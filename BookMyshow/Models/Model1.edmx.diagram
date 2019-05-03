@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="fb688b76b405434a89c3cca99eca3eda" Name="Diagram1" ZoomLevel="94">
+        <EntityTypeShape EntityType="ShowBookingModel.Cast" Width="1.5" PointX="1.5" PointY="8.5" />
+        <EntityTypeShape EntityType="ShowBookingModel.City" Width="1.5" PointX="0.75" PointY="5.5" />
+        <EntityTypeShape EntityType="ShowBookingModel.MovieOfferDetail" Width="1.5" PointX="13" PointY="5.625" />
+        <EntityTypeShape EntityType="ShowBookingModel.Movy" Width="1.5" PointX="0.75" PointY="0.875" />
+        <EntityTypeShape EntityType="ShowBookingModel.Offer" Width="1.5" PointX="9.75" PointY="10.25" />
+        <EntityTypeShape EntityType="ShowBookingModel.Payment" Width="1.5" PointX="7.5" PointY="9.375" />
+        <EntityTypeShape EntityType="ShowBookingModel.PlayOffer" Width="1.5" PointX="12" PointY="10.25" />
+        <EntityTypeShape EntityType="ShowBookingModel.Play" Width="1.5" PointX="9.75" PointY="13.125" />
+        <EntityTypeShape EntityType="ShowBookingModel.Slot" Width="1.5" PointX="3" PointY="2.625" />
+        <EntityTypeShape EntityType="ShowBookingModel.sysdiagram" Width="1.5" PointX="5.75" PointY="0.75" />
+        <EntityTypeShape EntityType="ShowBookingModel.Theatre" Width="1.5" PointX="3" PointY="5" />
+        <EntityTypeShape EntityType="ShowBookingModel.TheatreSeat" Width="1.5" PointX="5.25" PointY="6.75" />
+        <EntityTypeShape EntityType="ShowBookingModel.TicketDetail" Width="1.5" PointX="8.25" PointY="5.375" />
+        <EntityTypeShape EntityType="ShowBookingModel.TicketSeat" Width="1.5" PointX="10.5" PointY="5.625" />
+        <EntityTypeShape EntityType="ShowBookingModel.TimeSlot" Width="1.5" PointX="5.25" PointY="3.375" />
+        <EntityTypeShape EntityType="ShowBookingModel.UserDetail" Width="1.5" PointX="5.25" PointY="9.125" />
+        <AssociationConnector Association="ShowBookingModel.FK_Casts_Movies" />
+        <AssociationConnector Association="ShowBookingModel.FK_Theatres_Cities" />
+        <AssociationConnector Association="ShowBookingModel.FK_MovieOfferDetails_Movies" />
+        <AssociationConnector Association="ShowBookingModel.FK_MovieOfferDetails_Offers" />
+        <AssociationConnector Association="ShowBookingModel.FK_TicketDetails_Movies" />
+        <AssociationConnector Association="ShowBookingModel.FK_TimeSlots_Movies" />
+        <AssociationConnector Association="ShowBookingModel.FK_PlayOffers_Offers" />
+        <AssociationConnector Association="ShowBookingModel.FK_Payments_UserDetails" />
+        <AssociationConnector Association="ShowBookingModel.FK_PlayOffers_Plays" />
+        <AssociationConnector Association="ShowBookingModel.FK_TimeSlots_Slots" />
+        <AssociationConnector Association="ShowBookingModel.FK_TheatreSeats_Theatres" />
+        <AssociationConnector Association="ShowBookingModel.FK_TicketDetails_Theatres" />
+        <AssociationConnector Association="ShowBookingModel.FK_TimeSlots_Theatres" />
+        <AssociationConnector Association="ShowBookingModel.FK_TicketSeats_TicketDetails" />
+        <AssociationConnector Association="ShowBookingModel.MovieCastDetails" />
+        <AssociationConnector Association="ShowBookingModel.TheatreCity" />
+        <AssociationConnector Association="ShowBookingModel.TheatreMovies" />
+        <AssociationConnector Association="ShowBookingModel.TheatreUsers" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

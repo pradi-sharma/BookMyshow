@@ -1,0 +1,389 @@
+﻿<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="~/Content/bootstrap/css/fontawesome-all.css">
+    <link rel="stylesheet" href="~/Content/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/Content/bootstrap/css/mdb.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="~/Content/css/simple-sidebar.css" />
+    <title>UiBrains</title>
+    <link rel="icon" href="../img/favicon.ico">
+    <style>
+
+
+        .search {
+            display: inline-block;
+            margin-left: 8px;
+            /* btn {
+            max-height: 18px;
+            max-width: 18px;
+            margin-left: 2px;
+            background: $topBarControlBackground;
+            color: $topBarColor;
+            line-height: 50%;
+            font-size: 80%;
+        } */
+
+        }
+    </style>
+</head>
+<body id="Asidebody">
+    <!-- ############################### START HERE ################################ -->
+    <!-- Main Navigation -->
+    <nav class="navbar navbar-dark stylish-color-dark navbar-expand-sm ">
+        <div class="container">
+            <table>
+                <tr id="nav-tr">
+                    <a href="index.html" class="navbar-brand " style="margin-left: -20px;margin-top: -10px;margin-bottom: -10px">
+                        <img src="~/Content/Images/bb82ec2bbdc6893100ceaa08bc3fb61f.png" width="100" height="100">
+                        Movies Ticket
+                    </a>
+                    @*
+                    <form class="form-inline ml-auto">
+                        <div class="form-group">
+                            <input type="text" placeholder="Search..." class="form-control" style="width: 400px">
+                        </div>
+                        <div class="search">
+                            <a href="#" class="btn btn-outline-light btn-sm ">Search</a>
+                        </div>
+                    </form>*@
+                    <button class="navbar-toggler">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                </tr>
+        </div>
+        <tr id="nav-tr">
+            <div class="collapse navbar-collapse " id="uiNavBar">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item px-2">
+                        <a href="index.html" class="nav-link">
+                            <i class="fa fa-home"></i> Home
+                        </a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fa fa-user-circle"></i> Welcome Admin @Session["userName"]
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#">Action</a>
+                            <a class="dropdown-item" href="#">Logout</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Something else here</a>
+                        </div>
+                    </li>
+
+                    <li class="nav-item px-2">
+                        <a href="services.html" class="nav-link" data-toggle="modal" data-target="#login-modal" onclick="openNav()">
+                            <i class="fa fa-ellipsis-v"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </tr>
+        </table>
+
+    </nav>
+
+    <!-- Side nav -->
+    
+    <div id="mySidenav" class="sidenav stylish-color-dark border-right">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        @Ajax.ActionLink("Add offers", "AddOffers", new AjaxOptions { HttpMethod = "GET", UpdateTargetId = "div", InsertionMode = InsertionMode.Replace })
+        @Ajax.ActionLink("Add Movie", "AddMovie", new AjaxOptions { HttpMethod = "GET", UpdateTargetId = "div", InsertionMode = InsertionMode.Replace })
+        @Ajax.ActionLink("Add Movie Offer", "AddMovieOffers", new AjaxOptions { HttpMethod = "GET", UpdateTargetId = "div", InsertionMode = InsertionMode.Replace })
+        @Ajax.ActionLink("Add Theatre admin", "AddTheatreAdmin", new AjaxOptions { HttpMethod = "GET", UpdateTargetId = "div", InsertionMode = InsertionMode.Replace })
+        @Ajax.ActionLink("View All Offers", "DisplayOffers", new AjaxOptions { HttpMethod = "GET", UpdateTargetId = "div", InsertionMode = InsertionMode.Replace })
+    </div>
+    <!-- Side nav -->
+    <!--MAIN CONTENTS-->
+    <div class="p-4" id="div">
+        <!--Cards-->
+        <!-- CARD DECK -->
+        <div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="card text-center">
+                            <div class="card-header bg-light-blue text-white ">
+                                <div class="row align-items-center">
+                                    <div class="col">
+                                        <i class="fa fa-cart-arrow-down fa-4x"></i>
+                                    </div>
+                                    <div class="col">
+                                        <h3 class="display-3">09</h3>
+                                        <h3>Items</h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <h3 class="text-primary">
+                                    View Details
+                                    <i class="fa fa-arrow-alt-circle-right"></i>
+                                </h3>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="card text-center">
+                            <div class="card-header bg-orange text-white ">
+                                <div class="row align-items-center">
+                                    <div class="col">
+                                        <i class="fa fa-book fa-4x"></i>
+                                    </div>
+                                    <div class="col">
+                                        <h3 class="display-3">09</h3>
+                                        <h3>Items</h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <h3 class="text-warning">
+                                    View Details
+                                    <i class="fa fa-arrow-alt-circle-right"></i>
+                                </h3>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="card text-center">
+                            <div class="card-header bg-dark-green text-white ">
+                                <div class="row align-items-center">
+                                    <div class="col">
+                                        <i class="fa fa-tree fa-4x"></i>
+                                    </div>
+                                    <div class="col">
+                                        <h3 class="display-3">09</h3>
+                                        <h3>Items</h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <h3 class="text-success">
+                                    View Details
+                                    <i class="fa fa-arrow-alt-circle-right"></i>
+                                </h3>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="card text-center">
+                            <div class="card-header bg-deep-purple text-white ">
+                                <div class="row align-items-center">
+                                    <div class="col">
+                                        <i class="fa fa-laptop fa-4x"></i>
+                                    </div>
+                                    <div class="col">
+                                        <h3 class="display-3">09</h3>
+                                        <h3>Items</h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <h3 class="text-primary">
+                                    View Details
+                                    <i class="fa fa-arrow-alt-circle-right"></i>
+                                </h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Cards-->
+    </div>
+    <!--MAIN CONTENTS-->
+    <!-- Footer -->
+    <footer class="page-footer font-small stylish-color-dark pt-4 pb-4">
+        <!-- Footer Links -->
+        <div class="container text-center text-md-left">
+            <!-- Grid row -->
+            <div class="row">
+                <!-- Grid column -->
+                <div class="col-md-4 mx-auto">
+                    <!-- Content -->
+                    <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Footer Content</h5>
+                    <p>
+                        Here you can use rows and columns here to organize your footer content. Lorem ipsum dolor sit amet, consectetur
+                        adipisicing elit.
+                    </p>
+                </div>
+                <!-- Grid column -->
+                <hr class="clearfix w-100 d-md-none">
+                <!-- Grid column -->
+                <div class="col-md-2 mx-auto">
+                    <!-- Links -->
+                    <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Links</h5>
+                    <ul class="list-unstyled">
+                        <li>
+                            <a href="#!">Link 1</a>
+                        </li>
+                        <li>
+                            <a href="#!">Link 2</a>
+                        </li>
+                        <li>
+                            <a href="#!">Link 3</a>
+                        </li>
+                        <li>
+                            <a href="#!">Link 4</a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- Grid column -->
+                <hr class="clearfix w-100 d-md-none">
+                <!-- Grid column -->
+                <div class="col-md-2 mx-auto">
+                    <!-- Links -->
+                    <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Links</h5>
+                    <ul class="list-unstyled">
+                        <li>
+                            <a href="#!">Link 1</a>
+                        </li>
+                        <li>
+                            <a href="#!">Link 2</a>
+                        </li>
+                        <li>
+                            <a href="#!">Link 3</a>
+                        </li>
+                        <li>
+                            <a href="#!">Link 4</a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- Grid column -->
+                <hr class="clearfix w-100 d-md-none">
+                <!-- Grid column -->
+                <div class="col-md-2 mx-auto">
+                    <!-- Links -->
+                    <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Links</h5>
+                    <ul class="list-unstyled">
+                        <li>
+                            <a href="#!">Link 1</a>
+                        </li>
+                        <li>
+                            <a href="#!">Link 2</a>
+                        </li>
+                        <li>
+                            <a href="#!">Link 3</a>
+                        </li>
+                        <li>
+                            <a href="#!">Link 4</a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- Grid column -->
+            </div>
+            <!-- Grid row -->
+        </div>
+        <!-- Footer Links -->
+        <hr>
+        <!-- Call to action -->
+        <ul class="list-unstyled list-inline text-center py-2">
+            <li class="list-inline-item">
+                <h5 class="mb-1">Register for free</h5>
+            </li>
+            <li class="list-inline-item">
+                <a href="#!" class="btn btn-danger btn-rounded">Sign up!</a>
+            </li>
+        </ul>
+        <!-- Call to action -->
+        <hr>
+        <!-- Social buttons -->
+        <ul class="list-unstyled list-inline text-center">
+            <li class="list-inline-item">
+                <a class="btn-floating btn-fb mx-1">
+                    <i class="fab fa-facebook-f"> </i>
+                </a>
+            </li>
+            <li class="list-inline-item">
+                <a class="btn-floating btn-tw mx-1">
+                    <i class="fab fa-twitter"> </i>
+                </a>
+            </li>
+            <li class="list-inline-item">
+                <a class="btn-floating btn-gplus mx-1">
+                    <i class="fab fa-google-plus-g"> </i>
+                </a>
+            </li>
+            <li class="list-inline-item">
+                <a class="btn-floating btn-li mx-1">
+                    <i class="fab fa-linkedin-in"> </i>
+                </a>
+            </li>
+            <li class="list-inline-item">
+                <a class="btn-floating btn-dribbble mx-1">
+                    <i class="fab fa-dribbble"> </i>
+                </a>
+            </li>
+        </ul>
+        <!-- Social buttons -->
+        <!-- Copyright -->
+
+        <div class="container-fluid">
+            <div class="row align-items-center">
+
+                <div class="col-md-4" style="margin-left: 105px">
+                    <h4>Copyright &copy; 2018</h4>
+                    <h4>Movies Ticket</h4>
+                    <p>
+                        Developed & Maintained by
+                        <a class="text-warning" href="https://github.com/thenaveensaggam" target="_blank">
+                            <i class="fa fa-user-circle"></i> Shubham ,Pradeep,Neha
+                        </a>
+                    </p>
+                </div>
+                <div class="col-md-3">
+                    <a href="#" class="btn bg-stylish-color-dark btn-block" data-toggle="modal" data-target="#contact-modal">Contact</a>
+                </div>
+                <div class="col-md-1">
+                    <a href="#" class="btn btn-stylish-color-dark top-icon">
+                        <i class="fa fa-arrow-alt-circle-up fa-2x "></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Copyright -->
+    </footer>
+    <!-- Footer -->
+    <!-- ############################### END HERE ################################ -->
+    <!-- side nav -->
+    <!-- aside bar -->
+    <script>
+        function openNav() {
+            document.getElementById("mySidenav").style.width = "250px";
+            document.getElementById("Asidebody").style.marginLeft = "250px";
+        }
+
+        function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+            document.getElementById("Asidebody").style.marginLeft = "0";
+        }
+    </script>
+    <!-- aside bar -->
+
+</body>
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<!-- BODY ENDS -->
+<script src="~/Content/bootstrap/js/fontawesome-all.js"></script>
+<script src="~/Content/bootstrap/js/jquery-3.2.1.min.js"></script>
+<script src="~/Content/bootstrap/js/popper.min.js"></script>
+<script src="~/Content/bootstrap/js/bootstrap.min.js"></script>
+<script src="~/Content/bootstrap/js/mdb.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.js"></script>
+<script>
+    $(document).on('click', '[data-toggle="lightbox"]', function (event) {
+        event.preventDefault();
+        $(this).ekkoLightbox();
+    });</script>
+</html>
+

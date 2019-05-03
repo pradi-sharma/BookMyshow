@@ -1,0 +1,27 @@
+﻿<html>
+<head>
+    <style>
+        .forminputs {
+            width: 400px;
+            height: 20px;
+        }
+    
+        .from {
+            width: 700px;
+            height: 900px;
+        }
+    </style>
+</head>
+<body>
+    <h2>in view</h2>
+    <div id="form">
+        @using (Ajax.BeginForm("AddMovieOffers", "AdminHome", new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "form", InsertionMode = InsertionMode.Replace }, new { @class = "form", id = "form" }))
+        {
+            @Html.Label("movielist", "Movie Name : ") @Html.DropDownList("movielist", (IEnumerable<SelectListItem>)ViewBag.movielist, new { @class = "forminputs" })<br /><br />
+            @Html.Label("offerlist", "Offers     : ") @Html.DropDownList("offerlist", (IEnumerable<SelectListItem>)ViewBag.offerlist, new { @class = "forminputs" })<br /><br />
+            @Html.Label("Coupon", "Coupon Code : ") @Html.TextBox("Coupon", null, new { style = "width: 400px;" })<br /><br />
+            <input type="submit" class="btn btn-success" value="Add Offer" />
+        }
+    </div>
+</body>
+</html>

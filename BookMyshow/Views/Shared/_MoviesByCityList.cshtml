@@ -1,0 +1,26 @@
+﻿@model IEnumerable<BookMyshow.Models.MovyByCity_Result>
+
+<table>
+    @foreach (var item in Model)
+    {
+
+        <tr>
+
+            <td>
+                @*@Convert.ToBase64String(item.Poster)*@
+                <a href="@Url.Action("MovieDescription", "UserHome", new { id = item.MovieId })">
+                    <h2><img src="data:image;base64,@System.Convert.ToBase64String(item.Poster)" width="80" height="80" /></h2>
+                </a>
+            </td>
+            <td>
+                <h2>@item.MovieName</h2>
+            </td>
+            <td>
+                <h2></h2>
+            </td>
+
+
+
+        </tr>
+    }
+</table>

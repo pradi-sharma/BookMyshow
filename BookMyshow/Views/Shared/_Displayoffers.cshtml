@@ -1,0 +1,31 @@
+﻿@model IEnumerable<BookMyshow.Models.Offer>
+
+
+<table class="table" id="result">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.OfferName)
+        </th>
+      
+        <th>
+            @Html.DisplayNameFor(model => model.Discount)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.OfferName)
+        </td>
+     
+        <td>
+            @Html.DisplayFor(modelItem => item.Discount)
+        </td>
+        <td>
+            @Ajax.ActionLink("Delete","DeleteOffer", new { id = item.OfferId }, new AjaxOptions {HttpMethod="GET",UpdateTargetId= "result",InsertionMode=InsertionMode.Replace })
+        </td>
+    </tr>
+}
+
+</table>

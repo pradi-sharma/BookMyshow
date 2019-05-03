@@ -1,0 +1,682 @@
+﻿@model IEnumerable<BookMyshow.Models.MoviePosters>
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="~/Content/bootstrap/css/fontawesome-all.css">
+    <link rel="stylesheet" href="~/Content/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/Content/bootstrap/css/mdb.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.css">
+    <link rel="stylesheet" href="~/Content/Script.css">
+    <title>Movies Ticket</title>
+    <link rel="icon" href="../img/favicon.ico">
+
+    <!-- CAROSAL Bottom Header -->
+
+    <link rel="stylesheet" href="~/Content/CarosalJquery/owl.carousel.min.css" />
+    <link rel="stylesheet" href="~/Content/CarosalJquery/owl.theme.default.min.css" />
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#submitButton").click(function () {
+                alert("clicked");
+                $.post("verification", function (data, status) {
+                    alert("Data: " + data + "\nStatus: " + status);
+                });
+            })
+        });
+    </script>
+
+
+
+    <style>
+        .search {
+            display: inline-block;
+            margin-left: 5px;
+        }
+
+        li {
+            margin-left: 0;
+            padding: 0;
+        }
+        /* btn {
+            max-height: 18px;
+            max-width: 18px;
+            margin-left: 2px;
+            background: $topBarControlBackground;
+            color: $topBarColor;
+            line-height: 50%;
+            font-size: 80%;
+        } */
+
+        /*.wrapper {
+            width: 100%;
+            height: auto;
+            overflow: hidden;
+            margin-bottom:20px;
+        }
+
+        .item {
+            width: 200px;
+            height: 250px;
+            padding: 20px;
+            margin: 20px;
+        }
+
+        .carosal-img {
+            height: 250px;
+            overflow: hidden;
+            position: relative;
+        }*/
+    </style>
+    <script>
+        //$(document).ready(function () {
+        //    $("#search").on("click", function () {
+        //        var result = "Correct";
+        //        var id1 = 0;
+        //        result = $("#searchinput").val();
+        //        alert(result);
+        //        $.ajax({
+        //            type: "POST",
+        //            data: "value=" + result,
+        //            url: "/MoviesTicket/Search",
+        //            //success: function (data) {
+        //            //    alert("in ajaxx call");
+        //            //}
+        //        });
+        //$.post('/MoviesTicket/Search', {
+        //    value: result
+        //}
+        //, function (data) {
+        //    alert("Success" + data.success);
+        //    id1 = data.success;
+        //    alert("in post" + id1);
+
+        //    });
+
+
+        //    });
+        //    //document.getElementById("search").innerText = "Likes";
+        //    //  $(this).val();
+        //});
+
+
+
+        function Demo() {
+            document.getElementsByName("DemoForm").submit();
+        }
+
+    </script>
+</head>
+
+<body>
+    <!-- ############################### START HERE ################################ -->
+    <!-- Main Navigation -->
+    <nav class="navbar navbar-dark stylish-color-dark   navbar-expand-sm ">
+        <div class="container">
+
+            <table>
+                <tr id="nav-tr">
+                    <a href="index.html" class="navbar-brand " style="margin-left: -80px;margin-top: -10px;margin-bottom: -10px">
+                        <img src="~/Content/Images/bb82ec2bbdc6893100ceaa08bc3fb61f.png" width="100" height="100">
+                        Movies Ticket
+                    </a>
+
+                    @*<form class="form-inline ml-auto">*@
+                    @using (Html.BeginForm("Search", "UserHome", FormMethod.Post, new { name = "DemoForm" }))
+                    {
+
+                        <div class="form-group">
+                            <input type="text" placeholder="Search..." class="form-control" id="searchinput" name="searchInput" style="width: 200px">
+
+                        </div>
+                        <div class="search">
+
+                            @*<input type="submit" value="search" id="search" class="btn btn-outline-light btn-sm"  />*@
+                            <button type="submit" id="search" class="btn btn-outline-light btn-sm" onclick="Demo()">Search</button>
+                            @*<a href="#" class="btn btn-outline-light btn-sm ">Search</a>*@
+                        </div>
+                    }
+                    @*</form>*@
+
+
+
+
+
+
+
+
+
+
+
+                    <button class="navbar-toggler">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+                </tr>
+        </div>
+        <tr id="nav-tr">
+
+            <div class="collapse navbar-collapse " id="uiNavBar">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item px-2">
+                        <a href="@Url.Action("Index","UserHome")" class="nav-link">
+                            <i class="fa fa-home"></i> Home
+                        </a>
+                    </li>
+                    <li class="nav-item px-2">
+                        <a href="#" class="nav-link" data-toggle="modal" data-target="#login-modal">
+                            <i class="fa fa-user"></i> Register
+                        </a>
+                    </li>
+
+                    <li class="nav-item px-2">
+                        <a href="#" class="nav-link" data-toggle="modal" data-target="#login-modal">
+                            <i class="fa fa-user"></i> Login
+                        </a>
+                    </li>
+                    <li class="nav-item px-2">
+                        <a href="#" class="nav-link">
+                            <i class="fa fa-film"></i> Movies
+                        </a>
+                    </li>
+                    <li class="nav-item px-2">
+                        <a href="#" class="nav-link">
+                            <i class="fa fa-play"></i> Plays
+                        </a>
+                    </li>
+                    <li class="nav-item px-2">
+                        <a href="~/UserHome/SearchByCity" class="nav-link">
+                            <i class="fa fa-search"></i> City
+                        </a>
+                    </li>
+
+
+                </ul>
+            </div>
+        </tr>
+        </table>
+
+    </nav>
+
+    <!-- Slider Section -->
+    <section style="padding:10px;">
+        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+
+            <ol class="carousel-indicators">
+                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+            </ol>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img class="d-block w-100" src="~/Content/Images/aquaman-movie-poster-2018-l0.jpg" alt="First slide">
+
+                </div>
+                <div class="carousel-item">
+                    <img class="d-block w-100" src="~/Content/Images/e1033a3d9b662e112e99e62ba2f1cd6f.jpg" alt="Second slide">
+                </div>
+                <div class="carousel-item">
+                    <img class="d-block w-100" src="~/Content/Images/1Race%20Gurram%20Malayalam%20version%20'Lucky%20The%20Racer'%20First%20Look%20Poster.jpg" alt="Third slide">
+                </div>
+            </div>
+            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+    </section>
+
+
+    <!--Login Modal-->
+
+
+
+    <div class="modal" id="login-modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-grey text-white">
+                    <h3>Log In</h3>
+                    <button class="close" data-dismiss="modal">
+                        <i class="fa fa-window-close text-white"></i>
+                    </button>
+                </div>
+                <form action="~/UserHome/Login" method="post">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <input type="text" placeholder="User Name" class="form-control" name="username">
+                        </div>
+                        <div class="form-group">
+                            <input type="password" placeholder="Password" class="form-control" name="password">
+                        </div>
+                        <!--<div class="form-group">-->
+                        <!--<textarea class="form-control my-textarea" rows="5" cols="30" placeholder="Leave a Message"></textarea>-->
+                        <!--</div>-->
+                    </div>
+                    <div class="modal-footer">
+                        <a href="#" class="btn btn-secondary" data-dismiss="modal">Close</a>
+                        <input type="submit" class="btn btn-teal" value="Submit" id="submitButton">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    <!--Login Modal-->
+    <!-- CAROSAL Bottom  -->
+    <div class="wrapper" style="margin-bottom:5px;padding:10px;overflow:hidden">
+
+        <div class="owl-carousel owl-theme" style="margin-bottom:5px;padding:10px;overflow:hidden">
+
+
+            @{ int id = 1;}
+
+            @*<div class="item" style=""><a href="#"><img width="250px" height="250px" src="~/Content/Imagescarosal/rango.jpg"></a><caption>BoxOffice</caption></div>*@
+             
+                @foreach(var item in Model)
+                {
+                <div class="item"><a href="@Url.Action("MovieDescription", "UserHome", new { id=item.MovieId })"><img width="250px" height="250px" src="@item.MoviePhoto"></a><caption>@item.Moviename</caption></div>
+                    id = id + 1;
+                }
+            
+            @*<div class="item"><a href="#"><img width="250px" height="250px" src="~/Content/Imagescarosal/ww.jpg"></a><caption>BoxOffice</caption> </div>
+                <div class="item"><a href="#"><img width="250px" height="250px" src="~/Content/Imagescarosal/alpha.jpg"></a><caption>BoxOffice</caption></div>*@
+            @*<div class="item"><a href="#"><img width="250px" height="250px" src="~/Content/Imagescarosal/cherranjeevi.jpg"></a><caption>BoxOffice</caption></div>
+                <div class="item"><a href="#"><img width="250px" height="250px" src="~/Content/Imagescarosal/aquaman-movie-poster-2018-l0.jpg"></a><caption>BoxOffice</caption></div>
+                <div class="item"><a href="#"><img width="250px" height="250px" src="~/Content/Imagescarosal/Hollywood-Animation-Movie-Kung-Fu-Panda-3-Poster.jpg"></a><caption>BoxOffice</caption></div>*@
+            @*<div class="item"><a href="#"><img width="250px" height="250px" src="~/Content/Imagescarosal/1Race Gurram Malayalam version 'Lucky The Racer' First Look Poster.jpg"></a><caption>BoxOffice</caption></div>
+                <div class="item"><a href="#"><img width="250px" height="250px" src="~/Content/Imagescarosal/e1033a3d9b662e112e99e62ba2f1cd6f.jpg"></a><caption>BoxOffice</caption></div>
+                <div class="item"><a href="#"><img width="250px" height="250px" src="~/Content/Imagescarosal/venom.jpg"></a><caption>BoxOffice</caption></div>
+                <div class="item"><a href="#"><img width="250px" height="250px" src="~/Content/Imagescarosal/82ec2bbdc6893100ceaa08bc3.png"></a><caption>BoxOffice</caption></div>
+                <div class="item"><a href="#"><img width="250px" height="250px" src="~/Content/Imagescarosal/82ec2bbdc6893100ceaa08bc3.png"></a><caption>BoxOffice</caption></div>
+                </div>*@
+
+
+        </div>
+        <!-- CAROSAL Bottom  -->
+
+
+
+        <div>
+            <h1>
+                Movies
+            </h1>
+            <!-- Card deck -->
+            <div class="card-deck">
+
+                <!-- Card -->
+                <div class="card mb-3">
+
+                    <!--Card image-->
+                    <div class="view overlay">
+                        <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/images/16.jpg" alt="Card image cap">
+                        <a href="#!">
+                            <div class="mask rgba-white-slight"></div>
+                        </a>
+                    </div>
+
+                    <!--Card content-->
+                    <div class="card-body">
+
+                        <!--Title-->
+                        <h4 class="card-title">Card title</h4>
+                        <!--Text-->
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
+                        <button type="button" class="btn btn-light-blue btn-md">Read more</button>
+
+                    </div>
+
+                </div>
+                <!-- Card -->
+                <!-- Card -->
+                <div class="card mb-3">
+
+                    <!--Card image-->
+                    <div class="view overlay">
+                        <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/images/14.jpg" alt="Card image cap">
+                        <a href="#!">
+                            <div class="mask rgba-white-slight"></div>
+                        </a>
+                    </div>
+
+                    <!--Card content-->
+                    <div class="card-body">
+
+                        <!--Title-->
+                        <h4 class="card-title">Card title</h4>
+                        <!--Text-->
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
+                        <button type="button" class="btn btn-light-blue btn-md">Read more</button>
+
+                    </div>
+
+                </div>
+                <!-- Card -->
+                <!-- Card -->
+                <div class="card mb-3">
+
+                    <!--Card image-->
+                    <div class="view overlay">
+                        <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/images/15.jpg" alt="Card image cap">
+                        <a href="#!">
+                            <div class="mask rgba-white-slight"></div>
+                        </a>
+                    </div>
+
+                    <!--Card content-->
+                    <div class="card-body">
+
+                        <!--Title-->
+                        <h4 class="card-title">Card title</h4>
+                        <!--Text-->
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
+                        <button type="button" class="btn btn-light-blue btn-md">Read more</button>
+
+                    </div>
+
+                </div>
+                <!-- Card -->
+                <!-- Card -->
+                <div class="card mb-3">
+
+                    <!--Card image-->
+                    <div class="view overlay">
+                        <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/images/14.jpg" alt="Card image cap">
+                        <a href="#!">
+                            <div class="mask rgba-white-slight"></div>
+                        </a>
+                    </div>
+
+                    <!--Card content-->
+                    <div class="card-body">
+
+                        <!--Title-->
+                        <h4 class="card-title">Card title</h4>
+                        <!--Text-->
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
+                        <button type="button" class="btn btn-light-blue btn-md">Read more</button>
+
+                    </div>
+
+                </div>
+                <!-- Card -->
+
+            </div>
+            <!-- Card deck -->
+        </div>
+
+
+
+
+
+
+
+
+
+
+        <!-- Contact Modal -->
+        <div class="modal" id="contact-modal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header bg-grey text-white">
+                        <h3>Contact Us</h3>
+                        <button class="close" data-dismiss="modal">
+                            <i class="fa fa-window-close text-white"></i>
+                        </button>
+                    </div>
+                    <form>
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <input type="text" placeholder="Name" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <input type="email" placeholder="Email" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <textarea class="form-control my-textarea" rows="5" cols="30" placeholder="Leave a Message"></textarea>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <a href="#" class="btn btn-secondary" data-dismiss="modal">Close</a>
+                            <input type="submit" class="btn btn-teal" value="Submit">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+        <!-- Footer -->
+        <footer class="page-footer font-small stylish-color-dark pt-4 pb-4">
+
+            <!-- Footer Links -->
+            <div class="container text-center text-md-left">
+
+                <!-- Grid row -->
+                <div class="row">
+
+                    <!-- Grid column -->
+                    <div class="col-md-4 mx-auto">
+
+                        <!-- Content -->
+                        <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Footer Content</h5>
+                        <p>
+                            Here you can use rows and columns here to organize your footer content. Lorem ipsum dolor sit amet, consectetur
+                            adipisicing elit.
+                        </p>
+
+                    </div>
+                    <!-- Grid column -->
+
+                    <hr class="clearfix w-100 d-md-none">
+
+                    <!-- Grid column -->
+                    <div class="col-md-2 mx-auto">
+
+                        <!-- Links -->
+                        <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Links</h5>
+
+                        <ul class="list-unstyled">
+                            <li>
+                                <a href="#!">Link 1</a>
+                            </li>
+                            <li>
+                                <a href="#!">Link 2</a>
+                            </li>
+                            <li>
+                                <a href="#!">Link 3</a>
+                            </li>
+                            <li>
+                                <a href="#!">Link 4</a>
+                            </li>
+                        </ul>
+
+                    </div>
+                    <!-- Grid column -->
+
+                    <hr class="clearfix w-100 d-md-none">
+
+                    <!-- Grid column -->
+                    <div class="col-md-2 mx-auto">
+
+                        <!-- Links -->
+                        <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Links</h5>
+
+                        <ul class="list-unstyled">
+                            <li>
+                                <a href="#!">Link 1</a>
+                            </li>
+                            <li>
+                                <a href="#!">Link 2</a>
+                            </li>
+                            <li>
+                                <a href="#!">Link 3</a>
+                            </li>
+                            <li>
+                                <a href="#!">Link 4</a>
+                            </li>
+                        </ul>
+
+                    </div>
+                    <!-- Grid column -->
+
+                    <hr class="clearfix w-100 d-md-none">
+
+                    <!-- Grid column -->
+                    <div class="col-md-2 mx-auto">
+
+                        <!-- Links -->
+                        <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Links</h5>
+
+                        <ul class="list-unstyled">
+                            <li>
+                                <a href="#!">Link 1</a>
+                            </li>
+                            <li>
+                                <a href="#!">Link 2</a>
+                            </li>
+                            <li>
+                                <a href="#!">Link 3</a>
+                            </li>
+                            <li>
+                                <a href="#!">Link 4</a>
+                            </li>
+                        </ul>
+
+                    </div>
+                    <!-- Grid column -->
+
+                </div>
+                <!-- Grid row -->
+
+            </div>
+            <!-- Footer Links -->
+
+            <hr>
+
+            <!-- Call to action -->
+            <ul class="list-unstyled list-inline text-center py-2">
+                <li class="list-inline-item">
+                    <h5 class="mb-1">Register for free</h5>
+                </li>
+                <li class="list-inline-item">
+                    <a href="#!" class="btn btn-danger btn-rounded">Sign up!</a>
+                </li>
+            </ul>
+            <!-- Call to action -->
+
+            <hr>
+
+            <!-- Social buttons -->
+            <ul class="list-unstyled list-inline text-center">
+                <li class="list-inline-item">
+                    <a class="btn-floating btn-fb mx-1">
+                        <i class="fab fa-facebook-f"> </i>
+                    </a>
+                </li>
+                <li class="list-inline-item">
+                    <a class="btn-floating btn-tw mx-1">
+                        <i class="fab fa-twitter"> </i>
+                    </a>
+                </li>
+                <li class="list-inline-item">
+                    <a class="btn-floating btn-gplus mx-1">
+                        <i class="fab fa-google-plus-g"> </i>
+                    </a>
+                </li>
+                <li class="list-inline-item">
+                    <a class="btn-floating btn-li mx-1">
+                        <i class="fab fa-linkedin-in"> </i>
+                    </a>
+                </li>
+                <li class="list-inline-item">
+                    <a class="btn-floating btn-dribbble mx-1">
+                        <i class="fab fa-dribbble"> </i>
+                    </a>
+                </li>
+            </ul>
+            <!-- Social buttons -->
+            <!-- Copyright -->
+
+
+
+
+
+
+            <div class="container-fluid">
+                <div class="row align-items-center">
+
+
+
+                    <div class="col-md-4" style="margin-left: 105px">
+                        <h4>Copyright &copy; 2018</h4>
+                        <h4>Movies Ticket</h4>
+                        <p>
+                            Developed & Maintained by
+                            <a class="text-warning" href="https://github.com/thenaveensaggam" target="_blank">
+                                <i class="fa fa-user-circle"></i> Shubham ,Pradeep,Neha
+                            </a>
+                        </p>
+                    </div>
+
+                    <div class="col-md-3">
+                        <a href="#" class="btn bg-stylish-color-dark btn-block" data-toggle="modal" data-target="#contact-modal">Contact</a>
+                    </div>
+                    <div class="col-md-1">
+                        <a href="#" class="btn btn-stylish-color-dark top-icon">
+                            <i class="fa fa-arrow-alt-circle-up fa-2x "></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Copyright -->
+
+        </footer>
+        <!-- Footer -->
+        <!-- ############################### END HERE ################################ -->
+
+</body>
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<!-- BODY ENDS -->
+<!-- CAROSAL Bottom Script -->
+
+<script src="~/Content/CarosalJquery/jquery-3.2.1.min.js"></script>
+<script src="~/Content/CarosalJquery/owl.carousel.min.js"></script>
+<script src="~/Content/CarosalJquery/jquer.js"></script>
+
+
+<!-- CAROSAL Bottom Script -->
+<script src="~/Content/bootstrap/js/fontawesome-all.js"></script>
+<script src="~/Content/bootstrap/js/jquery-3.2.1.min.js"></script>
+<script src="~/Content/bootstrap/js/popper.min.js"></script>
+<script src="~/Content/bootstrap/js/bootstrap.min.js"></script>
+<script src="~/Content/bootstrap/js/mdb.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.js"></script>
+<script>
+    $(document).on('click', '[data-toggle="lightbox"]', function (event) {
+        event.preventDefault();
+        $(this).ekkoLightbox();
+    });
+</script>
+</html>
+

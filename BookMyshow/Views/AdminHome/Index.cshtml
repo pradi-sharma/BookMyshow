@@ -1,0 +1,82 @@
+﻿<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+@*fdg*@
+<link href="~/Content/css/bootstrap.css" rel="stylesheet" />
+<link href="~/Content/css/bootstrap.min.css" rel="stylesheet" />
+<link href="~/Content/css/font-awesome.min.css" rel="stylesheet" />
+<link href="~/Content/css/mdb.css" rel="stylesheet" />
+<link href="~/Content/css/mdb.min.css" rel="stylesheet" />
+<link href="~/Content/css/style.css" rel="stylesheet" />
+<link href="~/Content/css/fontawesome-all.css" rel="stylesheet" />
+
+<body>
+
+
+    <div style="width:100%">
+        <nav class="navbar navbar-dark bg-grey navbar-expand-sm ">
+            <div class="container-fluid"  >
+                <a href="index.html" class="navbar-brand " style="margin-left: -80px;margin-top: -10px;margin-bottom: -10px">
+                    @*<img src="../Images/bb82ec2bbdc6893100ceaa08bc3fb61f.png" width="100" height="100">*@
+                    Movies Ticket
+                </a>
+
+                <form class="form-inline ml-auto">
+                    <div class="form-group">
+                        <input type="text" placeholder="Search..." class="form-control" style="width: 400px">
+                    </div>
+                    <a href="#" class="btn btn-outline-light btn-sm">Search</a>
+                </form>
+                <button class="navbar-toggler">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse " id="uiNavBar">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item px-2">
+                            <a href="index.html" class="nav-link">
+                                <i class="fa fa-home"></i> Home
+                            </a>
+                        </li>
+
+                        <li class="nav-item px-2">
+                            @*<a href="services.html" class="nav-link" data-toggle="modal" data-target="#login-modal">
+                <i class="fa fa-user"></i> Login
+            </a>*@
+                            <i class="fa fa-user"> <span class="nav-link"> @Ajax.ActionLink("Add offers", "AddOffers", new AjaxOptions { HttpMethod = "GET", UpdateTargetId = "div", InsertionMode = InsertionMode.Replace })</span></i>
+                        </li>
+                        <li class="nav-item px-2">
+
+                            <i class="fa fa-user"> <span class="nav-link"> @Ajax.ActionLink("Add Movie", "AddMovie", new AjaxOptions { HttpMethod = "GET", UpdateTargetId = "div", InsertionMode = InsertionMode.Replace })</span></i>
+                        </li>
+                        <li class="nav-item px-2">
+
+                            <i class="fa fa-user"> <span class="nav-link"> @Ajax.ActionLink("Add Movie Offer", "AddMovieOffers", new AjaxOptions { HttpMethod = "GET", UpdateTargetId = "div", InsertionMode = InsertionMode.Replace })</span></i>
+                        </li>
+                        <li class="nav-item px-2">
+                            <a href="contact.html" class="nav-link">
+                                <i class="fa fa-film"></i> Movies
+                            </a>
+                        </li>
+                        <li class="nav-item px-2">
+                            <a href="contact.html" class="nav-link">
+                                <i class="fa fa-play"></i> Plays
+                            </a>
+                        </li>
+                        <li class="nav-item px-2">
+
+                            <i class="fa fa-user"> <span class="nav-link"> @Ajax.ActionLink("Add Theatre admin", "AddTheatreAdmin", new AjaxOptions { HttpMethod = "GET", UpdateTargetId = "div", InsertionMode = InsertionMode.Replace })</span></i>
+                        </li>
+                        <li class="nav-item px-2">
+
+                            <i class="fa fa-user"> <span class="nav-link"> @Ajax.ActionLink("View All Offers", "DisplayOffers", new AjaxOptions { HttpMethod = "GET", UpdateTargetId = "div", InsertionMode = InsertionMode.Replace })</span></i>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <div id="div"></div>
+</body>
+

@@ -1,0 +1,433 @@
+﻿
+<html>
+<head>
+
+
+    <link rel="stylesheet" href="~/Content/bootstrap/css/fontawesome-all.css" />
+
+    <link rel="stylesheet" href="~/Content/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/Content/bootstrap/css/mdb.css">
+
+    <style>
+        h4 {
+            margin-left: 5px;
+        }
+
+        #drop {
+            width: 200px;
+            height: 30px;
+        }
+
+        #submitbtn {
+        }
+    </style>
+    <script>
+        function validate() {
+            document.getElementsByName("Newform").submit();
+        }
+    </script>
+
+</head>
+<body>
+
+
+    <!-- Main Navigation -->
+    <nav class="navbar navbar-dark stylish-color-dark   navbar-expand-sm ">
+        <div class="container">
+
+            <table>
+                <tr id="nav-tr">
+                    <a href="index.html" class="navbar-brand " style="margin-left: -80px;margin-top: -10px;margin-bottom: -10px">
+                        <img src="~/Content/Images/bb82ec2bbdc6893100ceaa08bc3fb61f.png" width="100" height="100">
+                        Movies Ticket
+                    </a>
+
+                    @*<form class="form-inline ml-auto">*@
+                    @using (Html.BeginForm("Search", "MoviesTicket", FormMethod.Post, new { name = "DemoForm" }))
+                    {
+
+                        <div class="form-group">
+                            <input type="text" placeholder="Search..." class="form-control" id="searchinput" name="searchInput" style="width: 200px">
+
+                        </div>
+                        <div class="search">
+
+                            @*<input type="submit" value="search" id="search" class="btn btn-outline-light btn-sm"  />*@
+                            <button type="submit" id="search" class="btn btn-outline-light btn-sm" onclick="Demo()">Search</button>
+                            @*<a href="#" class="btn btn-outline-light btn-sm ">Search</a>*@
+                        </div>
+                    }
+                    @*</form>*@
+
+
+
+
+
+
+
+
+
+
+
+                    <button class="navbar-toggler">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+                </tr>
+        </div>
+        <tr id="nav-tr">
+
+            <div class="collapse navbar-collapse " id="uiNavBar">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item px-2">
+                        <a href="/MoviesTicket/Movie" class="nav-link">
+                            <i class="fa fa-home"></i> Home
+                        </a>
+                    </li>
+                    <li class="nav-item px-2">
+                        <a href="#" class="nav-link" data-toggle="modal" data-target="#login-modal">
+                            <i class="fa fa-user"></i> Register
+                        </a>
+                    </li>
+
+                    <li class="nav-item px-2">
+                        <a href="#" class="nav-link" data-toggle="modal" data-target="#login-modal">
+                            <i class="fa fa-user"></i> Login
+                        </a>
+                    </li>
+                    <li class="nav-item px-2">
+                        <a href="#" class="nav-link">
+                            <i class="fa fa-film"></i> Movies
+                        </a>
+                    </li>
+                    <li class="nav-item px-2">
+                        <a href="#" class="nav-link">
+                            <i class="fa fa-play"></i> Plays
+                        </a>
+                    </li>
+                    <li class="nav-item px-2">
+                        <a href="/City/SearchByCity" class="nav-link">
+                            <i class="fa fa-search"></i> City
+                        </a>
+                    </li>
+
+
+                </ul>
+            </div>
+        </tr>
+        </table>
+
+    </nav>
+    <br />
+
+    <!--Ends Here-->
+
+
+    <div id="displayMovies">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 ">
+                    <figure>
+                        <a href="@Url.Action("SearchMovies", "UserHome", new { id = 1 })"><img src="~/Content/CityImages/Delhi.png" class="bg-light" width="200" height="150" /></a>
+                        <h4 style="align-content:center">Delhi</h4>
+                    </figure>
+
+                </div>
+                <div class="col-md-3">
+                    <figure>
+                        <a href="@Url.Action("SearchMovies", "UserHome", new { id = 2 })"> <img src="~/Content/CityImages/Gatewayofindia.png" class="bg-light" width="200" height="150" /></a>
+                        <h4>Mumbai</h4>
+                    </figure>
+                </div>
+                <div class="col-md-3">
+                    <figure>
+                        <a href="@Url.Action("SearchMovies", "UserHome", new { id = 3 })">
+                            <img src="~/Content/CityImages/Chennai.png" class="bg-light" width="200" height="150" />
+                        </a>
+                        <h4>Chennai</h4>
+                    </figure>
+                </div>
+                <div class="col-md-3">
+                    <figure>
+                        <a href="@Url.Action("SearchMovies", "UserHome", new { id = 1 })">
+                            <img src="~/Content/CityImages/hyd.png" class="bg-light" width="200" height="150" />
+                        </a>
+                        <h4>Hyderabad</h4>
+                    </figure>
+                </div>
+
+            </div>
+
+
+
+
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 ">
+                    <figure>
+                        <a href="@Url.Action("SearchMovies", "UserHome", new { id = 7 })">
+                            <img src="~/Content/CityImages/Jhultaminar.png" class="bg-light" width="200" height="150" />
+                        </a>
+                        <h4 style="align-content:center">Udaypur</h4>
+                    </figure>
+
+                </div>
+                <div class="col-md-3">
+                    <figure>
+                        <a href="@Url.Action("SearchMovies", "UserHome", new { id = 3 })">
+                            <img src="~/Content/CityImages/Shanivarwada.png" class="bg-light" width="200" height="150" />
+                        </a>
+                        <h4>Pune</h4>
+                    </figure>
+                </div>
+                <div class="col-md-3">
+                    <figure>
+                        <a href="@Url.Action("SearchMovies", "UserHome", new { id = 6 })">
+                            <img src="~/Content/CityImages/Surat.png" class="bg-light" width="200" height="150" />
+                        </a>
+                        <h4>Surat</h4>
+                    </figure>
+                </div>
+                <div class="col-md-3">
+                    <figure>
+                        <a href="@Url.Action("SearchMovies", "UserHome", new { id = 9 })">
+                            <img src="~/Content/CityImages/Tajmahal.png" class="bg-light" width="200" height="150" />
+                        </a>
+                        <h4>Aagra</h4>
+                    </figure>
+                </div>
+
+            </div>
+        </div>
+
+
+
+
+
+
+        <!--Form Start-->
+        <div class="container">
+            <div>
+                <div class="col-md-12">
+
+                    <table>
+                        @using (Ajax.BeginForm("SearchByCity", "UserHome", new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "displayMovies", InsertionMode = InsertionMode.Replace }, new { name = "Newform" }))
+                        {
+                            <tr>
+                                <td> @Html.DropDownList("CityId", (IEnumerable<SelectListItem>)ViewBag.City, new { id = "drop" })</td>
+                                <td><button type="submit" value="SearchbyCity" id="submitbtn" class="btn btn-outline-light btn-dark" onclick="validate()">SearchbyCity</button></td>
+                            </tr>
+                        }
+                    </table>
+
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Form End Here-->
+    <!-- Footer -->
+    <footer class="page-footer font-small stylish-color-dark pt-4 pb-4">
+
+        <!-- Footer Links -->
+        <div class="container text-center text-md-left">
+
+            <!-- Grid row -->
+            <div class="row">
+
+                <!-- Grid column -->
+                <div class="col-md-4 mx-auto">
+
+                    <!-- Content -->
+                    <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Footer Content</h5>
+                    <p>
+                        Here you can use rows and columns here to organize your footer content. Lorem ipsum dolor sit amet, consectetur
+                        adipisicing elit.
+                    </p>
+
+                </div>
+                <!-- Grid column -->
+
+                <hr class="clearfix w-100 d-md-none">
+
+                <!-- Grid column -->
+                <div class="col-md-2 mx-auto">
+
+                    <!-- Links -->
+                    <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Links</h5>
+
+                    <ul class="list-unstyled">
+                        <li>
+                            <a href="#!">Link 1</a>
+                        </li>
+                        <li>
+                            <a href="#!">Link 2</a>
+                        </li>
+                        <li>
+                            <a href="#!">Link 3</a>
+                        </li>
+                        <li>
+                            <a href="#!">Link 4</a>
+                        </li>
+                    </ul>
+
+                </div>
+                <!-- Grid column -->
+
+                <hr class="clearfix w-100 d-md-none">
+
+                <!-- Grid column -->
+                <div class="col-md-2 mx-auto">
+
+                    <!-- Links -->
+                    <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Links</h5>
+
+                    <ul class="list-unstyled">
+                        <li>
+                            <a href="#!">Link 1</a>
+                        </li>
+                        <li>
+                            <a href="#!">Link 2</a>
+                        </li>
+                        <li>
+                            <a href="#!">Link 3</a>
+                        </li>
+                        <li>
+                            <a href="#!">Link 4</a>
+                        </li>
+                    </ul>
+
+                </div>
+                <!-- Grid column -->
+
+                <hr class="clearfix w-100 d-md-none">
+
+                <!-- Grid column -->
+                <div class="col-md-2 mx-auto">
+
+                    <!-- Links -->
+                    <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Links</h5>
+
+                    <ul class="list-unstyled">
+                        <li>
+                            <a href="#!">Link 1</a>
+                        </li>
+                        <li>
+                            <a href="#!">Link 2</a>
+                        </li>
+                        <li>
+                            <a href="#!">Link 3</a>
+                        </li>
+                        <li>
+                            <a href="#!">Link 4</a>
+                        </li>
+                    </ul>
+
+                </div>
+                <!-- Grid column -->
+
+            </div>
+            <!-- Grid row -->
+
+        </div>
+        <!-- Footer Links -->
+
+        <hr>
+
+        <!-- Call to action -->
+        <ul class="list-unstyled list-inline text-center py-2">
+            <li class="list-inline-item">
+                <h5 class="mb-1">Register for free</h5>
+            </li>
+            <li class="list-inline-item">
+                <a href="#!" class="btn btn-danger btn-rounded">Sign up!</a>
+            </li>
+        </ul>
+        <!-- Call to action -->
+
+        <hr>
+
+        <!-- Social buttons -->
+        <ul class="list-unstyled list-inline text-center">
+            <li class="list-inline-item">
+                <a class="btn-floating btn-fb mx-1">
+                    <i class="fab fa-facebook-f"> </i>
+                </a>
+            </li>
+            <li class="list-inline-item">
+                <a class="btn-floating btn-tw mx-1">
+                    <i class="fab fa-twitter"> </i>
+                </a>
+            </li>
+            <li class="list-inline-item">
+                <a class="btn-floating btn-gplus mx-1">
+                    <i class="fab fa-google-plus-g"> </i>
+                </a>
+            </li>
+            <li class="list-inline-item">
+                <a class="btn-floating btn-li mx-1">
+                    <i class="fab fa-linkedin-in"> </i>
+                </a>
+            </li>
+            <li class="list-inline-item">
+                <a class="btn-floating btn-dribbble mx-1">
+                    <i class="fab fa-dribbble"> </i>
+                </a>
+            </li>
+        </ul>
+        <!-- Social buttons -->
+        <!-- Copyright -->
+
+
+
+
+
+
+        <div class="container-fluid">
+            <div class="row align-items-center">
+
+
+
+                <div class="col-md-4" style="margin-left: 105px">
+                    <h4>Copyright &copy; 2018</h4>
+                    <h4>Movies Ticket</h4>
+                    <p>
+                        Developed & Maintained by
+                        <a class="text-warning" href="https://github.com/thenaveensaggam" target="_blank">
+                            <i class="fa fa-user-circle"></i> Shubham ,Pradeep,Neha
+                        </a>
+                    </p>
+                </div>
+
+                <div class="col-md-3">
+                    <a href="#" class="btn bg-stylish-color-dark btn-block" data-toggle="modal" data-target="#contact-modal">Contact</a>
+                </div>
+                <div class="col-md-1">
+                    <a href="#" class="btn btn-stylish-color-dark top-icon">
+                        <i class="fa fa-arrow-alt-circle-up fa-2x "></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Copyright -->
+
+    </footer>
+    <!-- Footer -->
+    <!--Script-->
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+
+    <script src="~/Content/bootstrap/js/fontawesome-all.js"></script>
+    <script src="~/Content/bootstrap/js/jquery-3.2.1.min.js"></script>
+    <script src="~/Content/bootstrap/js/popper.min.js"></script>
+    <script src="~/Content/bootstrap/js/bootstrap.min.js"></script>
+    <script src="~/Content/bootstrap/js/mdb.min.js"></script>
+</body>
+</html>
