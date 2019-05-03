@@ -456,6 +456,9 @@
           <Parameter Name="moviId" Type="int" Mode="In" />
         </Function>
         <Function Name="GetMoviesDescription" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetSelectSeats" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="theatreId" Type="int" Mode="In" />
+        </Function>
         <Function Name="GetSlots" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="tId" Type="int" Mode="In" />
           <Parameter Name="mId" Type="int" Mode="In" />
@@ -757,7 +760,10 @@
             <Parameter Name="mId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="MovyByCity" ReturnType="Collection(ShowBookingModel.MovyByCity_Result)">
-            <Parameter Name="id" Mode="In" Type="Int32" />
+          <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetSelectSeats" ReturnType="Collection(String)">
+          <Parameter Name="theatreId" Mode="In" Type="Int32" />
           </FunctionImport>
           </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
@@ -1398,6 +1404,7 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetSelectSeats" FunctionName="ShowBookingModel.Store.GetSelectSeats" />
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

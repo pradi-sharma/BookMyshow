@@ -161,14 +161,19 @@ namespace BookMyshow.Controllers
         }
      
         [HttpPost]
-        public PartialViewResult TimingsByTheatre(FormCollection form)
+        public ActionResult TimingsByTheatre(FormCollection form)
         {
-            int id = Convert.ToInt32(form["theatreId"]);
-           // int id = Request.Url.GetComponents("theatreId",);
-            //var result = entities.Movies.Where(movieId => movieId.MovieId == id).FirstOrDefault();
-            //var theatre = entities.GetTheatres(id);
-            ViewBag.demo1 = id;
-            return PartialView("_Timings");
+            int theatreId = Convert.ToInt32(form["theatreId"]);
+            TimeSpan slot = Convert.ToDateTime(form["slotId"]).TimeOfDay;
+            int movieId = Convert.ToInt32(form["theatreId"]);
+            int slotid = entities.Slots.Where(s => s.StartTime == slot).FirstOrDefault().SlotId;
+          
+            List<string>notSelectedSeats = entities.GetSelectSeats(5).ToList();
+
+            
+
+            ViewBag.arr = notSelectedSeats;
+            return View("UserSeatSelection");
         }
 
         public ActionResult SearchByCity()

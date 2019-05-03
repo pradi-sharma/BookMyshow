@@ -333,6 +333,7 @@
     <Content Include="Views\Shared\_MoviesByCityList.cshtml" />
     <Content Include="Views\UserHome\MoviesByCity.cshtml" />
     <Content Include="Views\UserHome\SearchByCity.cshtml" />
+    <Content Include="Views\UserHome\UserSeatSelection.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -395,7 +395,7 @@ h2.mss {
 
 .greenBox::before {
     content: "";
-    background: Green;
+    background: green;
 }
 
 .redBox::before {
@@ -413,7 +413,7 @@ h2.mss {
 
 .seats {
     border: 1px solid red;
-    background: yellow;
+    background-color:red ;
 }
 
 .seatGap {
@@ -473,7 +473,7 @@ input[type=checkbox]:before {
     box-shadow: inset 0px 2px 3px 0px rgba(0, 0, 0, .3), 0px 1px 0px 0px rgba(255, 255, 255, .8);
     -moz-box-shadow: inset 0px 2px 3px 0px rgba(0, 0, 0, .3), 0px 1px 0px 0px rgba(255, 255, 255, .8);
     -webkit-box-shadow: inset 0px 2px 3px 0px rgba(0, 0, 0, .3), 0px 1px 0px 0px rgba(255, 255, 255, .8);
-    background-color: #ffffff;
+  /*background-color: none;*/
 }
 
 input[type=checkbox]:checked:before {
@@ -614,7 +614,7 @@ input[type=checkbox]:checked:before {
 }
 
 /*--//responsive--*/
-*/
+
 
 #payment-body {
     margin-top: 5px;
@@ -632,3 +632,4 @@ input[type=checkbox]:checked:before {
 .pl-ziro {
     padding-left: 0px;
 }
+
