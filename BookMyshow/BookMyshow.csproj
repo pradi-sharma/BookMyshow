@@ -184,9 +184,13 @@
     <Content Include="Content\bootstrap\font\roboto\Roboto-Thin.ttf" />
     <Content Include="Content\bootstrap\font\roboto\Roboto-Thin.woff" />
     <Content Include="Content\bootstrap\font\roboto\Roboto-Thin.woff2" />
-    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
-    <Content Include="Scripts\jquery-1.10.2.js" />
-    <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <None Include="Scripts\jquery-3.4.1.intellisense.js" />
+    <Content Include="Scripts\jquery-3.4.1.js" />
+    <Content Include="Scripts\jquery-3.4.1.min.js" />
+    <Content Include="Scripts\jquery-3.4.1.slim.js" />
+    <Content Include="Scripts\jquery-3.4.1.slim.min.js" />
+    <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
+    <Content Include="Scripts\jquery-3.4.1.min.map" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
@@ -206,6 +210,9 @@
     <Compile Include="Controllers\UserHomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\BookedSeat.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Cast.cs">
       <DependentUpon>Model1.tt</DependentUpon>
@@ -271,6 +278,9 @@
     <Compile Include="Models\Theatre.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\TheatreMovy.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\TheatreSeat.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -305,7 +315,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\AdminHome\Index.cshtml" />
-    <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Shared\_TheatreAdmin.cshtml" />
     <Content Include="Views\AdminHome\AddTheatreAdmin.cshtml" />
     <Content Include="Views\Shared\_AddMovie.cshtml" />
@@ -320,7 +329,7 @@
     <Content Include="Views\Theatre\SelectLayout.cshtml" />
     <Content Include="Views\Theatre\Demo.cshtml" />
     <Content Include="Views\Theatre\TheatreAdminHome.cshtml" />
-    <Content Include="Views\Payment\Payment.cshtml" />
+    <Content Include="Views\UserHome\Payment.cshtml" />
     <Content Include="Views\UserHome\Index.cshtml" />
     <Content Include="Views\UserHome\Login.cshtml" />
     <Content Include="Views\UserHome\MovieDescription.cshtml" />
@@ -343,6 +352,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Payment\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

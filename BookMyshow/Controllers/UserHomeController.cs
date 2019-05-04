@@ -167,13 +167,38 @@ namespace BookMyshow.Controllers
             TimeSpan slot = Convert.ToDateTime(form["slotId"]).TimeOfDay;
             int movieId = Convert.ToInt32(form["theatreId"]);
             int slotid = entities.Slots.Where(s => s.StartTime == slot).FirstOrDefault().SlotId;
-          
-            List<string>notSelectedSeats = entities.GetSelectSeats(5).ToList();
 
-            
+            // List<string>notSelectedSeats = entities.GetSelectSeats(5).ToList();
+            List<string> notSelectedSeats = entities.GetBlockedSeats(theatreId, slotid, movieId).ToList();
 
+            var p = entities.GetPrice(theatreId, movieId).Single();
+            ViewBag.Price =Convert.ToDecimal(p);
             ViewBag.arr = notSelectedSeats;
+          
             return View("UserSeatSelection");
+        }
+        //public ActionResult BookTicket(int[]key,string[] value)
+        //{
+        //    decimal amount = key[0];
+
+        //    return View();
+        //}
+      
+
+        public ActionResult SelectedSeats(decimal key,string[] value)
+        {
+          
+            TempData["ss"] = value;
+            TempData["amount2"] = key;
+            TempData.Keep();
+
+          
+            return this.Json(new { success = true });
+        }
+        public ActionResult MakePayment()
+        {
+            ViewBag.amt2 = TempData["amount2"];
+            return View("Payment");
         }
 
         public ActionResult SearchByCity()

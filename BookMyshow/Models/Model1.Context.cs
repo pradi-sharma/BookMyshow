@@ -27,6 +27,7 @@ namespace BookMyshow.Models
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<BookedSeat> BookedSeats { get; set; }
         public virtual DbSet<Cast> Casts { get; set; }
         public virtual DbSet<City> Cities { get; set; }
         public virtual DbSet<MovieOfferDetail> MovieOfferDetails { get; set; }
@@ -37,6 +38,7 @@ namespace BookMyshow.Models
         public virtual DbSet<Play> Plays { get; set; }
         public virtual DbSet<Slot> Slots { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
+        public virtual DbSet<TheatreMovy> TheatreMovies { get; set; }
         public virtual DbSet<Theatre> Theatres { get; set; }
         public virtual DbSet<TheatreSeat> TheatreSeats { get; set; }
         public virtual DbSet<TicketDetail> TicketDetails { get; set; }
@@ -234,6 +236,36 @@ namespace BookMyshow.Models
                 new ObjectParameter("theatreId", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("GetSelectSeats", theatreIdParameter);
+        }
+    
+        public virtual ObjectResult<string> GetBlockedSeats(Nullable<int> theatreId, Nullable<int> slotId, Nullable<int> movieId)
+        {
+            var theatreIdParameter = theatreId.HasValue ?
+                new ObjectParameter("TheatreId", theatreId) :
+                new ObjectParameter("TheatreId", typeof(int));
+    
+            var slotIdParameter = slotId.HasValue ?
+                new ObjectParameter("SlotId", slotId) :
+                new ObjectParameter("SlotId", typeof(int));
+    
+            var movieIdParameter = movieId.HasValue ?
+                new ObjectParameter("MovieId", movieId) :
+                new ObjectParameter("MovieId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("GetBlockedSeats", theatreIdParameter, slotIdParameter, movieIdParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<decimal>> GetPrice(Nullable<int> theatreId, Nullable<int> movieId)
+        {
+            var theatreIdParameter = theatreId.HasValue ?
+                new ObjectParameter("TheatreId", theatreId) :
+                new ObjectParameter("TheatreId", typeof(int));
+    
+            var movieIdParameter = movieId.HasValue ?
+                new ObjectParameter("MovieId", movieId) :
+                new ObjectParameter("MovieId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<decimal>>("GetPrice", theatreIdParameter, movieIdParameter);
         }
     }
 }
