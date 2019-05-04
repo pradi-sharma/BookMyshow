@@ -15,7 +15,7 @@ namespace BookMyshow.Models
     public partial class TicketSeat
     {
         public int TicketId { get; set; }
-        public int SelectedSeat { get; set; }
+        public string SelectedSeat { get; set; }
     
         public virtual TicketDetail TicketDetail { get; set; }
     }

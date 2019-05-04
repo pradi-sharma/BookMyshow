@@ -8,15 +8,15 @@
     <meta charset="utf-8">
     <meta name="keywords" content="Movie Seat Selection a Responsive Web Template, Bootstrap Web Templates, Flat Web Templates, Android Compatible Web Template, Smartphone Compatible Web Template, Free Webdesigns for Nokia, Samsung, LG, Sony Ericsson, Motorola Web Design">
     @*<script>
-        addEventListener("load", function () {
-            setTimeout(hideURLbar, 0);
-        }, false);
+            addEventListener("load", function () {
+                setTimeout(hideURLbar, 0);
+            }, false);
 
-        function hideURLbar() {
-            window.scrollTo(0, 1);
-        }
+            function hideURLbar() {
+                window.scrollTo(0, 1);
+            }
 
-    </script>*@
+        </script>*@
     <!-- //Meta-Tags -->
     <!-- Index-Page-CSS -->
     <link rel="stylesheet" href="~/Content/style.css" type="text/css" media="all">
@@ -27,26 +27,29 @@
     <!-- //fonts -->
 
     <style>
-        #J10{
-            
+        #J10 {
         }
+
         .seats.disabled::before {
             background-color: red;
         }
+
         .seats.abcd::before {
             background-color: red;
         }
     </style>
+    <script src="~/Scripts/bootstrap.js"></script>
+    <link href="~/Content/bootstrap/css/bootstrap.css" rel="stylesheet" />
     @*<script src="~/Scripts/jquery-1.10.2.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            alert("loaded");
-            // $("#J10").css("background-color", "blue");
+        <script>
+            $(document).ready(function () {
+                alert("loaded");
+                // $("#J10").css("background-color", "blue");
 
-        });
-   
-       
-    </script>*@
+            });
+
+
+        </script>*@
 </head>
 
 <body onload="onLoaderFunc()">
@@ -81,7 +84,7 @@
             <ul class="seat_sel">
                 <li class="smallBox greenBox">Selected Seat</li>
 
-                <!---<li class="smallBox redBox">Reserved Seat</li>-->
+                <li class="smallBox redBox">Reserved Seat</li>
 
                 <li class="smallBox emptyBox">Empty Seat</li>
             </ul>
@@ -552,7 +555,7 @@
             @*<form action="/UserHome/Payment" method="get" id="pmntform">
         <input type="text" id="amt1" hidden />*@
             @*<input type="but" id="paymentId" value="Make Payment"/>*@
-         @Html.ActionLink("Make Payment", "MakePayment");
+         @Html.ActionLink("Make Payment", "MakePayment",new { @class= "btn btn-primary btn-large" })
 
             <!-- //details after booking displayed here -->
         </div>

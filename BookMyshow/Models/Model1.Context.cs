@@ -42,9 +42,9 @@ namespace BookMyshow.Models
         public virtual DbSet<Theatre> Theatres { get; set; }
         public virtual DbSet<TheatreSeat> TheatreSeats { get; set; }
         public virtual DbSet<TicketDetail> TicketDetails { get; set; }
-        public virtual DbSet<TicketSeat> TicketSeats { get; set; }
         public virtual DbSet<TimeSlot> TimeSlots { get; set; }
         public virtual DbSet<UserDetail> UserDetails { get; set; }
+        public virtual DbSet<TicketSeat> TicketSeats { get; set; }
     
         public virtual int FillSeats(Nullable<int> seatNumber)
         {
@@ -266,6 +266,44 @@ namespace BookMyshow.Models
                 new ObjectParameter("MovieId", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<decimal>>("GetPrice", theatreIdParameter, movieIdParameter);
+        }
+    
+        public virtual int InsertTicketSeats(Nullable<int> ticketId, string seat)
+        {
+            var ticketIdParameter = ticketId.HasValue ?
+                new ObjectParameter("ticketId", ticketId) :
+                new ObjectParameter("ticketId", typeof(int));
+    
+            var seatParameter = seat != null ?
+                new ObjectParameter("seat", seat) :
+                new ObjectParameter("seat", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("InsertTicketSeats", ticketIdParameter, seatParameter);
+        }
+    
+        public virtual int InsertBookedSeat(Nullable<int> theatreId, Nullable<int> slotId, Nullable<int> movieId, string seat, Nullable<int> userId)
+        {
+            var theatreIdParameter = theatreId.HasValue ?
+                new ObjectParameter("theatreId", theatreId) :
+                new ObjectParameter("theatreId", typeof(int));
+    
+            var slotIdParameter = slotId.HasValue ?
+                new ObjectParameter("slotId", slotId) :
+                new ObjectParameter("slotId", typeof(int));
+    
+            var movieIdParameter = movieId.HasValue ?
+                new ObjectParameter("MovieId", movieId) :
+                new ObjectParameter("MovieId", typeof(int));
+    
+            var seatParameter = seat != null ?
+                new ObjectParameter("seat", seat) :
+                new ObjectParameter("seat", typeof(string));
+    
+            var userIdParameter = userId.HasValue ?
+                new ObjectParameter("userId", userId) :
+                new ObjectParameter("userId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("InsertBookedSeat", theatreIdParameter, slotIdParameter, movieIdParameter, seatParameter, userIdParameter);
         }
     }
 }

@@ -74,41 +74,79 @@
         }*/
     </style>
     <script>
-        //$(document).ready(function () {
-        //    $("#search").on("click", function () {
-        //        var result = "Correct";
-        //        var id1 = 0;
-        //        result = $("#searchinput").val();
-        //        alert(result);
-        //        $.ajax({
-        //            type: "POST",
-        //            data: "value=" + result,
-        //            url: "/MoviesTicket/Search",
-        //            //success: function (data) {
-        //            //    alert("in ajaxx call");
-        //            //}
-        //        });
-        //$.post('/MoviesTicket/Search', {
-        //    value: result
-        //}
-        //, function (data) {
-        //    alert("Success" + data.success);
-        //    id1 = data.success;
-        //    alert("in post" + id1);
-
-        //    });
-
-
-        //    });
-        //    //document.getElementById("search").innerText = "Likes";
-        //    //  $(this).val();
-        //});
 
 
 
         function Demo() {
             document.getElementsByName("DemoForm").submit();
         }
+
+    </script>
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+
+            $("#username_error").hide();
+            $("#password_error").hide();
+
+            var name_error = false;
+            var password_error = false;
+
+            $("#username").focusout(function () {
+                check_name_error();
+            });
+            $("#password").focusout(function () {
+                check_password_error();
+            });
+
+            function check_name_error() {
+
+                var name = $("#username").val();
+                if (name !== '') {
+                    $("#username_error").hide();
+                    $("#username").css("border-bottom", "2px solid #34F458");
+                } else {
+                   // $("#username_error").html("Invalid Username");
+                    $("#username_error").show();
+                    $("#username").css("border-bottom", "2px solid #F90A0A");
+                    name_error = true;
+                }
+            }
+
+            function check_password_error() {
+                var Password = $("#password").val();
+
+
+                if (Password == "") {
+                //    $("#password_error").html("PassWord Not Match");
+                    $("#password_error").show();
+                    $("#password").css("border-bottom", "2px solid red");
+                    error_Password = true;
+                } else {
+                    $("#password_error").hide();
+                    $("#password").css("border-bottom", "2px solid green");
+
+                }
+
+            }
+            $("#loginbtn").click(function () {
+
+                name_error = false;
+                password_error = false;
+
+                check_name_error();
+                check_password_error();
+
+                if (name_error === false && password_error === false) {
+                    alert("Login Sucessfull");
+                    return ("User.cshtml");
+                }
+                else {
+                    alert("Fill Your Details");
+                    return false;
+                }
+            })
+        })
 
     </script>
 </head>
@@ -252,10 +290,12 @@
                 <form action="~/UserHome/Login" method="post">
                     <div class="modal-body">
                         <div class="form-group">
-                            <input type="text" placeholder="User Name" class="form-control" name="username">
+                            <input type="text" placeholder="User Name" class="form-control" name="username" id="username">
+                            <span id="username_error">enter correct username</span>
                         </div>
                         <div class="form-group">
-                            <input type="password" placeholder="Password" class="form-control" name="password">
+                            <input type="password" placeholder="Password" class="form-control" name="password" id="password">
+                            <span id="password_error">bad credentials</span>
                         </div>
                         <!--<div class="form-group">-->
                         <!--<textarea class="form-control my-textarea" rows="5" cols="30" placeholder="Leave a Message"></textarea>-->
@@ -263,7 +303,7 @@
                     </div>
                     <div class="modal-footer">
                         <a href="#" class="btn btn-secondary" data-dismiss="modal">Close</a>
-                        <input type="submit" class="btn btn-teal" value="Submit" id="submitButton">
+                        <input type="submit" class="btn btn-teal" value="Submit" id="loginbtn">
                     </div>
                 </form>
             </div>

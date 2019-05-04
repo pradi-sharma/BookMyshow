@@ -9,6 +9,9 @@ namespace BookMyshow.Controllers
 {
     public class UserHomeController : Controller
     {
+      static int sId = 0;
+       static int mvId = 0;
+       static int thId = 0;
 
         List<string> actorphotolist = new List<string>();
         ShowBookingEntities entities = new ShowBookingEntities();
@@ -168,6 +171,11 @@ namespace BookMyshow.Controllers
             int movieId = Convert.ToInt32(form["theatreId"]);
             int slotid = entities.Slots.Where(s => s.StartTime == slot).FirstOrDefault().SlotId;
 
+            //to set global variables
+            sId = slotid;
+            mvId = movieId;
+            thId = theatreId;
+
             // List<string>notSelectedSeats = entities.GetSelectSeats(5).ToList();
             List<string> notSelectedSeats = entities.GetBlockedSeats(theatreId, slotid, movieId).ToList();
 
@@ -188,17 +196,53 @@ namespace BookMyshow.Controllers
         public ActionResult SelectedSeats(decimal key,string[] value)
         {
           
-            TempData["ss"] = value;
+            
             TempData["amount2"] = key;
+            TempData["ss"] = value.ToList();
             TempData.Keep();
 
-          
+
             return this.Json(new { success = true });
         }
         public ActionResult MakePayment()
         {
             ViewBag.amt2 = TempData["amount2"];
+            TempData.Keep();
             return View("Payment");
+        }
+        public ActionResult GenerateTicket()
+        {
+            ViewBag.amt2 = TempData["amount2"];
+            List<string> seatslist = (List<string>)TempData["ss"];
+
+            TicketDetail ticket = new TicketDetail();
+            ticket.MovieId = mvId;
+            ticket.TheatreId = thId;
+            ticket.Price=Convert.ToDecimal(TempData["amount2"]);
+            entities.TicketDetails.Add(ticket);
+            entities.SaveChanges();
+            int identity = entities.TicketDetails.Select(t => t.TicketId).Max();
+
+            foreach (var item in seatslist)
+            {
+                entities.InsertTicketSeats(identity, item);
+            }
+            foreach (var item in seatslist)
+            {
+                BookedSeat bookedSeat = new BookedSeat();
+                bookedSeat.MovieId = mvId;
+                bookedSeat.SlotId = sId;
+                bookedSeat.TheatreId = thId;
+                bookedSeat.UserId = 1;
+                bookedSeat.SeatNumber = item;
+                entities.BookedSeats.Add(bookedSeat);
+                entities.SaveChanges();
+            }
+          
+            
+
+
+            return View("Ticket");
         }
 
         public ActionResult SearchByCity()

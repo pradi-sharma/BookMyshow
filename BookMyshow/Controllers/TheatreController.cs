@@ -17,9 +17,9 @@ namespace BookMyshow.Controllers
             var result = entities.checkTheatre(Convert.ToInt32(Session["userId"]));
             if (result != null)
             {
-                return View("RegisteredTheatreAdminHome");
+                return View("TheatreAdminHome");
             }
-            return View("TheatreAdminHome");
+            return View("RegisteredTheatreAdminHome");
         }
         public ActionResult TheatreRegister()
         {
@@ -49,10 +49,6 @@ namespace BookMyshow.Controllers
 
             SqlConnection connection = new SqlConnection("database=ShowBooking;server=VDI-NET-0006\\LOCAL;trusted_connection=true");
             connection.Open();
-           
-          
-
-
             //if (value.ToString().Contains(','))
             //{
              //   string[] arrval = value.ToString().Split(',');
@@ -78,6 +74,10 @@ namespace BookMyshow.Controllers
             //}
             ViewBag.Message = Session[key];
             return this.Json(new { success = true });
+        }
+        public PartialViewResult AddMovie()
+        {
+            return PartialView();
         }
     }
 }
