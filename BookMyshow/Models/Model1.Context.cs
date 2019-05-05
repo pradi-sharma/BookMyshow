@@ -37,7 +37,6 @@ namespace BookMyshow.Models
         public virtual DbSet<PlayOffer> PlayOffers { get; set; }
         public virtual DbSet<Play> Plays { get; set; }
         public virtual DbSet<Slot> Slots { get; set; }
-        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<Theatre> Theatres { get; set; }
         public virtual DbSet<TheatreSeat> TheatreSeats { get; set; }
         public virtual DbSet<TicketDetail> TicketDetails { get; set; }

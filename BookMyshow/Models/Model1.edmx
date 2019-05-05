@@ -107,16 +107,6 @@
           <Property Name="StartTime" Type="time" Precision="7" Nullable="false" />
           <Property Name="EndTime" Type="time" Precision="7" Nullable="false" />
         </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="principal_id" Type="int" Nullable="false" />
-          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="version" Type="int" />
-          <Property Name="definition" Type="varbinary(max)" />
-        </EntityType>
         <EntityType Name="TheatreCity">
           <Key>
             <PropertyRef Name="CityId" />
@@ -613,7 +603,6 @@
           <EntitySet Name="PlayOffers" EntityType="Self.PlayOffers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Plays" EntityType="Self.Plays" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Slots" EntityType="Self.Slots" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TheatreCity" EntityType="Self.TheatreCity" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TheatreMovies" EntityType="Self.TheatreMovies" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Theatres" EntityType="Self.Theatres" Schema="dbo" store:Type="Tables" />
@@ -822,7 +811,6 @@
           <EntitySet Name="PlayOffers" EntityType="ShowBookingModel.PlayOffer" />
           <EntitySet Name="Plays" EntityType="ShowBookingModel.Play" />
           <EntitySet Name="Slots" EntityType="ShowBookingModel.Slot" />
-          <EntitySet Name="sysdiagrams" EntityType="ShowBookingModel.sysdiagram" />
           <EntitySet Name="Theatres" EntityType="ShowBookingModel.Theatre" />
           <EntitySet Name="TheatreSeats" EntityType="ShowBookingModel.TheatreSeat" />
           <EntitySet Name="TicketDetails" EntityType="ShowBookingModel.TicketDetail" />
@@ -1073,16 +1061,6 @@
           <Property Name="EndTime" Type="Time" Nullable="false" Precision="7" />
           <NavigationProperty Name="BookedSeats" Relationship="ShowBookingModel.FK_BookedSeats_Slots" FromRole="Slot" ToRole="BookedSeat" />
           <NavigationProperty Name="TimeSlots" Relationship="ShowBookingModel.FK_TimeSlots_Slots" FromRole="Slot" ToRole="TimeSlot" />
-        </EntityType>
-        <EntityType Name="sysdiagram">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="Theatre">
           <Key>
@@ -1557,17 +1535,6 @@
                 <ScalarProperty Name="EndTime" ColumnName="EndTime" />
                 <ScalarProperty Name="StartTime" ColumnName="StartTime" />
                 <ScalarProperty Name="SlotId" ColumnName="SlotId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="ShowBookingModel.sysdiagram">
-              <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="definition" ColumnName="definition" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="name" ColumnName="name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

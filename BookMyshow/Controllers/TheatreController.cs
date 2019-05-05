@@ -45,14 +45,28 @@ namespace BookMyshow.Controllers
             entities.SaveChanges();
             return View("_theatreSuccess");
         }
-        public ActionResult SelectLayout()
+        public PartialViewResult SelectLayout()
         {
-            Session["sampledata"] = "sample";
-            return View();
+            int userid = Convert.ToInt32(Session["userId"]);
+            try
+            {
+                var theatreId = Convert.ToInt32(entities.checkTheatre(userid).Single());
+            }
+            catch (Exception)
+            {
+
+                ViewBag.name = Session["userName"];
+                return PartialView("_RegisterFirstMessage");
+            }
+                Session["sampledata"] = "sample";
+                return PartialView("_SeatLayoutSelection");
+
         }
         [HttpPost]
         public ActionResult SelectLayout(string key, string[] value)
         {
+            int userid =Convert.ToInt32(Session["userId"]);
+            int theatreId =Convert.ToInt32(entities.checkTheatre(userid).Single());
             Session[key] = value;
 
             SqlConnection connection = new SqlConnection("database=ShowBooking;server=VDI-NET-0006\\LOCAL;trusted_connection=true");
@@ -66,7 +80,7 @@ namespace BookMyshow.Controllers
             {
                 SqlCommand command = new SqlCommand("InsertIntoTheatreSeats", connection);
                 command.CommandType = System.Data.CommandType.StoredProcedure;
-                    command.Parameters.AddWithValue("@TheatreId", 5);
+                    command.Parameters.AddWithValue("@TheatreId", theatreId);
                     command.Parameters.AddWithValue("@SeatNumber", value[i].ToString());
                     command.Parameters.AddWithValue("@Status", "S");
                     command.ExecuteNonQuery();

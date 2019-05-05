@@ -275,9 +275,6 @@
     <Compile Include="Models\sp_helpdiagrams_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\sysdiagram.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\Theatre.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -345,6 +342,8 @@
     <Content Include="Views\UserHome\UserSeatSelection.cshtml" />
     <Content Include="Views\Theatre\_AddMovie.cshtml" />
     <Content Include="Views\Theatre\_RemoveMovie.cshtml" />
+    <Content Include="Views\Theatre\_SeatLayoutSelection.cshtml" />
+    <Content Include="Views\Theatre\_RegisterFirstMessage.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -1,9 +1,10 @@
 ﻿
-<script src="~/Scripts/jquery-1.10.2.min.js"></script>
-<script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+
 
 <html lang="en">
 <head>
+    <script src="~/Scripts/jquery-3.4.1.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -94,7 +95,8 @@
 
     <div id="mySidenav" class="sidenav stylish-color-dark border-right">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-        @Ajax.ActionLink("register Theatre", "TheatreRegister",new AjaxOptions { HttpMethod="GET",UpdateTargetId="div",InsertionMode=InsertionMode.Replace})
+        @Ajax.ActionLink("register Theatre", "TheatreRegister", new AjaxOptions { HttpMethod = "GET", UpdateTargetId = "div", InsertionMode = InsertionMode.Replace })
+        @Ajax.ActionLink("layout", "SelectLayout", new AjaxOptions { HttpMethod = "GET", UpdateTargetId = "div", InsertionMode = InsertionMode.Replace })
         @Html.ActionLink("select seating layout", "SelectLayout")
     </div>
     <!-- Side nav -->

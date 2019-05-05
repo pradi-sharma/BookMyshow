@@ -15,7 +15,6 @@
         <EntityTypeShape EntityType="ShowBookingModel.PlayOffer" Width="1.5" PointX="12" PointY="3.875" />
         <EntityTypeShape EntityType="ShowBookingModel.Play" Width="1.5" PointX="9.75" PointY="0.75" />
         <EntityTypeShape EntityType="ShowBookingModel.Slot" Width="1.5" PointX="6" PointY="3" />
-        <EntityTypeShape EntityType="ShowBookingModel.sysdiagram" Width="1.5" PointX="2.75" PointY="4.375" />
         <EntityTypeShape EntityType="ShowBookingModel.Theatre" Width="1.5" PointX="3" PointY="8.5" />
         <EntityTypeShape EntityType="ShowBookingModel.TheatreSeat" Width="1.5" PointX="5.25" PointY="7.5" />
         <EntityTypeShape EntityType="ShowBookingModel.TicketDetail" Width="1.5" PointX="5.25" PointY="9.875" />
