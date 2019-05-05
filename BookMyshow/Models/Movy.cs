@@ -19,10 +19,10 @@ namespace BookMyshow.Models
         {
             this.BookedSeats = new HashSet<BookedSeat>();
             this.MovieOfferDetails = new HashSet<MovieOfferDetail>();
-            this.TheatreMovies = new HashSet<TheatreMovy>();
             this.TicketDetails = new HashSet<TicketDetail>();
             this.TimeSlots = new HashSet<TimeSlot>();
             this.Casts = new HashSet<Cast>();
+            this.Theatres = new HashSet<Theatre>();
         }
     
         public int MovieId { get; set; }
@@ -31,6 +31,7 @@ namespace BookMyshow.Models
         public System.DateTime ReleaseDate { get; set; }
         public byte[] Poster { get; set; }
         public int IntrestedUsers { get; set; }
+        public string VideoLink { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BookedSeat> BookedSeats { get; set; }
@@ -38,12 +39,12 @@ namespace BookMyshow.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MovieOfferDetail> MovieOfferDetails { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TheatreMovy> TheatreMovies { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TicketDetail> TicketDetails { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TimeSlot> TimeSlots { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Cast> Casts { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Theatre> Theatres { get; set; }
     }
 }

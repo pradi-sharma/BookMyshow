@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.css">
     <link rel="stylesheet" href="~/Content/Script.css">
     <title>Movies Ticket</title>
-    <link rel="icon" href="../img/favicon.ico">
+    <link rel="icon" href="~/Content/Images/bb82ec2bbdc6893100ceaa08bc3fb61f.png">
 
     <!-- CAROSAL Bottom Header -->
 
@@ -42,6 +42,13 @@
         li {
             margin-left: 0;
             padding: 0;
+        }
+
+
+        input::placeholder {
+            color: green;
+            font-size: 1.2em;
+            font-style: italic;
         }
         /* btn {
             max-height: 18px;
@@ -72,6 +79,12 @@
             overflow: hidden;
             position: relative;
         }*/
+        .container {
+            padding-right: 15px;
+            padding-left: 15px;
+            margin-right: 10px;
+            margin-left: 60px;
+        }
     </style>
     <script>
 
@@ -159,30 +172,12 @@
 
             <table>
                 <tr id="nav-tr">
-                    <a href="index.html" class="navbar-brand " style="margin-left: -80px;margin-top: -10px;margin-bottom: -10px">
+                    <a href="/UserHome/Index" class="navbar-brand " style="margin-left: -90px;margin-top: -10px;margin-bottom: -10px;margin-right:70px;">
                         <img src="~/Content/Images/bb82ec2bbdc6893100ceaa08bc3fb61f.png" width="100" height="100">
-                        Movies Ticket
+                        <span style="color:red" class="font-weight-bold text-uppercase mt-3 mb-4"> Movies </span><span class="font-weight-bold text-uppercase mt-3 mb-4">Ticket</span>
                     </a>
 
-                    @*<form class="form-inline ml-auto">*@
-                    @using (Html.BeginForm("Search", "UserHome", FormMethod.Post, new { name = "DemoForm" }))
-                    {
-
-                        <div class="form-group">
-                            <input type="text" placeholder="Search..." class="form-control" id="searchinput" name="searchInput" style="width: 200px">
-
-                        </div>
-                        <div class="search">
-
-                            @*<input type="submit" value="search" id="search" class="btn btn-outline-light btn-sm"  />*@
-                            <button type="submit" id="search" class="btn btn-outline-light btn-sm" onclick="Demo()">Search</button>
-                            @*<a href="#" class="btn btn-outline-light btn-sm ">Search</a>*@
-                        </div>
-                    }
-                    @*</form>*@
-
-
-
+                   
 
 
 
@@ -199,11 +194,42 @@
         </div>
         <tr id="nav-tr">
 
-            <div class="collapse navbar-collapse " id="uiNavBar">
+            <div class="collapse navbar-collapse " id="uiNavBar" style="margin-top:25px;margin-right:-50px">
                 <ul class="navbar-nav ml-auto">
+                    @*<form class="form-inline ml-auto">*@
+                    @using (Html.BeginForm("Search", "UserHome", FormMethod.Post, new { name = "DemoForm" }))
+                    {
+
+                        <div class="form-group">
+
+                            <input type="text" placeholder="SearchByMovie..." class="form-control" id="searchinput" name="searchInput" style="width: 200px;color:white;margin-top:-10px;">
+
+                        </div>
+                        <div class="search">
+
+                            @*<input type="submit" value="search" id="search" class="btn btn-outline-light btn-sm"  />*@
+                            <button type="submit" id="search" class="btn btn-outline-light btn-sm" onclick="Demo()">Search</button>
+                            @*<a href="#" class="btn btn-outline-light btn-sm ">Search</a>*@
+                        </div>
+                    }
+                    @*</form>*@
+
+
+
                     <li class="nav-item px-2">
                         <a href="@Url.Action("Index","UserHome")" class="nav-link">
                             <i class="fa fa-home"></i> Home
+                        </a>
+                    </li>
+
+                    <li class="nav-item px-2">
+                        <a href="#" class="nav-link">
+                            <i class="fa fa-film"></i> Movies
+                        </a>
+                    </li>
+                    <li class="nav-item px-2">
+                        <a href="#" class="nav-link">
+                            <i class="fa fa-play"></i> Plays
                         </a>
                     </li>
                     <li class="nav-item px-2">
@@ -218,18 +244,8 @@
                         </a>
                     </li>
                     <li class="nav-item px-2">
-                        <a href="#" class="nav-link">
-                            <i class="fa fa-film"></i> Movies
-                        </a>
-                    </li>
-                    <li class="nav-item px-2">
-                        <a href="#" class="nav-link">
-                            <i class="fa fa-play"></i> Plays
-                        </a>
-                    </li>
-                    <li class="nav-item px-2">
                         <a href="~/UserHome/SearchByCity" class="nav-link">
-                            <i class="fa fa-search"></i> City
+                            <i class="fa fa-search"></i>Pune <p style="text-decoration:overline dotted;font-size:14px;opacity:0.8">SelectCity</p>
                         </a>
                     </li>
 
@@ -516,10 +532,10 @@
                     <div class="col-md-4 mx-auto">
 
                         <!-- Content -->
-                        <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Footer Content</h5>
+                        <h5 class="font-weight-bold text-uppercase mt-3 mb-4">SUPPORT</h5>
                         <p>
-                            Here you can use rows and columns here to organize your footer content. Lorem ipsum dolor sit amet, consectetur
-                            adipisicing elit.
+                            For more support contact with us! We are available 24 * 7 on 12345-0123456789<br />
+                            Drop a mail on <span style="color:salmon">M.ticket@moviesticket.com</span>
                         </p>
 
                     </div>
@@ -531,20 +547,20 @@
                     <div class="col-md-2 mx-auto">
 
                         <!-- Links -->
-                        <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Links</h5>
+                        <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Check Ratings</h5>
 
                         <ul class="list-unstyled">
                             <li>
-                                <a href="#!">Link 1</a>
+                                <a href="https://www.imdb.com/">IDBM</a>
                             </li>
                             <li>
-                                <a href="#!">Link 2</a>
+                                <a href="https://www.flixster.com/">Flixster</a>
                             </li>
                             <li>
-                                <a href="#!">Link 3</a>
+                                <a href="https://www.mrqe.com/">MRQE</a>
                             </li>
                             <li>
-                                <a href="#!">Link 4</a>
+                                <a href="https://www.yahoo.com/entertainment/movies/">Yahoo</a>
                             </li>
                         </ul>
 
@@ -557,20 +573,20 @@
                     <div class="col-md-2 mx-auto">
 
                         <!-- Links -->
-                        <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Links</h5>
+                        <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Get Movies</h5>
 
                         <ul class="list-unstyled">
                             <li>
-                                <a href="#!">Link 1</a>
+                                <a href="https://megabox-hd.en.uptodown.com/android">Megabox</a>
                             </li>
                             <li>
-                                <a href="#!">Link 2</a>
+                                <a href="https://www.hotstar.com/">Hotstar</a>
                             </li>
                             <li>
-                                <a href="#!">Link 3</a>
+                                <a href="https://www.sonycrackle.com/">Sony Crackle</a>
                             </li>
                             <li>
-                                <a href="#!">Link 4</a>
+                                <a href="https://vimeo.com/">Vimeo</a>
                             </li>
                         </ul>
 
@@ -583,20 +599,20 @@
                     <div class="col-md-2 mx-auto">
 
                         <!-- Links -->
-                        <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Links</h5>
+                        <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Upcoming_Movies</h5>
 
                         <ul class="list-unstyled">
                             <li>
-                                <a href="#!">Link 1</a>
+                                <a href="https://www.boxofficemojo.com/">Box Office Mojo</a>
                             </li>
                             <li>
-                                <a href="#!">Link 2</a>
+                                <a href="https://www.rottentomatoes.com/">Rotten Tomatoes</a>
                             </li>
                             <li>
-                                <a href="#!">Link 3</a>
+                                <a href="https://www.comingsoon.net/">Coming Soon</a>
                             </li>
                             <li>
-                                <a href="#!">Link 4</a>
+                                <a href="whenitdrops.com/">When It Drops</a>
                             </li>
                         </ul>
 
@@ -617,7 +633,7 @@
                     <h5 class="mb-1">Register for free</h5>
                 </li>
                 <li class="list-inline-item">
-                    <a href="#!" class="btn btn-danger btn-rounded">Sign up!</a>
+                    <a href="#!" class="btn btn-danger btn-rounded" data-toggle="modal" data-target="#login-modal">Sign up!</a>
                 </li>
             </ul>
             <!-- Call to action -->
@@ -666,8 +682,9 @@
 
 
                     <div class="col-md-4" style="margin-left: 105px">
-                        <h4>Copyright &copy; 2018</h4>
-                        <h4>Movies Ticket</h4>
+                        <h4>Copyright &copy; 2019</h4>
+                        <span style="color:red" class="font-weight-bold text-uppercase mt-3 mb-4"> Movies </span><span class="font-weight-bold text-uppercase mt-3 mb-4">Ticket</span>
+
                         <p>
                             Developed & Maintained by
                             <a class="text-warning" href="https://github.com/thenaveensaggam" target="_blank">

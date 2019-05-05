@@ -147,6 +147,7 @@
     <Content Include="Content\Images\bb82ec2bbdc6893100ceaa08bc3fb61f.png" />
     <Content Include="Content\Images\download.jpg" />
     <Content Include="Content\Images\e1033a3d9b662e112e99e62ba2f1cd6f.jpg" />
+    <Content Include="Content\Images\wonderwoman_barcode.jpg" />
     <Content Include="Content\PaymentStyle.css" />
     <Content Include="Content\style.css" />
     <Content Include="Content\Site.css" />
@@ -272,13 +273,7 @@
     <Compile Include="Models\sp_helpdiagrams_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\sysdiagram.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\Theatre.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\TheatreMovy.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TheatreSeat.cs">
@@ -343,6 +338,7 @@
     <Content Include="Views\UserHome\MoviesByCity.cshtml" />
     <Content Include="Views\UserHome\SearchByCity.cshtml" />
     <Content Include="Views\UserHome\UserSeatSelection.cshtml" />
+    <Content Include="Views\UserHome\Ticket.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

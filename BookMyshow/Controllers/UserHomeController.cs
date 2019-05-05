@@ -179,7 +179,7 @@ namespace BookMyshow.Controllers
             // List<string>notSelectedSeats = entities.GetSelectSeats(5).ToList();
             List<string> notSelectedSeats = entities.GetBlockedSeats(theatreId, slotid, movieId).ToList();
 
-            var p = entities.GetPrice(theatreId, movieId).Single();
+            var p = entities.GetPrice(theatreId, movieId,sId).Single();
             ViewBag.Price =Convert.ToDecimal(p);
             ViewBag.arr = notSelectedSeats;
           

@@ -37,14 +37,12 @@ namespace BookMyshow.Models
         public virtual DbSet<PlayOffer> PlayOffers { get; set; }
         public virtual DbSet<Play> Plays { get; set; }
         public virtual DbSet<Slot> Slots { get; set; }
-        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
-        public virtual DbSet<TheatreMovy> TheatreMovies { get; set; }
         public virtual DbSet<Theatre> Theatres { get; set; }
         public virtual DbSet<TheatreSeat> TheatreSeats { get; set; }
         public virtual DbSet<TicketDetail> TicketDetails { get; set; }
+        public virtual DbSet<TicketSeat> TicketSeats { get; set; }
         public virtual DbSet<TimeSlot> TimeSlots { get; set; }
         public virtual DbSet<UserDetail> UserDetails { get; set; }
-        public virtual DbSet<TicketSeat> TicketSeats { get; set; }
     
         public virtual int FillSeats(Nullable<int> seatNumber)
         {
@@ -255,7 +253,7 @@ namespace BookMyshow.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("GetBlockedSeats", theatreIdParameter, slotIdParameter, movieIdParameter);
         }
     
-        public virtual ObjectResult<Nullable<decimal>> GetPrice(Nullable<int> theatreId, Nullable<int> movieId)
+        public virtual ObjectResult<Nullable<decimal>> GetPrice(Nullable<int> theatreId, Nullable<int> movieId, Nullable<int> slotId)
         {
             var theatreIdParameter = theatreId.HasValue ?
                 new ObjectParameter("TheatreId", theatreId) :
@@ -265,7 +263,11 @@ namespace BookMyshow.Models
                 new ObjectParameter("MovieId", movieId) :
                 new ObjectParameter("MovieId", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<decimal>>("GetPrice", theatreIdParameter, movieIdParameter);
+            var slotIdParameter = slotId.HasValue ?
+                new ObjectParameter("slotId", slotId) :
+                new ObjectParameter("slotId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<decimal>>("GetPrice", theatreIdParameter, movieIdParameter, slotIdParameter);
         }
     
         public virtual int InsertTicketSeats(Nullable<int> ticketId, string seat)
@@ -304,6 +306,19 @@ namespace BookMyshow.Models
                 new ObjectParameter("userId", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("InsertBookedSeat", theatreIdParameter, slotIdParameter, movieIdParameter, seatParameter, userIdParameter);
+        }
+    
+        public virtual int InsertTheatreMovy(Nullable<int> theatreId, Nullable<int> movieId)
+        {
+            var theatreIdParameter = theatreId.HasValue ?
+                new ObjectParameter("theatreId", theatreId) :
+                new ObjectParameter("theatreId", typeof(int));
+    
+            var movieIdParameter = movieId.HasValue ?
+                new ObjectParameter("movieId", movieId) :
+                new ObjectParameter("movieId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("InsertTheatreMovy", theatreIdParameter, movieIdParameter);
         }
     }
 }
