@@ -1,8 +1,8 @@
-﻿<script src="~/Scripts/jquery-1.10.2.min.js"></script>
-<script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
-
-<html lang="en">
+﻿
 <head>
+
+    <script src="~/Scripts/jquery-3.4.1.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -29,7 +29,6 @@
             line-height: 50%;
             font-size: 80%;
         } */
-
         }
     </style>
 </head>
@@ -45,14 +44,14 @@
                         Movies Ticket
                     </a>
                     @*
-                    <form class="form-inline ml-auto">
-                        <div class="form-group">
-                            <input type="text" placeholder="Search..." class="form-control" style="width: 400px">
-                        </div>
-                        <div class="search">
-                            <a href="#" class="btn btn-outline-light btn-sm ">Search</a>
-                        </div>
-                    </form>*@
+                        <form class="form-inline ml-auto">
+                            <div class="form-group">
+                                <input type="text" placeholder="Search..." class="form-control" style="width: 400px">
+                            </div>
+                            <div class="search">
+                                <a href="#" class="btn btn-outline-light btn-sm ">Search</a>
+                            </div>
+                        </form>*@
                     <button class="navbar-toggler">
                         <span class="navbar-toggler-icon"></span>
                     </button>
@@ -91,7 +90,7 @@
     </nav>
 
     <!-- Side nav -->
-    
+
     <div id="mySidenav" class="sidenav stylish-color-dark border-right">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
         @Ajax.ActionLink("Add offers", "AddOffers", new AjaxOptions { HttpMethod = "GET", UpdateTargetId = "div", InsertionMode = InsertionMode.Replace })
@@ -371,6 +370,8 @@
     <!-- aside bar -->
 
 </body>
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <!-- BODY ENDS -->
@@ -385,5 +386,5 @@
         event.preventDefault();
         $(this).ekkoLightbox();
     });</script>
-</html>
+
 

@@ -10,15 +10,10 @@
 namespace BookMyshow.Models
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class TheatreMovy
+    public partial class GetMoviesList_Result
     {
-        public int TheatreId { get; set; }
+        public string MovieName { get; set; }
         public int MovieId { get; set; }
-        public decimal Price { get; set; }
-    
-        public virtual Movy Movy { get; set; }
-        public virtual Theatre Theatre { get; set; }
     }
 }

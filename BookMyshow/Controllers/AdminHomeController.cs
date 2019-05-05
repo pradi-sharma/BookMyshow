@@ -66,7 +66,7 @@ namespace BookMyshow.Controllers
             return PartialView("_Displayoffers", entities.Offers);
         }
 
-        public PartialViewResult DeleteOffer(int id)
+        public ActionResult DeleteOffer(int id)
         {
             var offer = entities.Offers.Find(id);
             var playoffer = entities.PlayOffers.Where(o => o.OfferId == id).FirstOrDefault();
@@ -83,7 +83,7 @@ namespace BookMyshow.Controllers
             }
             entities.Offers.Remove(offer);
             entities.SaveChanges();
-            return PartialView("_DisplayOffers", entities.Offers);
+            return View("Admin");
         } 
         #endregion 
 
@@ -99,9 +99,10 @@ namespace BookMyshow.Controllers
             newadmin.UserName = form["Username"];
             newadmin.Password = form["Password"];
             newadmin.Role = form["RoleDropdown"];
+            newadmin.Contact = Convert.ToInt64(form["Contact"]);
             entities.UserDetails.Add(newadmin);
             entities.SaveChanges();
-            return View();
+            return View("Admin");
         }
         public PartialViewResult AddMovie()
         {

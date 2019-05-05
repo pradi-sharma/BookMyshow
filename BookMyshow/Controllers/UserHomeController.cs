@@ -95,7 +95,8 @@ namespace BookMyshow.Controllers
             string password = form["password"];
             UserDetail user = new UserDetail();
             var result = entities.UserDetails.Where(u => u.UserName == username && u.Password == password).FirstOrDefault();
-            if (result != null)
+           int count= entities.UserDetails.Where(u => u.UserName == username && u.Password == password).Count();
+            if (count != 0)
             {
                string role = result.Role;
                 if (role == "user")
@@ -106,13 +107,13 @@ namespace BookMyshow.Controllers
                 }
                 else if (role == "admin")
                 {
-                    Session["userId="] = result.UserId;
+                    Session["userId"] = result.UserId;
                     Session["userName"] = result.UserName;
                     return RedirectToAction("Index", "AdminHome");
                 }
                 else if (role == "theatreAdmin")
                 {
-                    Session["userId="] = result.UserId;
+                    Session["userId"] = result.UserId;
                     Session["userName"] = result.UserName;
                     return RedirectToAction("Index", "Theatre");
                 }
@@ -179,7 +180,7 @@ namespace BookMyshow.Controllers
             // List<string>notSelectedSeats = entities.GetSelectSeats(5).ToList();
             List<string> notSelectedSeats = entities.GetBlockedSeats(theatreId, slotid, movieId).ToList();
 
-            var p = entities.GetPrice(theatreId, movieId).Single();
+            var p = entities.GetPrice(theatreId, movieId,sId).Single();
             ViewBag.Price =Convert.ToDecimal(p);
             ViewBag.arr = notSelectedSeats;
           
@@ -222,10 +223,10 @@ namespace BookMyshow.Controllers
             entities.TicketDetails.Add(ticket);
             entities.SaveChanges();
             int identity = entities.TicketDetails.Select(t => t.TicketId).Max();
-
+            int newIdentity = identity + 1;
             foreach (var item in seatslist)
             {
-                entities.InsertTicketSeats(identity, item);
+                entities.InsertTicketSeats(newIdentity, item);
             }
             foreach (var item in seatslist)
             {

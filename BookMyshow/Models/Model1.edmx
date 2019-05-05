@@ -61,6 +61,7 @@
           <Property Name="ReleaseDate" Type="date" Nullable="false" />
           <Property Name="Poster" Type="varbinary(max)" />
           <Property Name="IntrestedUsers" Type="int" Nullable="false" />
+          <Property Name="VideoLink" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="Offers">
           <Key>
@@ -131,7 +132,6 @@
           </Key>
           <Property Name="TheatreId" Type="int" Nullable="false" />
           <Property Name="MovieId" Type="int" Nullable="false" />
-          <Property Name="Price" Type="money" Nullable="false" />
         </EntityType>
         <EntityType Name="Theatres">
           <Key>
@@ -184,6 +184,7 @@
           <Property Name="TheatreId" Type="int" Nullable="false" />
           <Property Name="Movieid" Type="int" Nullable="false" />
           <Property Name="SlotId" Type="int" Nullable="false" />
+          <Property Name="Price" Type="money" />
         </EntityType>
         <EntityType Name="UserDetails">
           <Key>
@@ -511,6 +512,11 @@
         <Function Name="checkTheatre" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="userId" Type="int" Mode="In" />
         </Function>
+        <Function Name="deleteMovie" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="theatreaid" Type="int" Mode="In" />
+          <Parameter Name="MovieId" Type="int" Mode="In" />
+          <Parameter Name="slotId" Type="int" Mode="In" />
+        </Function>
         <Function Name="FillSeats" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="seatNumber" Type="int" Mode="In" />
         </Function>
@@ -524,9 +530,13 @@
           <Parameter Name="moviId" Type="int" Mode="In" />
         </Function>
         <Function Name="GetMoviesDescription" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetMoviesList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="theatreId" Type="int" Mode="In" />
+        </Function>
         <Function Name="GetPrice" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="TheatreId" Type="int" Mode="In" />
           <Parameter Name="MovieId" Type="int" Mode="In" />
+          <Parameter Name="slotId" Type="int" Mode="In" />
         </Function>
         <Function Name="GetSelectSeats" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="theatreId" Type="int" Mode="In" />
@@ -549,6 +559,10 @@
           <Parameter Name="TheatreId" Type="int" Mode="In" />
           <Parameter Name="SeatNumber" Type="varchar" Mode="In" />
           <Parameter Name="Status" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="InsertTheatreMovy" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="theatreId" Type="int" Mode="In" />
+          <Parameter Name="movieId" Type="int" Mode="In" />
         </Function>
         <Function Name="InsertTicketSeats" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="ticketId" Type="int" Mode="In" />
@@ -785,6 +799,18 @@
           <FunctionImport Name="GetPrice" ReturnType="Collection(Decimal)">
             <Parameter Name="TheatreId" Mode="In" Type="Int32" />
             <Parameter Name="MovieId" Mode="In" Type="Int32" />
+            <Parameter Name="slotId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="InsertTicketSeats">
+            <Parameter Name="ticketId" Mode="In" Type="Int32" />
+            <Parameter Name="seat" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="InsertBookedSeat">
+            <Parameter Name="theatreId" Mode="In" Type="Int32" />
+            <Parameter Name="slotId" Mode="In" Type="Int32" />
+            <Parameter Name="MovieId" Mode="In" Type="Int32" />
+            <Parameter Name="seat" Mode="In" Type="String" />
+            <Parameter Name="userId" Mode="In" Type="Int32" />
           </FunctionImport>
           <EntitySet Name="BookedSeats" EntityType="ShowBookingModel.BookedSeat" />
           <EntitySet Name="Casts" EntityType="ShowBookingModel.Cast" />
@@ -797,10 +823,10 @@
           <EntitySet Name="Plays" EntityType="ShowBookingModel.Play" />
           <EntitySet Name="Slots" EntityType="ShowBookingModel.Slot" />
           <EntitySet Name="sysdiagrams" EntityType="ShowBookingModel.sysdiagram" />
-          <EntitySet Name="TheatreMovies" EntityType="ShowBookingModel.TheatreMovy" />
           <EntitySet Name="Theatres" EntityType="ShowBookingModel.Theatre" />
           <EntitySet Name="TheatreSeats" EntityType="ShowBookingModel.TheatreSeat" />
           <EntitySet Name="TicketDetails" EntityType="ShowBookingModel.TicketDetail" />
+          <EntitySet Name="TicketSeats" EntityType="ShowBookingModel.TicketSeat" />
           <EntitySet Name="TimeSlots" EntityType="ShowBookingModel.TimeSlot" />
           <EntitySet Name="UserDetails" EntityType="ShowBookingModel.UserDetail" />
           <AssociationSet Name="FK_BookedSeats_Movies" Association="ShowBookingModel.FK_BookedSeats_Movies">
@@ -835,10 +861,6 @@
             <End Role="Offer" EntitySet="Offers" />
             <End Role="MovieOfferDetail" EntitySet="MovieOfferDetails" />
           </AssociationSet>
-          <AssociationSet Name="FK_TheatreMovies_Movies" Association="ShowBookingModel.FK_TheatreMovies_Movies">
-            <End Role="Movy" EntitySet="Movies" />
-            <End Role="TheatreMovy" EntitySet="TheatreMovies" />
-          </AssociationSet>
           <AssociationSet Name="FK_TicketDetails_Movies" Association="ShowBookingModel.FK_TicketDetails_Movies">
             <End Role="Movy" EntitySet="Movies" />
             <End Role="TicketDetail" EntitySet="TicketDetails" />
@@ -863,10 +885,6 @@
             <End Role="Slot" EntitySet="Slots" />
             <End Role="TimeSlot" EntitySet="TimeSlots" />
           </AssociationSet>
-          <AssociationSet Name="FK_TheatreMovies_Theatres" Association="ShowBookingModel.FK_TheatreMovies_Theatres">
-            <End Role="Theatre" EntitySet="Theatres" />
-            <End Role="TheatreMovy" EntitySet="TheatreMovies" />
-          </AssociationSet>
           <AssociationSet Name="FK_TheatreSeats_Theatres" Association="ShowBookingModel.FK_TheatreSeats_Theatres">
             <End Role="Theatre" EntitySet="Theatres" />
             <End Role="TheatreSeat" EntitySet="TheatreSeats" />
@@ -879,6 +897,10 @@
             <End Role="Theatre" EntitySet="Theatres" />
             <End Role="TimeSlot" EntitySet="TimeSlots" />
           </AssociationSet>
+          <AssociationSet Name="FK_TicketSeats_TicketDetails" Association="ShowBookingModel.FK_TicketSeats_TicketDetails">
+            <End Role="TicketDetail" EntitySet="TicketDetails" />
+            <End Role="TicketSeat" EntitySet="TicketSeats" />
+          </AssociationSet>
           <AssociationSet Name="MovieCastDetails" Association="ShowBookingModel.MovieCastDetails">
             <End Role="Cast" EntitySet="Casts" />
             <End Role="Movy" EntitySet="Movies" />
@@ -887,25 +909,25 @@
             <End Role="City" EntitySet="Cities" />
             <End Role="Theatre" EntitySet="Theatres" />
           </AssociationSet>
+          <AssociationSet Name="TheatreMovies" Association="ShowBookingModel.TheatreMovies">
+            <End Role="Movy" EntitySet="Movies" />
+            <End Role="Theatre" EntitySet="Theatres" />
+          </AssociationSet>
           <AssociationSet Name="TheatreUsers" Association="ShowBookingModel.TheatreUsers">
             <End Role="Theatre" EntitySet="Theatres" />
             <End Role="UserDetail" EntitySet="UserDetails" />
           </AssociationSet>
-          <FunctionImport Name="InsertTicketSeats">
-            <Parameter Name="ticketId" Mode="In" Type="Int32" />
-            <Parameter Name="seat" Mode="In" Type="String" />
-          </FunctionImport>
-          <EntitySet Name="TicketSeats" EntityType="ShowBookingModel.TicketSeat" />
-          <AssociationSet Name="FK_TicketSeats_TicketDetails" Association="ShowBookingModel.FK_TicketSeats_TicketDetails">
-            <End Role="TicketDetail" EntitySet="TicketDetails" />
-            <End Role="TicketSeat" EntitySet="TicketSeats" />
-          </AssociationSet>
-          <FunctionImport Name="InsertBookedSeat">
+          <FunctionImport Name="InsertTheatreMovy">
             <Parameter Name="theatreId" Mode="In" Type="Int32" />
-            <Parameter Name="slotId" Mode="In" Type="Int32" />
+            <Parameter Name="movieId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetMoviesList" ReturnType="Collection(ShowBookingModel.GetMoviesList_Result)" >
+          <Parameter Name="theatreId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="deleteMovie">
+            <Parameter Name="theatreaid" Mode="In" Type="Int32" />
             <Parameter Name="MovieId" Mode="In" Type="Int32" />
-            <Parameter Name="seat" Mode="In" Type="String" />
-            <Parameter Name="userId" Mode="In" Type="Int32" />
+            <Parameter Name="slotId" Mode="In" Type="Int32" />
           </FunctionImport>
           </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
@@ -991,13 +1013,14 @@
           <Property Name="ReleaseDate" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="Poster" Type="Binary" MaxLength="Max" FixedLength="false" />
           <Property Name="IntrestedUsers" Type="Int32" Nullable="false" />
+          <Property Name="VideoLink" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="BookedSeats" Relationship="ShowBookingModel.FK_BookedSeats_Movies" FromRole="Movy" ToRole="BookedSeat" />
           <NavigationProperty Name="Cast" Relationship="ShowBookingModel.FK_Casts_Movies" FromRole="Movy" ToRole="Cast" />
           <NavigationProperty Name="MovieOfferDetails" Relationship="ShowBookingModel.FK_MovieOfferDetails_Movies" FromRole="Movy" ToRole="MovieOfferDetail" />
-          <NavigationProperty Name="TheatreMovies" Relationship="ShowBookingModel.FK_TheatreMovies_Movies" FromRole="Movy" ToRole="TheatreMovy" />
           <NavigationProperty Name="TicketDetails" Relationship="ShowBookingModel.FK_TicketDetails_Movies" FromRole="Movy" ToRole="TicketDetail" />
           <NavigationProperty Name="TimeSlots" Relationship="ShowBookingModel.FK_TimeSlots_Movies" FromRole="Movy" ToRole="TimeSlot" />
           <NavigationProperty Name="Casts" Relationship="ShowBookingModel.MovieCastDetails" FromRole="Movy" ToRole="Cast" />
+          <NavigationProperty Name="Theatres" Relationship="ShowBookingModel.TheatreMovies" FromRole="Movy" ToRole="Theatre" />
         </EntityType>
         <EntityType Name="Offer">
           <Key>
@@ -1061,17 +1084,6 @@
           <Property Name="version" Type="Int32" />
           <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
-        <EntityType Name="TheatreMovy">
-          <Key>
-            <PropertyRef Name="TheatreId" />
-            <PropertyRef Name="MovieId" />
-          </Key>
-          <Property Name="TheatreId" Type="Int32" Nullable="false" />
-          <Property Name="MovieId" Type="Int32" Nullable="false" />
-          <Property Name="Price" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
-          <NavigationProperty Name="Movy" Relationship="ShowBookingModel.FK_TheatreMovies_Movies" FromRole="TheatreMovy" ToRole="Movy" />
-          <NavigationProperty Name="Theatre" Relationship="ShowBookingModel.FK_TheatreMovies_Theatres" FromRole="TheatreMovy" ToRole="Theatre" />
-        </EntityType>
         <EntityType Name="Theatre">
           <Key>
             <PropertyRef Name="TheatreId" />
@@ -1082,11 +1094,11 @@
           <Property Name="CityId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="BookedSeats" Relationship="ShowBookingModel.FK_BookedSeats_Theatres" FromRole="Theatre" ToRole="BookedSeat" />
           <NavigationProperty Name="City" Relationship="ShowBookingModel.FK_Theatres_Cities" FromRole="Theatre" ToRole="City" />
-          <NavigationProperty Name="TheatreMovies" Relationship="ShowBookingModel.FK_TheatreMovies_Theatres" FromRole="Theatre" ToRole="TheatreMovy" />
           <NavigationProperty Name="TheatreSeats" Relationship="ShowBookingModel.FK_TheatreSeats_Theatres" FromRole="Theatre" ToRole="TheatreSeat" />
           <NavigationProperty Name="TicketDetails" Relationship="ShowBookingModel.FK_TicketDetails_Theatres" FromRole="Theatre" ToRole="TicketDetail" />
           <NavigationProperty Name="TimeSlots" Relationship="ShowBookingModel.FK_TimeSlots_Theatres" FromRole="Theatre" ToRole="TimeSlot" />
           <NavigationProperty Name="Cities" Relationship="ShowBookingModel.TheatreCity" FromRole="Theatre" ToRole="City" />
+          <NavigationProperty Name="Movies" Relationship="ShowBookingModel.TheatreMovies" FromRole="Theatre" ToRole="Movy" />
           <NavigationProperty Name="UserDetails" Relationship="ShowBookingModel.TheatreUsers" FromRole="Theatre" ToRole="UserDetail" />
         </EntityType>
         <EntityType Name="TheatreSeat">
@@ -1103,13 +1115,22 @@
           <Key>
             <PropertyRef Name="TicketId" />
           </Key>
-          <Property Name="TicketId" Type="Int32" Nullable="false" />
+          <Property Name="TicketId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Price" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
           <Property Name="MovieId" Type="Int32" Nullable="false" />
           <Property Name="TheatreId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Movy" Relationship="ShowBookingModel.FK_TicketDetails_Movies" FromRole="TicketDetail" ToRole="Movy" />
           <NavigationProperty Name="Theatre" Relationship="ShowBookingModel.FK_TicketDetails_Theatres" FromRole="TicketDetail" ToRole="Theatre" />
           <NavigationProperty Name="TicketSeats" Relationship="ShowBookingModel.FK_TicketSeats_TicketDetails" FromRole="TicketDetail" ToRole="TicketSeat" />
+        </EntityType>
+        <EntityType Name="TicketSeat">
+          <Key>
+            <PropertyRef Name="TicketId" />
+            <PropertyRef Name="SelectedSeat" />
+          </Key>
+          <Property Name="TicketId" Type="Int32" Nullable="false" />
+          <Property Name="SelectedSeat" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="TicketDetail" Relationship="ShowBookingModel.FK_TicketSeats_TicketDetails" FromRole="TicketSeat" ToRole="TicketDetail" />
         </EntityType>
         <EntityType Name="TimeSlot">
           <Key>
@@ -1119,6 +1140,7 @@
           <Property Name="TheatreId" Type="Int32" Nullable="false" />
           <Property Name="Movieid" Type="Int32" Nullable="false" />
           <Property Name="SlotId" Type="Int32" Nullable="false" />
+          <Property Name="Price" Type="Decimal" Precision="19" Scale="4" />
           <NavigationProperty Name="Movy" Relationship="ShowBookingModel.FK_TimeSlots_Movies" FromRole="TimeSlot" ToRole="Movy" />
           <NavigationProperty Name="Slot" Relationship="ShowBookingModel.FK_TimeSlots_Slots" FromRole="TimeSlot" ToRole="Slot" />
           <NavigationProperty Name="Theatre" Relationship="ShowBookingModel.FK_TimeSlots_Theatres" FromRole="TimeSlot" ToRole="Theatre" />
@@ -1233,18 +1255,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_TheatreMovies_Movies">
-          <End Type="ShowBookingModel.Movy" Role="Movy" Multiplicity="1" />
-          <End Type="ShowBookingModel.TheatreMovy" Role="TheatreMovy" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Movy">
-              <PropertyRef Name="MovieId" />
-            </Principal>
-            <Dependent Role="TheatreMovy">
-              <PropertyRef Name="MovieId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_TicketDetails_Movies">
           <End Type="ShowBookingModel.Movy" Role="Movy" Multiplicity="1" />
           <End Type="ShowBookingModel.TicketDetail" Role="TicketDetail" Multiplicity="*" />
@@ -1317,18 +1327,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_TheatreMovies_Theatres">
-          <End Type="ShowBookingModel.Theatre" Role="Theatre" Multiplicity="1" />
-          <End Type="ShowBookingModel.TheatreMovy" Role="TheatreMovy" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Theatre">
-              <PropertyRef Name="TheatreId" />
-            </Principal>
-            <Dependent Role="TheatreMovy">
-              <PropertyRef Name="TheatreId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_TheatreSeats_Theatres">
           <End Type="ShowBookingModel.Theatre" Role="Theatre" Multiplicity="1" />
           <End Type="ShowBookingModel.TheatreSeat" Role="TheatreSeat" Multiplicity="*" />
@@ -1365,27 +1363,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="MovieCastDetails">
-          <End Type="ShowBookingModel.Cast" Role="Cast" Multiplicity="*" />
-          <End Type="ShowBookingModel.Movy" Role="Movy" Multiplicity="*" />
-        </Association>
-        <Association Name="TheatreCity">
-          <End Type="ShowBookingModel.City" Role="City" Multiplicity="*" />
-          <End Type="ShowBookingModel.Theatre" Role="Theatre" Multiplicity="*" />
-        </Association>
-        <Association Name="TheatreUsers">
-          <End Type="ShowBookingModel.Theatre" Role="Theatre" Multiplicity="*" />
-          <End Type="ShowBookingModel.UserDetail" Role="UserDetail" Multiplicity="*" />
-        </Association>
-        <EntityType Name="TicketSeat">
-          <Key>
-            <PropertyRef Name="TicketId" />
-            <PropertyRef Name="SelectedSeat" />
-          </Key>
-          <Property Name="TicketId" Type="Int32" Nullable="false" />
-          <Property Name="SelectedSeat" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="TicketDetail" Relationship="ShowBookingModel.FK_TicketSeats_TicketDetails" FromRole="TicketSeat" ToRole="TicketDetail" />
-        </EntityType>
         <Association Name="FK_TicketSeats_TicketDetails">
           <End Type="ShowBookingModel.TicketDetail" Role="TicketDetail" Multiplicity="1" />
           <End Type="ShowBookingModel.TicketSeat" Role="TicketSeat" Multiplicity="*" />
@@ -1398,6 +1375,26 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="MovieCastDetails">
+          <End Type="ShowBookingModel.Cast" Role="Cast" Multiplicity="*" />
+          <End Type="ShowBookingModel.Movy" Role="Movy" Multiplicity="*" />
+        </Association>
+        <Association Name="TheatreCity">
+          <End Type="ShowBookingModel.City" Role="City" Multiplicity="*" />
+          <End Type="ShowBookingModel.Theatre" Role="Theatre" Multiplicity="*" />
+        </Association>
+        <Association Name="TheatreMovies">
+          <End Type="ShowBookingModel.Movy" Role="Movy" Multiplicity="*" />
+          <End Type="ShowBookingModel.Theatre" Role="Theatre" Multiplicity="*" />
+        </Association>
+        <Association Name="TheatreUsers">
+          <End Type="ShowBookingModel.Theatre" Role="Theatre" Multiplicity="*" />
+          <End Type="ShowBookingModel.UserDetail" Role="UserDetail" Multiplicity="*" />
+        </Association>
+        <ComplexType Name="GetMoviesList_Result">
+          <Property Type="String" Name="MovieName" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="MovieId" Nullable="false" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1462,6 +1459,8 @@
           <FunctionImportMapping FunctionImportName="GetSelectSeats" FunctionName="ShowBookingModel.Store.GetSelectSeats" />
           <FunctionImportMapping FunctionImportName="GetBlockedSeats" FunctionName="ShowBookingModel.Store.GetBlockedSeats" />
           <FunctionImportMapping FunctionImportName="GetPrice" FunctionName="ShowBookingModel.Store.GetPrice" />
+          <FunctionImportMapping FunctionImportName="InsertTicketSeats" FunctionName="ShowBookingModel.Store.InsertTicketSeats" />
+          <FunctionImportMapping FunctionImportName="InsertBookedSeat" FunctionName="ShowBookingModel.Store.InsertBookedSeat" />
           <EntitySetMapping Name="BookedSeats">
             <EntityTypeMapping TypeName="ShowBookingModel.BookedSeat">
               <MappingFragment StoreEntitySet="BookedSeats">
@@ -1503,6 +1502,7 @@
           <EntitySetMapping Name="Movies">
             <EntityTypeMapping TypeName="ShowBookingModel.Movy">
               <MappingFragment StoreEntitySet="Movies">
+                <ScalarProperty Name="VideoLink" ColumnName="VideoLink" />
                 <ScalarProperty Name="IntrestedUsers" ColumnName="IntrestedUsers" />
                 <ScalarProperty Name="Poster" ColumnName="Poster" />
                 <ScalarProperty Name="ReleaseDate" ColumnName="ReleaseDate" />
@@ -1571,15 +1571,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="TheatreMovies">
-            <EntityTypeMapping TypeName="ShowBookingModel.TheatreMovy">
-              <MappingFragment StoreEntitySet="TheatreMovies">
-                <ScalarProperty Name="Price" ColumnName="Price" />
-                <ScalarProperty Name="MovieId" ColumnName="MovieId" />
-                <ScalarProperty Name="TheatreId" ColumnName="TheatreId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Theatres">
             <EntityTypeMapping TypeName="ShowBookingModel.Theatre">
               <MappingFragment StoreEntitySet="Theatres">
@@ -1609,9 +1600,18 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="TicketSeats">
+            <EntityTypeMapping TypeName="ShowBookingModel.TicketSeat">
+              <MappingFragment StoreEntitySet="TicketSeats">
+                <ScalarProperty Name="SelectedSeat" ColumnName="SelectedSeat" />
+                <ScalarProperty Name="TicketId" ColumnName="TicketId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="TimeSlots">
             <EntityTypeMapping TypeName="ShowBookingModel.TimeSlot">
               <MappingFragment StoreEntitySet="TimeSlots">
+                <ScalarProperty Name="Price" ColumnName="Price" />
                 <ScalarProperty Name="SlotId" ColumnName="SlotId" />
                 <ScalarProperty Name="Movieid" ColumnName="Movieid" />
                 <ScalarProperty Name="TheatreId" ColumnName="TheatreId" />
@@ -1646,6 +1646,14 @@
               <ScalarProperty Name="CityId" ColumnName="CityId" />
             </EndProperty>
           </AssociationSetMapping>
+          <AssociationSetMapping Name="TheatreMovies" TypeName="ShowBookingModel.TheatreMovies" StoreEntitySet="TheatreMovies">
+            <EndProperty Name="Theatre">
+              <ScalarProperty Name="TheatreId" ColumnName="TheatreId" />
+            </EndProperty>
+            <EndProperty Name="Movy">
+              <ScalarProperty Name="MovieId" ColumnName="MovieId" />
+            </EndProperty>
+          </AssociationSetMapping>
           <AssociationSetMapping Name="TheatreUsers" TypeName="ShowBookingModel.TheatreUsers" StoreEntitySet="TheatreUsers">
             <EndProperty Name="UserDetail">
               <ScalarProperty Name="UserId" ColumnName="UserId" />
@@ -1654,16 +1662,16 @@
               <ScalarProperty Name="TheatreId" ColumnName="TheatreId" />
             </EndProperty>
           </AssociationSetMapping>
-          <FunctionImportMapping FunctionImportName="InsertTicketSeats" FunctionName="ShowBookingModel.Store.InsertTicketSeats" />
-          <EntitySetMapping Name="TicketSeats">
-            <EntityTypeMapping TypeName="ShowBookingModel.TicketSeat">
-              <MappingFragment StoreEntitySet="TicketSeats">
-                <ScalarProperty Name="SelectedSeat" ColumnName="SelectedSeat" />
-                <ScalarProperty Name="TicketId" ColumnName="TicketId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="InsertBookedSeat" FunctionName="ShowBookingModel.Store.InsertBookedSeat" />
+          <FunctionImportMapping FunctionImportName="InsertTheatreMovy" FunctionName="ShowBookingModel.Store.InsertTheatreMovy" />
+          <FunctionImportMapping FunctionImportName="GetMoviesList" FunctionName="ShowBookingModel.Store.GetMoviesList">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ShowBookingModel.GetMoviesList_Result">
+                <ScalarProperty Name="MovieName" ColumnName="MovieName" />
+                <ScalarProperty Name="MovieId" ColumnName="MovieId" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="deleteMovie" FunctionName="ShowBookingModel.Store.deleteMovie" />
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

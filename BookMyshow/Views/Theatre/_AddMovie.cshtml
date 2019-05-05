@@ -1,0 +1,16 @@
+﻿@using (Html.BeginForm("AddMovie", "Theatre", FormMethod.Post, new { @id = "form" }))
+{
+    <label>Select Movie</label>
+    <br />
+    @Html.DropDownList("movielist", (IEnumerable<SelectListItem>)ViewBag.movielist,null, new { @class = "form-control" })<br />
+    <br />
+    <label>Select Time Slot</label>
+    @Html.DropDownList("SlotList", (IEnumerable<SelectListItem>)ViewBag.SlotList, null, new { @class = "form-control" })<br />
+    <br />
+    <label>Give Price For the One Ticket </label>
+    <input type="number" name="Price" width="100%" />
+    <br />
+    <input type="submit" id="save" value="submit" class="btn btn-success" />
+
+}
+

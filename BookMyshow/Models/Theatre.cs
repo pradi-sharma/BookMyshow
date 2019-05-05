@@ -18,11 +18,11 @@ namespace BookMyshow.Models
         public Theatre()
         {
             this.BookedSeats = new HashSet<BookedSeat>();
-            this.TheatreMovies = new HashSet<TheatreMovy>();
             this.TheatreSeats = new HashSet<TheatreSeat>();
             this.TicketDetails = new HashSet<TicketDetail>();
             this.TimeSlots = new HashSet<TimeSlot>();
             this.Cities = new HashSet<City>();
+            this.Movies = new HashSet<Movy>();
             this.UserDetails = new HashSet<UserDetail>();
         }
     
@@ -35,8 +35,6 @@ namespace BookMyshow.Models
         public virtual ICollection<BookedSeat> BookedSeats { get; set; }
         public virtual City City { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TheatreMovy> TheatreMovies { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TheatreSeat> TheatreSeats { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TicketDetail> TicketDetails { get; set; }
@@ -44,6 +42,8 @@ namespace BookMyshow.Models
         public virtual ICollection<TimeSlot> TimeSlots { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<City> Cities { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Movy> Movies { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UserDetail> UserDetails { get; set; }
     }

@@ -9,22 +9,30 @@ using BookMyshow.Models;
 namespace BookMyshow.Controllers
 {
     public class TheatreController : Controller
-    {
+    { 
         ShowBookingEntities entities = new ShowBookingEntities();
        
         public ActionResult Index()
         {
-            var result = entities.checkTheatre(Convert.ToInt32(Session["userId"]));
-            if (result != null)
+            var a =Session["userId"];
+            var result = entities.checkTheatre(Convert.ToInt32(Session["userId"])).Count();
+            if (result != 0)
             {
-                return View("TheatreAdminHome");
+                return View("RegisteredTheatreAdminHome");
             }
-            return View("RegisteredTheatreAdminHome");
+            return View("TheatreAdminHome");
         }
         public ActionResult TheatreRegister()
         {
-            ViewData["cities"] = new SelectList(entities.Cities, "CityId", "CityName");
-            return View();
+            if (Session != null)
+            {
+                ViewData["cities"] = new SelectList(entities.Cities, "CityId", "CityName");
+                return View();
+            }else
+            {
+                return RedirectToAction("Index", "UserHome");
+            }
+          
         }
         [HttpPost]
         public ActionResult TheatreRegister(FormCollection theatre)
@@ -77,7 +85,50 @@ namespace BookMyshow.Controllers
         }
         public PartialViewResult AddMovie()
         {
-            return PartialView();
+            ViewBag.movielist = new SelectList(entities.Movies, "MovieId", "MovieName");
+            ViewBag.SlotList = new SelectList(entities.Slots, "SlotId", "StartTime");
+            return PartialView("_AddMovie");
+        }
+        [HttpPost]
+        public PartialViewResult AddMovie(FormCollection form)
+        {
+            int movId = Convert.ToInt32(form["movielist"]);
+            int SlotId = Convert.ToInt32(form["SlotList"]);
+            decimal price = Convert.ToDecimal(form["Price"]);
+            int uId =Convert.ToInt32(Session["userId"]);
+         //  int tid=Convert.ToInt32(entities.checkTheatre(uId));
+            int tid = 2;
+         //   entities.InsertTheatreMovy(tid, movId);
+            //theatreMovie.TheatreId = 1;
+            //theatreMovie.MovieId = movId;
+
+            //entities.TheatreMovies.Add(theatreMovie);
+            //entities.SaveChanges();
+            TimeSlot timeSlot = new TimeSlot();
+            timeSlot.TheatreId = tid;
+            timeSlot.Movieid = movId;
+            timeSlot.SlotId = SlotId;
+            timeSlot.Price = price;
+            entities.TimeSlots.Add(timeSlot);
+            entities.SaveChanges();
+            return PartialView("RegisteredTheatreAdminHome");
+        }
+        public PartialViewResult RemoveMovie()
+        {
+          //  var mlist = ;
+           // List<string> movies = mlist.ToList();
+
+           ViewBag.movielist = new SelectList(entities.GetMoviesList(1), "MovieId", "MovieName");
+            ViewBag.SlotList = new SelectList(entities.Slots, "SlotId", "StartTime");
+            return PartialView("_RemoveMovie");
+        }
+        [HttpPost]
+        public ActionResult RemoveMovie(FormCollection form)
+        {
+            int mvId = Convert.ToInt32(form["movielist"]);
+            int slotid = Convert.ToInt32(form["SlotList"]);
+            entities.deleteMovie(1, mvId, slotid);
+            return View("RegisteredTheatreAdminHome");
         }
     }
 }

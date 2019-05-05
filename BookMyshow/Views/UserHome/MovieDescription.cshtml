@@ -1,6 +1,5 @@
 ﻿@model BookMyshow.Models.Movy
 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,7 +24,7 @@
     <link rel="stylesheet" href="~/Content/CarosalJquery/owl.theme.default.min.css" />
     <script>
 
-            // alert("helloo");
+        // alert("helloo");
         // document.getElementsByName("AjaxForm").submit();
 
 
@@ -61,6 +60,17 @@
         table tr td {
             padding: 5px;
         }
+
+        #trailerbtn {
+            margin-left: -254px;
+            margin-top: 72%;
+            color: white;
+            background-color: transparent;
+            position: absolute;
+            padding: 5px;
+            border: none;
+            width: 250px;
+        }
         /* btn {
             max-height: 18px;
             max-width: 18px;
@@ -91,10 +101,54 @@
             position: relative;
         }*/
     </style>
+
+    <script src="~/Content/CarosalJquery/jquery-3.2.1.min.js"></script>
+    <script>
+
+            $('#modal1').on('hidden.bs.modal', function (e) {
+                // do something...
+                $('#modal1 iframe').attr("src", $("#modal1 iframe").attr("src"));
+            });
+
+            $('#modal6').on('hidden.bs.modal', function (e) {
+                // do something...
+                $('#modal6 iframe').attr("src", $("#modal6 iframe").attr("src"));
+            });
+
+            $('#modal4').on('hidden.bs.modal', function (e) {
+                // do something...
+                $('#modal4 iframe').attr("src", $("#modal4 iframe").attr("src"));
+            });
+
+
+
+       $(document).ready(function () {
+            $("#Like").on("click", function () {
+                //alert("alert");
+                var likes = @Model.IntrestedUsers +1;
+               // likes = likes + 1;
+                document.getElementById("Like").innerText = "Likes: " + likes;
+
+               $(this).val();
+
+
+
+
+           $(function () {
+               $.post('/MoviesTicket/LikeDemo',
+                   { key: @Model.MovieId, value: likes }, function (data) {
+                       //alert("Success" + data.success);
+                   });
+                });
+            })
+       })
+
+    </script>
+
 </head>
 
 <body class="text-white">
-    <!-- ############################### START HERE ################################ -->
+
     <!-- Main Navigation -->
     <nav class="navbar navbar-dark stylish-color-dark  navbar-expand-sm ">
         <div class="container">
@@ -121,16 +175,6 @@
                     }
                     @*</form>*@
 
-
-
-
-
-
-
-
-
-
-
                     <button class="navbar-toggler">
                         <span class="navbar-toggler-icon"></span>
                     </button>
@@ -142,7 +186,7 @@
             <div class="collapse navbar-collapse " id="uiNavBar">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item px-2">
-                        <a href="/UserHome/Index" class="nav-link">
+                        <a href="index.html" class="nav-link">
                             <i class="fa fa-home"></i> Home
                         </a>
                     </li>
@@ -174,22 +218,61 @@
 
     </nav>
 
+    <div>
 
-    <head>
-        <script src="~/Content/CarosalJquery/jquery-3.2.1.min.js"></script>
-        <script>
-        $(document).ready(function () {
-            $("#Like").on("click", function () {
-                alert("alert");
-                document.getElementById("Like").innerText ="Likes: @Model.IntrestedUsers";
-              //  $(this).val();
-            })
 
-            })
+        <!-- Grid row -->
+        <div class="row">
 
-        </script>
-    </head>
-    <body>
+            <!-- Grid column -->
+            <div class="col-lg-4 col-md-12 mb-4">
+
+                <!--Modal: Name-->
+                <div class="modal fade" id="modal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg" role="document">
+
+                        <!--Content-->
+                        <div class="modal-content">
+
+                            <!--Body-->
+                            <div class="modal-body mb-0 p-0">
+
+                                <div class="embed-responsive embed-responsive-16by9">
+                                    <iframe class="embed-responsive-item" src="@Model.VideoLink" allowfullscreen></iframe>
+                                </div>
+
+                            </div>
+
+                            <!--Footer-->
+                            <div class="modal-footer justify-content-center">
+                                <span class="mr-4">Spread the word!</span>
+                                <a type="button" class="btn-floating btn-sm btn-fb"><i class="fab fa-facebook-f"></i></a>
+                                <!--Twitter-->
+                                <a type="button" class="btn-floating btn-sm btn-tw"><i class="fab fa-twitter"></i></a>
+                                <!--Google +-->
+                                <a type="button" class="btn-floating btn-sm btn-gplus"><i class="fab fa-google-plus-g"></i></a>
+                                <!--Linkedin-->
+                                <a type="button" class="btn-floating btn-sm btn-ins"><i class="fab fa-linkedin-in"></i></a>
+
+                                <button type="button" class="btn btn-outline-primary btn-rounded btn-md ml-4" data-dismiss="modal">Close</button>
+
+                            </div>
+
+                        </div>
+                        <!--/.Content-->
+
+                    </div>
+                </div>
+                <!--Modal: Name-->
+
+
+            </div>
+            <!-- Grid column -->
+
+
+        </div>
+
+
 
 
         <div class="p-2 row m-2 ">
@@ -198,11 +281,16 @@
             <div class="col-md-4 ">
 
                 <img alt="image here" src="@ViewBag.FirstMovie" style="height:350px; max-width: 250px; " />
+
+                <a>
+
+                    <button id="trailerbtn" data-toggle="modal" data-target="#modal1"><i class="fa fa-film" aria-hidden="true"></i>Watch Trailer</button>
+                </a>
                 <br />
                 @*<span id="Like">Intrested</span>*@
-                <button id="Like">Interested</button>
+                <button id="Like">Interested @Model.IntrestedUsers</button>
                 <button id="book">Book Now</button>
-                @Html.ActionLink("BookNow","BookMovie",new { id=Model.MovieId})
+
             </div>
             <div class="col-md-4 " style="align-items:center">
                 <h4>Movie Title:@Model.MovieName</h4>
@@ -219,7 +307,7 @@
                             <p>Cast</p>
                             @foreach (var item in ViewBag.Castphotos)
                             {
-                                <img src="@item" width="140" height="190" id="castimage" alt="cast photo here"/>
+                                <img src="@item" width="140" height="190" id="castimage" />
                             }
 
 
@@ -448,7 +536,6 @@
         <script src="~/Content/bootstrap/js/jquery-3.2.1.min.js"></script>
         <script src="~/Content/bootstrap/js/popper.min.js"></script>
         <script src="~/Content/bootstrap/js/bootstrap.min.js"></script>
-    </body>
-
+</body>
 
 
