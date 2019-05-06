@@ -502,15 +502,9 @@
         <Function Name="checkTheatre" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="userId" Type="int" Mode="In" />
         </Function>
-        <Function Name="deleteMovie" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="theatreaid" Type="int" Mode="In" />
-          <Parameter Name="MovieId" Type="int" Mode="In" />
-          <Parameter Name="slotId" Type="int" Mode="In" />
-        </Function>
         <Function Name="FillSeats" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="seatNumber" Type="int" Mode="In" />
         </Function>
-        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
         <Function Name="GetBlockedSeats" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="TheatreId" Type="int" Mode="In" />
           <Parameter Name="SlotId" Type="int" Mode="In" />
@@ -520,9 +514,6 @@
           <Parameter Name="moviId" Type="int" Mode="In" />
         </Function>
         <Function Name="GetMoviesDescription" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
-        <Function Name="GetMoviesList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="theatreId" Type="int" Mode="In" />
-        </Function>
         <Function Name="GetPrice" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="TheatreId" Type="int" Mode="In" />
           <Parameter Name="MovieId" Type="int" Mode="In" />
@@ -561,36 +552,6 @@
         <Function Name="MovyByCity" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="id" Type="int" Mode="In" />
         </Function>
-        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-          <Parameter Name="version" Type="int" Mode="In" />
-          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
-        </Function>
-        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-          <Parameter Name="version" Type="int" Mode="In" />
-          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
-        </Function>
-        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-        </Function>
-        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-        </Function>
-        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-        </Function>
-        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
-        </Function>
-        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="ShowBookingModelStoreContainer">
           <EntitySet Name="BookedSeats" EntityType="Self.BookedSeats" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Casts" EntityType="Self.Casts" Schema="dbo" store:Type="Tables" />
@@ -801,6 +762,18 @@
             <Parameter Name="seat" Mode="In" Type="String" />
             <Parameter Name="userId" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="InsertTheatreMovy">
+            <Parameter Name="theatreId" Mode="In" Type="Int32" />
+            <Parameter Name="movieId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetMoviesList" ReturnType="Collection(ShowBookingModel.GetMoviesList_Result)" >
+          <Parameter Name="theatreId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="deleteMovie">
+            <Parameter Name="theatreaid" Mode="In" Type="Int32" />
+            <Parameter Name="MovieId" Mode="In" Type="Int32" />
+            <Parameter Name="slotId" Mode="In" Type="Int32" />
+          </FunctionImport>
           <EntitySet Name="BookedSeats" EntityType="ShowBookingModel.BookedSeat" />
           <EntitySet Name="Casts" EntityType="ShowBookingModel.Cast" />
           <EntitySet Name="Cities" EntityType="ShowBookingModel.City" />
@@ -905,18 +878,6 @@
             <End Role="Theatre" EntitySet="Theatres" />
             <End Role="UserDetail" EntitySet="UserDetails" />
           </AssociationSet>
-          <FunctionImport Name="InsertTheatreMovy">
-            <Parameter Name="theatreId" Mode="In" Type="Int32" />
-            <Parameter Name="movieId" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="GetMoviesList" ReturnType="Collection(ShowBookingModel.GetMoviesList_Result)" >
-          <Parameter Name="theatreId" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="deleteMovie">
-            <Parameter Name="theatreaid" Mode="In" Type="Int32" />
-            <Parameter Name="MovieId" Mode="In" Type="Int32" />
-            <Parameter Name="slotId" Mode="In" Type="Int32" />
-          </FunctionImport>
           </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -941,6 +902,10 @@
         <ComplexType Name="MovyByCity_Result">
           <Property Type="String" Name="MovieName" Nullable="false" MaxLength="50" />
           <Property Type="Binary" Name="Poster" Nullable="true" />
+          <Property Type="Int32" Name="MovieId" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="GetMoviesList_Result">
+          <Property Type="String" Name="MovieName" Nullable="false" MaxLength="50" />
           <Property Type="Int32" Name="MovieId" Nullable="false" />
         </ComplexType>
         <EntityType Name="BookedSeat">
@@ -1369,10 +1334,6 @@
           <End Type="ShowBookingModel.Theatre" Role="Theatre" Multiplicity="*" />
           <End Type="ShowBookingModel.UserDetail" Role="UserDetail" Multiplicity="*" />
         </Association>
-        <ComplexType Name="GetMoviesList_Result">
-          <Property Type="String" Name="MovieName" Nullable="false" MaxLength="50" />
-          <Property Type="Int32" Name="MovieId" Nullable="false" />
-        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1380,30 +1341,6 @@
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="ShowBookingModelStoreContainer" CdmEntityContainer="ShowBookingEntities">
           <FunctionImportMapping FunctionImportName="FillSeats" FunctionName="ShowBookingModel.Store.FillSeats" />
-          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="ShowBookingModel.Store.sp_alterdiagram" />
-          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="ShowBookingModel.Store.sp_creatediagram" />
-          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="ShowBookingModel.Store.sp_dropdiagram" />
-          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="ShowBookingModel.Store.sp_helpdiagramdefinition">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="ShowBookingModel.sp_helpdiagramdefinition_Result">
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="definition" ColumnName="definition" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="ShowBookingModel.Store.sp_helpdiagrams">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="ShowBookingModel.sp_helpdiagrams_Result">
-                <ScalarProperty Name="Database" ColumnName="Database" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Owner" ColumnName="Owner" />
-                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="ShowBookingModel.Store.sp_renamediagram" />
-          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="ShowBookingModel.Store.sp_upgraddiagrams" />
           <FunctionImportMapping FunctionImportName="InsertIntoTheatreSeats" FunctionName="ShowBookingModel.Store.InsertIntoTheatreSeats" />
           <FunctionImportMapping FunctionImportName="GetCasts" FunctionName="ShowBookingModel.Store.GetCasts">
             <ResultMapping>
@@ -1439,6 +1376,7 @@
           <FunctionImportMapping FunctionImportName="GetPrice" FunctionName="ShowBookingModel.Store.GetPrice" />
           <FunctionImportMapping FunctionImportName="InsertTicketSeats" FunctionName="ShowBookingModel.Store.InsertTicketSeats" />
           <FunctionImportMapping FunctionImportName="InsertBookedSeat" FunctionName="ShowBookingModel.Store.InsertBookedSeat" />
+          <FunctionImportMapping FunctionImportName="InsertTheatreMovy" FunctionName="ShowBookingModel.Store.InsertTheatreMovy" />
           <EntitySetMapping Name="BookedSeats">
             <EntityTypeMapping TypeName="ShowBookingModel.BookedSeat">
               <MappingFragment StoreEntitySet="BookedSeats">
@@ -1629,16 +1567,6 @@
               <ScalarProperty Name="TheatreId" ColumnName="TheatreId" />
             </EndProperty>
           </AssociationSetMapping>
-          <FunctionImportMapping FunctionImportName="InsertTheatreMovy" FunctionName="ShowBookingModel.Store.InsertTheatreMovy" />
-          <FunctionImportMapping FunctionImportName="GetMoviesList" FunctionName="ShowBookingModel.Store.GetMoviesList">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="ShowBookingModel.GetMoviesList_Result">
-                <ScalarProperty Name="MovieName" ColumnName="MovieName" />
-                <ScalarProperty Name="MovieId" ColumnName="MovieId" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="deleteMovie" FunctionName="ShowBookingModel.Store.deleteMovie" />
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
