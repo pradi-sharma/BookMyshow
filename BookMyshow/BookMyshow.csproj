@@ -148,6 +148,7 @@
     <Content Include="Content\Images\blue-close-up-concrete-304664.jpg" />
     <Content Include="Content\Images\download.jpg" />
     <Content Include="Content\Images\e1033a3d9b662e112e99e62ba2f1cd6f.jpg" />
+    <Content Include="Content\Images\Oops-pop-art-retro-style-600x600.jpeg" />
     <Content Include="Content\PaymentStyle.css" />
     <Content Include="Content\style.css" />
     <Content Include="Content\Site.css" />
@@ -361,6 +362,7 @@
     <Content Include="Views\UserHome\Ticket.cshtml" />
     <Content Include="Views\UserHome\_OfferValidationSuccess.cshtml" />
     <Content Include="Views\UserHome\_UserSeatsSelection.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
