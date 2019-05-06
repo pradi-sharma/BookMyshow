@@ -476,5 +476,18 @@ namespace BookMyshow.Models
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_upgraddiagrams1");
         }
+    
+        public virtual int InsertTheatreUser(Nullable<int> theatreId, Nullable<int> userId)
+        {
+            var theatreIdParameter = theatreId.HasValue ?
+                new ObjectParameter("TheatreId", theatreId) :
+                new ObjectParameter("TheatreId", typeof(int));
+    
+            var userIdParameter = userId.HasValue ?
+                new ObjectParameter("userId", userId) :
+                new ObjectParameter("userId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("InsertTheatreUser", theatreIdParameter, userIdParameter);
+        }
     }
 }
