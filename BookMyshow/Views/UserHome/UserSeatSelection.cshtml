@@ -2,6 +2,8 @@
 <html>
 
 <head>
+
+    <link href="~/Content/style.css" rel="stylesheet" />
     <title>Movie Seat Selection Flat Responsive Widget Template</title>
     <!-- Meta-Tags -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -37,9 +39,16 @@
         .seats.abcd::before {
             background-color: red;
         }
+
+        .mybody {
+            background: url(../../Content/Images/download.jpg);
+            background-size: cover;
+            font-family: 'Source Sans Pro', sans-serif;
+        }
     </style>
     <script src="~/Scripts/bootstrap.js"></script>
     <link href="~/Content/bootstrap/css/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
     @*<script src="~/Scripts/jquery-1.10.2.min.js"></script>
         <script>
             $(document).ready(function () {
@@ -52,14 +61,14 @@
         </script>*@
 </head>
 
-<body onload="onLoaderFunc()">
-    <h1>Movie Seat Selection</h1>
+<body onload="onLoaderFunc()" class="mybody" )>
+    <h1 style="color:white;" class="font-bold">Movie Seat Selection</h1>
     <div class="container">
 
         <div class="sel-reg">
             <!-- input fields -->
             <div class="inputForm">
-                <h2>fill the required details below and select your seats</h2>
+                <h2 style="color:white;">fill the required details below and select your seats</h2>
                 <div class="mr_movmain">
 
                     <div class="movits-left">
@@ -553,10 +562,57 @@
                 </table>
             </div>
             @*<form action="/UserHome/Payment" method="get" id="pmntform">
-        <input type="text" id="amt1" hidden />*@
+                <input type="text" id="amt1" hidden />*@
             @*<input type="but" id="paymentId" value="Make Payment"/>*@
-         @Html.ActionLink("Make Payment", "MakePayment",new { @class= "btn btn-primary btn-large" })
+            @if (Session["userId"] != null)
+            {
+                @Html.ActionLink("Make Payment", "MakePayment", new { @class = "btn btn-primary btn-large" })
+            }
+            else
+            {
+                @*@Html.ActionLink("UserHome", "#", null, new { @data_toggle = "modal", @data_target = "login-modal" })*@
+                <a href="#" class="nav-link" data-toggle="modal" data-target="#login-modal">
+                    <i class="fa fa-user"></i> Login
+                </a>
+            }
 
+            <!--Login Modal-->
+
+            <div class="modal" id="login-modal">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header bg-grey text-white">
+                            <h3>Log In</h3>
+                            <button class="close" data-dismiss="modal">
+                                <i class="fa fa-window-close text-white"></i>
+                            </button>
+                        </div>
+                        <form action="~/UserHome/Login" method="post">
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <input type="text" placeholder="User Name" class="form-control" name="username" id="username">
+                                    <span id="username_error">enter correct username</span>
+                                </div>
+                                <div class="form-group">
+                                    <input type="password" placeholder="Password" class="form-control" name="password" id="password">
+                                    <span id="password_error">bad credentials</span>
+                                </div>
+                                <!--<div class="form-group">-->
+                                <!--<textarea class="form-control my-textarea" rows="5" cols="30" placeholder="Leave a Message"></textarea>-->
+                                <!--</div>-->
+                            </div>
+                            <div class="modal-footer">
+                                <a href="#" class="btn btn-secondary" data-dismiss="modal">Close</a>
+                                <input type="submit" class="btn btn-teal" value="Submit" id="loginbtn">
+                                <a href="#" data-toggle="modal" data-target="#forgot-modal">ForgotPassword</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+
+            <!--Login Modal-->
             <!-- //details after booking displayed here -->
         </div>
     </div>
@@ -564,15 +620,18 @@
             <p>©Movies Ticket 2019</p>
         </div>*@
     <!-- js -->
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/Site.css" rel="stylesheet" />
     <script src="~/Scripts/jquery-3.4.1.min.js"></script>
- 
+
 
     <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
     <!-- //js -->
     <!-- script for seat selection -->
     <script>
         var amount1;
-        
+
         //$("#pmntform").submit(function () {
 
         //    alert(amount1);
@@ -580,11 +639,12 @@
         //    $("#amt").val(amount1);
         //    alert("after");
         //});
-    
+
         function onLoaderFunc() {
            // $(".seatStructure *").prop("disabled", true);
             $(".displayerBoxes *").prop("disabled", true);
-            $(".disabled").prop("disabled", true);
+            $(".disabled ").prop("disabled", true);
+            $(":checkbox").prop('disabled', true);
 
         }
         //function MakePayment()
@@ -596,7 +656,7 @@
         //        allSeatsVals.push($(this).val());
         //    });
         //   // alert(amount);
-         
+
 
         //    //$.ajax({
 
@@ -617,6 +677,7 @@
         //}
 
         function takeData() {
+            $(":checkbox").prop('disabled', false);
             if (($("#Username").val().length == 0) || ($("#Numseats").val().length == 0)) {
                 alert("Please Enter your Name and Number of Seats");
             } else {
@@ -648,7 +709,7 @@
 
                     if (array[ii].type == "checkbox") {
                         if (array[ii].className == "abcd") {
-                            array[ii].prop("disabled", true); 
+                            array[ii].prop("disabled", true);
 
                         }
 

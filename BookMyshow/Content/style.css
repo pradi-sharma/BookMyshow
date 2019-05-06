@@ -232,22 +232,26 @@ body a:hover {
 
 /* content */
 
-body {
-    background: url(Images/download.jpg) no-repeat center;
+/*body{
+    background: url(Images/auditorium-chairs-comfortable-269140.jpg) no-repeat center;
     background-size: cover;
-    /*-webkit-background-size: cover;
+    opacity:0.1;
+    -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
-    -ms-background-size: cover;*/
+    -ms-background-size: cover;
     background-attachment: fixed;
     font-family: 'Source Sans Pro', sans-serif;
 }
+t-family: 'Source Sans Pro', sans-serif;
+}*/
+
 
 .mr_movmain span {
     color: #f00;
 }
 
-.sel-reg {
+/*.sel-reg {
     width: 700px;
     margin: 0 5vw;
     background: rgba(128, 128, 128, 0.34);
@@ -256,7 +260,8 @@ body {
     display: flex;
     display: -webkit-flex;
     flex-wrap: wrap;
-}
+    opacity:1;
+}*/
 
 .container {
     display: -webkit-flex;
@@ -473,7 +478,7 @@ input[type=checkbox]:before {
     box-shadow: inset 0px 2px 3px 0px rgba(0, 0, 0, .3), 0px 1px 0px 0px rgba(255, 255, 255, .8);
     -moz-box-shadow: inset 0px 2px 3px 0px rgba(0, 0, 0, .3), 0px 1px 0px 0px rgba(255, 255, 255, .8);
     -webkit-box-shadow: inset 0px 2px 3px 0px rgba(0, 0, 0, .3), 0px 1px 0px 0px rgba(255, 255, 255, .8);
-  /*background-color: none;*/
+    /*background-color: yellow;*/
 }
 
 input[type=checkbox]:checked:before {

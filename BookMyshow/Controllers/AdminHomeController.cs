@@ -114,11 +114,12 @@ namespace BookMyshow.Controllers
             return View("Admin");
         }
         public PartialViewResult AddMovie()
-        {
+        { DateTime date = DateTime.Now;
+            TempData["currentdate"] = date.Year + "-0" + date.Month + "-0" + date.Day;
             return PartialView("_AddMovie");
         }
         [HttpPost]
-        public ActionResult AddMovie(Movy form, HttpPostedFileBase poster1)
+        public PartialViewResult AddMovie(Movy form, HttpPostedFileBase poster1)
         {
 
 
@@ -126,7 +127,7 @@ namespace BookMyshow.Controllers
             movie.MovieName = form.MovieName;
             movie.ReleaseDate = Convert.ToDateTime(form.ReleaseDate).Date;
             movie.Synopsis = form.Synopsis;
-            movie.IntrestedUsers = Convert.ToInt32(form.IntrestedUsers);
+            movie.VideoLink = form.VideoLink;
             if (poster1 != null)
             {
                 movie.Poster = new byte[poster1.ContentLength];
@@ -134,7 +135,7 @@ namespace BookMyshow.Controllers
             }
             entities.Movies.Add(movie);
             entities.SaveChanges();
-            return View();
+            return PartialView("_AddMovieSuccess");
         }
 
     }

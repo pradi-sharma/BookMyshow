@@ -35,7 +35,7 @@ namespace BookMyshow.Controllers
           
         }
         [HttpPost]
-        public ActionResult TheatreRegister(FormCollection theatre)
+        public PartialViewResult TheatreRegister(FormCollection theatre)
         {   
             Theatre newtheatre = new Theatre();
             newtheatre.TheatreName = theatre["TheatreName"];
@@ -43,7 +43,10 @@ namespace BookMyshow.Controllers
             newtheatre.CityId = Convert.ToInt32(theatre["cities"]);
             entities.Theatres.Add(newtheatre);
             entities.SaveChanges();
-            return View("_theatreSuccess");
+            int idd = entities.Theatres.Max(t => t.TheatreId);
+            int uid = Convert.ToInt32(Session["userId"]);
+            entities.InsertTheatreUser(idd,uid);
+            return PartialView("_theatreSuccess");
         }
         public PartialViewResult SelectLayout()
         {
@@ -58,7 +61,7 @@ namespace BookMyshow.Controllers
                 ViewBag.name = Session["userName"];
                 return PartialView("_RegisterFirstMessage");
             }
-                Session["sampledata"] = "sample";
+                
                 return PartialView("_SeatLayoutSelection");
 
         }

@@ -564,6 +564,10 @@
           <Parameter Name="theatreId" Type="int" Mode="In" />
           <Parameter Name="movieId" Type="int" Mode="In" />
         </Function>
+        <Function Name="InsertTheatreUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="TheatreId" Type="int" Mode="In" />
+          <Parameter Name="userId" Type="int" Mode="In" />
+        </Function>
         <Function Name="InsertTicketSeats" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="ticketId" Type="int" Mode="In" />
           <Parameter Name="seat" Type="varchar" Mode="In" />
@@ -935,7 +939,7 @@
             <Parameter Name="slotId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="GetMoviesList1" ReturnType="Collection(ShowBookingModel.GetMoviesList1_Result)">
-            <Parameter Name="theatreId" Mode="In" Type="Int32" />
+          <Parameter Name="theatreId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_alterdiagram1">
             <Parameter Name="diagramname" Mode="In" Type="String" />
@@ -967,6 +971,10 @@
             <Parameter Name="new_diagramname" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_upgraddiagrams1" />
+          <FunctionImport Name="InsertTheatreUser">
+            <Parameter Name="TheatreId" Mode="In" Type="Int32" />
+            <Parameter Name="userId" Mode="In" Type="Int32" />
+          </FunctionImport>
           </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -1725,6 +1733,7 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="sp_renamediagram1" FunctionName="ShowBookingModel.Store.sp_renamediagram" />
           <FunctionImportMapping FunctionImportName="sp_upgraddiagrams1" FunctionName="ShowBookingModel.Store.sp_upgraddiagrams" />
+          <FunctionImportMapping FunctionImportName="InsertTheatreUser" FunctionName="ShowBookingModel.Store.InsertTheatreUser" />
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

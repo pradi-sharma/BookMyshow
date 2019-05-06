@@ -13,7 +13,7 @@
     </style>
 </head>
 <body>
-    <h2>in view</h2>
+
     <div id="form">
         @using (Ajax.BeginForm("AddMovieOffers", "AdminHome", new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "form", InsertionMode = InsertionMode.Replace }, new { @class = "form", id = "form" }))
         {

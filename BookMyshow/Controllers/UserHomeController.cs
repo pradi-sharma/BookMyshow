@@ -167,7 +167,7 @@ namespace BookMyshow.Controllers
         }
      
         [HttpPost]
-        public ActionResult TimingsByTheatre(FormCollection form)
+        public PartialViewResult TimingsByTheatre(FormCollection form)
         {
             int theatreId = Convert.ToInt32(form["theatreId"]);
             TimeSpan slot = Convert.ToDateTime(form["slotId"]).TimeOfDay;
@@ -186,7 +186,7 @@ namespace BookMyshow.Controllers
             ViewBag.Price =Convert.ToDecimal(p);
             ViewBag.arr = notSelectedSeats;
           
-            return View("UserSeatSelection");
+            return PartialView("_UserSeatsSelection");
         }
         //public ActionResult BookTicket(int[]key,string[] value)
         //{
@@ -213,7 +213,7 @@ namespace BookMyshow.Controllers
             {
                 ViewBag.amt2 = TempData["amount2"];
                 TempData.Keep();
-                return View("Payment");
+                return PartialView("Payment");
             }
             else
             {
