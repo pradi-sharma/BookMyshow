@@ -1,5 +1,13 @@
 ﻿@model BookMyshow.Models.Offer
-
+<h2 class="font-weight-bold ">Add Offer</h2>
+<style>
+   #OfferNamee{
+       width:40px;
+   }
+    .text-danger{
+        font-weight:bold;
+    }
+</style>
 
 @using (Ajax.BeginForm("Addoffers","AdminHome",new AjaxOptions { HttpMethod="POST",UpdateTargetId="result",InsertionMode=InsertionMode.Replace}))
 {
@@ -33,9 +41,7 @@
     </div>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+
 
 <script src="~/Scripts/jquery-1.10.2.min.js"></script>
 <script src="~/Scripts/jquery.validate.min.js"></script>

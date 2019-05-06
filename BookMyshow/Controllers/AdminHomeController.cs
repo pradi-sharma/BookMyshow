@@ -95,7 +95,9 @@ namespace BookMyshow.Controllers
         [HttpPost]
         public ActionResult AddTheatreAdmin(FormCollection form)
         {
-            UserDetail newadmin = new UserDetail();
+            try
+            {
+                UserDetail newadmin = new UserDetail();
             newadmin.UserName = form["Username"];
             newadmin.Password = form["Password"];
             int r =Convert.ToInt32(form["RoleDropdown"]);
@@ -112,17 +114,27 @@ namespace BookMyshow.Controllers
             entities.UserDetails.Add(newadmin);
             entities.SaveChanges();
             return View("Admin");
+            }
+            catch (Exception ex)
+            {
+
+                return View("Error", new HandleErrorInfo(ex, "UserHome", "Search"));
+            }
         }
         public PartialViewResult AddMovie()
-        { DateTime date = DateTime.Now;
+        {
+            try {
+            DateTime date = DateTime.Now;
             TempData["currentdate"] = date.Year + "-0" + date.Month + "-0" + date.Day;
             return PartialView("_AddMovie");
+            }
+            catch (Exception ex) { throw ex; }
         }
         [HttpPost]
         public PartialViewResult AddMovie(Movy form, HttpPostedFileBase poster1)
         {
 
-
+            try { 
             Movy movie = new Movy();
             movie.MovieName = form.MovieName;
             movie.ReleaseDate = Convert.ToDateTime(form.ReleaseDate).Date;
@@ -136,6 +148,22 @@ namespace BookMyshow.Controllers
             entities.Movies.Add(movie);
             entities.SaveChanges();
             return PartialView("_AddMovieSuccess");
+            }
+            catch (Exception ex) { throw ex; }
+        }
+        protected override void OnException(ExceptionContext filterContext)
+        {
+            Exception exception = filterContext.Exception;
+            //Logging the Exception
+            filterContext.ExceptionHandled = true;
+
+
+            var Result = this.View("Error", new HandleErrorInfo(exception,
+                filterContext.RouteData.Values["controller"].ToString(),
+                filterContext.RouteData.Values["action"].ToString()));
+
+            filterContext.Result = Result;
+
         }
 
     }

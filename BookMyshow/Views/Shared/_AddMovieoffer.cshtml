@@ -5,23 +5,56 @@
             width: 400px;
             height: 20px;
         }
-    
+
         .from {
             width: 700px;
             height: 900px;
+        }
+        #Drop{
+            font-size:10px;
+            padding:10px;
+            height:30px;
+        }
+        body{
+            font-size:20px;
         }
     </style>
 </head>
 <body>
 
     <div id="form">
+        <table>
+
+       
         @using (Ajax.BeginForm("AddMovieOffers", "AdminHome", new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "form", InsertionMode = InsertionMode.Replace }, new { @class = "form", id = "form" }))
-        {
-            @Html.Label("movielist", "Movie Name : ") @Html.DropDownList("movielist", (IEnumerable<SelectListItem>)ViewBag.movielist, new { @class = "forminputs" })<br /><br />
-            @Html.Label("offerlist", "Offers     : ") @Html.DropDownList("offerlist", (IEnumerable<SelectListItem>)ViewBag.offerlist, new { @class = "forminputs" })<br /><br />
-            @Html.Label("Coupon", "Coupon Code : ") @Html.TextBox("Coupon", null, new { style = "width: 400px;" })<br /><br />
-            <input type="submit" class="btn btn-success" value="Add Offer" />
+        {<tr>
+             <td> @Html.Label("movielist", "Movie Name : ")</td>   
+             <td>
+                 @Html.DropDownList("movielist", (IEnumerable<SelectListItem>)ViewBag.movielist, new { @class = "forminputs", @id = "Drop" })<br /><br />
+             </td>
+         </tr>
+         <tr>
+             <td> @Html.Label("offerlist", "Offers     : ")</td>
+             <td>
+                 @Html.DropDownList("offerlist", (IEnumerable<SelectListItem>)ViewBag.offerlist, new { @class = "forminputs", @id = "Drop" })<br /><br />
+             </td>
+         </tr>
+         <tr>
+             <td> @Html.Label("Coupon", "Coupon Code : ")</td>
+             <td> @Html.TextBox("Coupon", null, new { style = "width: 400px;" })</td>
+         </tr>
+         <tr>
+             <td>
+                 <input type="submit" class="btn btn-success" value="Add Offer" />
+             </td>
+         </tr>
+           
+           
+           
+           
+            
         }
+       </table>
     </div>
 </body>
 </html>
