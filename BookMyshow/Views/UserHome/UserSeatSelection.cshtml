@@ -641,6 +641,20 @@
 
                 }
                 $(".abcd").prop("disabled", true);
+                var array = document.getElementsByTagName("input");
+
+
+                for (var ii = 0; ii < array.length; ii++) {
+
+                    if (array[ii].type == "checkbox") {
+                        if (array[ii].className == "abcd") {
+                            array[ii].prop("disabled", true); 
+
+                        }
+
+                    }
+                }
+
 
                     document.getElementById("notification").innerHTML =
                         "<b style='margin-bottom:0px;background:#ff9800;letter-spacing:1px;'>Please Select your Seats NOW!</b>";
@@ -699,9 +713,7 @@
         }
 
 
-        function myFunction() {
-            alert($("input:checked").length);
-        }
+
 
 
 

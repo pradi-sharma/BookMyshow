@@ -239,9 +239,6 @@ namespace BookMyshow.Controllers
                 entities.BookedSeats.Add(bookedSeat);
                 entities.SaveChanges();
             }
-          
-            
-
 
             return View("Ticket");
         }

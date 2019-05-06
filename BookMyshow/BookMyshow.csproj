@@ -344,6 +344,7 @@
     <Content Include="Views\Theatre\_RemoveMovie.cshtml" />
     <Content Include="Views\Theatre\_SeatLayoutSelection.cshtml" />
     <Content Include="Views\Theatre\_RegisterFirstMessage.cshtml" />
+    <Content Include="Views\UserHome\Ticket.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
