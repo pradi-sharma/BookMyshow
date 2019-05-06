@@ -125,14 +125,6 @@
 
                     </a>
 
-                   
-
-
-
-
-
-
-
 
 
 
@@ -168,26 +160,27 @@
                             <i class="fa fa-home"></i> Welcome @Session["userName"]
                         </a>
                     </li>
-                    
+
 
                     <li class="nav-item px-2">
                         <a href="#" class="nav-link">
                             <i class="fa fa-film"></i> Movies
                         </a>
                     </li>
+                    @*<li class="nav-item px-2">
+            <a href="#" class="nav-link">
+                <i class="fa fa-play"></i> Plays
+            </a>
+        </li>*@
+
                     <li class="nav-item px-2">
-                        <a href="#" class="nav-link">
-                            <i class="fa fa-play"></i> Plays
+                        <a href="~/UserHome/LogOut" class="nav-link">
+                            <i class="fa fa-sign-out-alt"></i> Logout
                         </a>
                     </li>
                     <li class="nav-item px-2">
                         <a href="~/UserHome/SearchByCity" class="nav-link">
-                            <i class="fa fa-search"></i> City
-                        </a>
-                    </li>
-                    <li class="nav-item px-2">
-                        <a href="~/UserHome/LogOut" class="nav-link">
-                            <i class="fa fa-sign-out-alt"></i> Logout
+                            <i class="fa fa-search"></i>Pune <p style="text-decoration:overline dotted;font-size:14px;opacity:0.8">SelectCity</p>
                         </a>
                     </li>
 
@@ -303,7 +296,7 @@
 
         <div>
             <h1>
-                Movies
+               Exclusive Offers
             </h1>
             <!-- Card deck -->
             <div class="card-deck">

@@ -1,5 +1,7 @@
 ﻿<html>
 <head>
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <link rel="stylesheet" href="~/Content/bootstrap.css" />
     <link rel="stylesheet" href="~/Content/PaymentStyle.css" />
@@ -26,6 +28,22 @@
             //}
 
         }
+        $(document).ready(function () {
+            $("#sbbtn").click(function () {
+                var code = $("#offer").val();
+                alert("in post");
+                $.post('/UserHome/ApplyOffer',
+                    { key: "xyz", value: code, }, function (data) {
+                        alert("Success " + data.success);
+                        if ((data.success).toString() == "true") {
+                            $("#offermsg").html = "offer applied";
+                        } else {
+                            alert("not applied");
+                        }
+                    });
+            });
+        })
+ 
 
 
     </script>
@@ -52,9 +70,14 @@
                                     Apply Offer
                                 </label>
                                 <div class="input-group">
-                                    <input type="text" class="form-control" id="offer" placeholder="Enter Valid Promo Code"
-                                           required autofocus />
-                                    <span class="input-group-addon"><span class="glyphicon glyphicon-barcode"></span></span>
+                                    @*@using (Ajax.BeginForm("ApplyOffer", "UserHome", new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "offermsg", InsertionMode = InsertionMode.Replace }))
+                                    {*@
+                                        <input type="text" name="offercode" class="form-control" id="offer" placeholder="Enter Valid Promo Code"
+                                               required autofocus />
+                                        <button type="button" id="sbbtn"><span class="input-group-addon"><span class="glyphicon glyphicon-barcode"></span></span></button>
+
+                                    
+                                    <span id="offermsg"></span>
 
 
                                 </div>
@@ -105,14 +128,16 @@
                     </li>
                 </ul>
                 <br />
-                <a href="/UserHome/GenerateTicket" class="btn btn-success btn-lg btn-block" role="button" >Pay</a>
+                <a href="/UserHome/GenerateTicket" class="btn btn-success btn-lg btn-block" role="button">Pay</a>
                 @*<button class="btn btn-success btn-lg btn-block" type="submit" onclick="ValidatePayment()">Pay</button>*@
             </div>
         </div>
     </div>
 
 
-
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
 
 </body>
+
 </html>

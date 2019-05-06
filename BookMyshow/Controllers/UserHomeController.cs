@@ -142,7 +142,7 @@ namespace BookMyshow.Controllers
             List<TheatreTimiSlots> theatreTimeSlotList = new List<TheatreTimiSlots>();
             foreach(int item in theatre.ToList())
             {
-                List<TimeSpan> spans = new List<TimeSpan>();
+                List<string> spans = new List<string>();
                 //var times = from t in entities.TimeSlots
                 //            join s in entities.Slots
                 //            on t.SlotId equals s.SlotId
@@ -154,10 +154,12 @@ namespace BookMyshow.Controllers
                 // TimeSpan xyz = times.StartTime;
                 foreach (TimeSpan item1 in times.ToList())
                 {
-                    spans.Add(item1);
+                    string ntime = string.Format("{0:00}:{1:00}", item1.Hours, item1.Minutes); // it should display 00:00
+                    spans.Add(ntime);
                 }
+                string tname = entities.Theatres.Where(i => i.TheatreId == item).Select(t => t.TheatreName).Single();
                 ViewBag.movieId = id;
-                TheatreTimiSlots theatreTimeSlot = new TheatreTimiSlots(item,spans);
+                TheatreTimiSlots theatreTimeSlot = new TheatreTimiSlots(item,spans,tname);
                 theatreTimeSlotList.Add(theatreTimeSlot);
             }
           //  ViewBag.theatrelist = theatre.ToList();
@@ -203,14 +205,31 @@ namespace BookMyshow.Controllers
             TempData.Keep();
 
 
-            return this.Json(new { success = true });
+            return this.Json(new { success = "true" });
         }
         public ActionResult MakePayment()
         {
-            ViewBag.amt2 = TempData["amount2"];
-            TempData.Keep();
-            return View("Payment");
+            if (Session["userId"] != null)
+            {
+                ViewBag.amt2 = TempData["amount2"];
+                TempData.Keep();
+                return View("Payment");
+            }
+            else
+            {
+                return RedirectToAction("Index", "UserHome");
+            }
+           
         }
+        [HttpPost]
+        public ActionResult ApplyOffer(string key,string value)
+        {
+            string ofrcode = value;
+
+            return this.Json(new { success = true });
+        }
+
+
         public ActionResult GenerateTicket()
         {
             ViewBag.amt2 = TempData["amount2"];
@@ -272,7 +291,9 @@ namespace BookMyshow.Controllers
             //ViewBag.City = new SelectList(entities.Cities, "CityId", "CityName");
             //int value = Convert.ToInt32(fc["CityId"]);
 
+            var c = entities.Cities.Where(c1 => c1.CityId == id).FirstOrDefault();
 
+            ViewBag.cname = c.CityName;
             var display = entities.MovyByCity(id);
 
             return View("MoviesByCity", display);
