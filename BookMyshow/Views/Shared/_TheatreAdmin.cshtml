@@ -30,7 +30,7 @@
     <div class="form-group">
         @Html.LabelFor(model => model.Role, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.DropDownList("RoleDropdown", new List<SelectListItem> { new SelectListItem { Value = "theatreAdmin", Text = "Theatre Admin" }, new SelectListItem { Value = "Application Admin", Text = "Application Admin" } })
+            @Html.DropDownList("RoleDropdown", new List<SelectListItem> { new SelectListItem { Value ="1", Text = "Theatre Admin" }, new SelectListItem { Value = "2", Text = "Application Admin" } })
             @Html.ValidationMessageFor(model => model.Role, "", new { @class = "text-danger" })
         </div>
     </div>

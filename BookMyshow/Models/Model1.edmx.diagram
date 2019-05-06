@@ -43,6 +43,7 @@
         <AssociationConnector Association="ShowBookingModel.TheatreCity" />
         <AssociationConnector Association="ShowBookingModel.TheatreMovies" />
         <AssociationConnector Association="ShowBookingModel.TheatreUsers" />
+        <EntityTypeShape EntityType="ShowBookingModel.sysdiagram" Width="1.5" PointX="4.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

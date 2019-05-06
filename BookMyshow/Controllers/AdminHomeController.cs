@@ -98,7 +98,16 @@ namespace BookMyshow.Controllers
             UserDetail newadmin = new UserDetail();
             newadmin.UserName = form["Username"];
             newadmin.Password = form["Password"];
-            newadmin.Role = form["RoleDropdown"];
+            int r =Convert.ToInt32(form["RoleDropdown"]);
+            if (r == 1)
+            {
+                newadmin.Role = "theatreAdmin";
+            }
+            else if (r == 2)
+            {
+                newadmin.Role = "admin";
+            }
+            newadmin.Email = form["Email"];
             newadmin.Contact = Convert.ToInt64(form["Contact"]);
             entities.UserDetails.Add(newadmin);
             entities.SaveChanges();
