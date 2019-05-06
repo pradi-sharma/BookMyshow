@@ -35,12 +35,12 @@
                 <div class="row">
                     <div class="col-md-10">
                         <tr>
-                            <img src="~/Content/Images/aquaman-movie-poster-2018-l0.jpg" width="500px" height="" style="overflow: hidden;" id="image1">
+                            <img src="data:image;base64,@System.Convert.ToBase64String(ViewBag.poster)" width="500px" height="" style="overflow: hidden;" id="image1">
 
                         </tr>
                     </div>
                     <div class="col-md-10">
-                        <tr><h2 style="font: bold;font-size: 40px"><i class="fa fa-play px-1"></i>Aquaman</h2></tr>
+                        <tr><h2 style="font: bold;font-size: 40px"><i class="fa fa-play px-1"></i>@ViewBag.name</h2></tr>
                     </div>
                     <div class="col-md-10 ">
 
@@ -60,25 +60,22 @@
                             <td>Seats</td>
                         </tr>
                         <tr>
-                            <td><h3>carnival</h3></td>
-                            <td><h3>A1,A2</h3></td>
-                        </tr>
-                    </div>
-                    <div class="col-md-10 ">
-                        <tr>
-                            <td>
-                                <img src="~/Content/Images/wonderwoman_barcode.jpg" width="35%" height="35%" id="image2" style="margin-left: 45%">
-                            </td>
-                        </tr>
+                            <td width="20px"><h3>@ViewBag.thname</h3></td>
 
+                            @foreach (var item in ViewBag.seats)
+                            {
+                                <td width="20px">
+                                @item
+                                </td>
+                            }
+
+                        </tr>
                     </div>
+             
                 </div>
             </table>
         </div>
-        <h4 style="margin-left: 425px;  ">
-            <span style="color: red">Movies</span><span style="color: white">Tickets</span> </h2>
-            <h4 style="color: white;margin-left: 840px;margin-top: -40px">
-                E-Ticket</h2>
+     
 
 
                 <script src="~/Content/bootstrap/js/fontawesome-all.js"></script>

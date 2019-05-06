@@ -167,7 +167,7 @@ namespace BookMyshow.Controllers
         }
      
         [HttpPost]
-        public PartialViewResult TimingsByTheatre(FormCollection form)
+        public ActionResult TimingsByTheatre(FormCollection form)
         {
             int theatreId = Convert.ToInt32(form["theatreId"]);
             TimeSpan slot = Convert.ToDateTime(form["slotId"]).TimeOfDay;
@@ -186,7 +186,7 @@ namespace BookMyshow.Controllers
             ViewBag.Price =Convert.ToDecimal(p);
             ViewBag.arr = notSelectedSeats;
           
-            return PartialView("_UserSeatsSelection");
+            return View("UserSeatSelection");
         }
         //public ActionResult BookTicket(int[]key,string[] value)
         //{
@@ -234,7 +234,7 @@ namespace BookMyshow.Controllers
         {
             ViewBag.amt2 = TempData["amount2"];
             List<string> seatslist = (List<string>)TempData["ss"];
-
+            ViewBag.seats = seatslist;
             TicketDetail ticket = new TicketDetail();
             ticket.MovieId = mvId;
             ticket.TheatreId = thId;
@@ -245,20 +245,25 @@ namespace BookMyshow.Controllers
             int newIdentity = identity + 1;
             foreach (var item in seatslist)
             {
-                entities.InsertTicketSeats(newIdentity, item);
+                entities.InsertTicketSeats(identity, item);
             }
             foreach (var item in seatslist)
             {
+                int uid = Convert.ToInt32(Session["userId"]);
                 BookedSeat bookedSeat = new BookedSeat();
                 bookedSeat.MovieId = mvId;
                 bookedSeat.SlotId = sId;
                 bookedSeat.TheatreId = thId;
-                bookedSeat.UserId = 1;
+                bookedSeat.UserId = uid;
                 bookedSeat.SeatNumber = item;
                 entities.BookedSeats.Add(bookedSeat);
                 entities.SaveChanges();
             }
-
+            string mv = entities.Movies.Where(m => m.MovieId == mvId).FirstOrDefault().MovieName;
+            ViewBag.name = mv;
+            byte[] poster = entities.Movies.Where(m => m.MovieId == mvId).FirstOrDefault().Poster;
+            ViewBag.poster = poster;
+            ViewBag.thname = entities.Theatres.Where(t => t.TheatreId == thId).FirstOrDefault().TheatreName;
             return View("Ticket");
         }
 
