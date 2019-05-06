@@ -25,7 +25,7 @@
             $("#submitButton").click(function () {
                 alert("clicked");
                 $.post("verification", function (data, status) {
-                    alert("Data: " + data + "\nStatus: " + status);
+                 //   alert("Data: " + data + "\nStatus: " + status);
                 });
             })
         });
@@ -477,7 +477,7 @@
 
                             <label>User Name</label>
                             <input type="text" class="form-control" id="username2" />
-                            <span id="name_errors" class="error_form"></span>
+                            <span id="uname_errors" class="error_form"></span>
 
                         </div>
 
@@ -485,7 +485,7 @@
 
                             <label>Password</label>
                             <input type="password" id="password2" class="form-control" />
-                            <span id="password_errors" class="error_form"></span>
+                            <span id="rpassword_errors" class="error_form"></span>
 
                         </div>
 
@@ -494,14 +494,14 @@
                             <label>confirm Password</label>
                             <input type="password" class="form-control" id="confirmpassword2" />
 
-                            <span id="confirm_password_errors2" class="error_form"></span>
+                            <span id="rconfirm_password_errors2" class="error_form"></span>
 
                         </div>
 
                         <div class="form-group">
 
                             <label>Contact</label>
-                            <input type="text" id="contacts" class="form-control" />
+                            <input type="text" id="contactno" class="form-control" />
                             <span id="contacts_errors" class="error_form"></span>
 
                         </div>
@@ -509,14 +509,14 @@
 
                             <label>Email</label>
                             <input type="email" id="email2" class="form-control" />
-                            <span id="emails_errors" class="error_form"></span>
+                            <span id="remails_errors" class="error_form"></span>
 
                         </div>
                         <div class="modal-footer">
 
                             <a href="#" class="btn btn-secondary" data-dismiss="modal">Close</a>
 
-                            <button type="submit" class="btn btn-teal" value="Register" id="submitbtn">Register</button>
+                            <button type="submit" class="btn btn-teal" value="Register" id="submitbtn" onclick="return RegisterValidate()">Register</button>
 
                         </div>
                     }

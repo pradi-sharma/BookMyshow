@@ -45,6 +45,7 @@ namespace BookMyshow.Controllers
             }
             catch (Exception ex) { throw ex; }
         }
+    
 
         public ActionResult MovieDescription(int id)
         {
@@ -259,12 +260,13 @@ namespace BookMyshow.Controllers
         [HttpPost]
         public ActionResult ApplyOffer(string key,string value)
         {
-            try { 
+            try {
+                decimal nkey = Convert.ToDecimal(key);
             string ofrcode = value;
             int result = entities.MovieOfferDetails.Where(o => o.CouponCode == ofrcode).FirstOrDefault().OfferId;
             int discount = entities.Offers.Where(i => i.OfferId == result).FirstOrDefault().Discount;
            int amt =Convert.ToInt32(TempData["amount2"]);
-            ViewBag.newamt = (amt * discount) / 100;
+            ViewBag.newamt =(nkey - ((amt * discount) / 100));
             return this.Json(new { success = true });
             }
             catch (Exception ex) { throw ex; }

@@ -322,15 +322,6 @@ namespace BookMyshow.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("InsertTheatreMovy", theatreIdParameter, movieIdParameter);
         }
     
-        public virtual ObjectResult<GetMoviesList_Result> GetMoviesList(Nullable<int> theatreId)
-        {
-            var theatreIdParameter = theatreId.HasValue ?
-                new ObjectParameter("theatreId", theatreId) :
-                new ObjectParameter("theatreId", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetMoviesList_Result>("GetMoviesList", theatreIdParameter);
-        }
-    
         public virtual int deleteMovie(Nullable<int> theatreaid, Nullable<int> movieId, Nullable<int> slotId)
         {
             var theatreaidParameter = theatreaid.HasValue ?
@@ -363,15 +354,6 @@ namespace BookMyshow.Models
                 new ObjectParameter("slotId", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("deleteMovie1", theatreaidParameter, movieIdParameter, slotIdParameter);
-        }
-    
-        public virtual ObjectResult<GetMoviesList1_Result> GetMoviesList1(Nullable<int> theatreId)
-        {
-            var theatreIdParameter = theatreId.HasValue ?
-                new ObjectParameter("theatreId", theatreId) :
-                new ObjectParameter("theatreId", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetMoviesList1_Result>("GetMoviesList1", theatreIdParameter);
         }
     
         public virtual int sp_alterdiagram1(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
@@ -488,6 +470,32 @@ namespace BookMyshow.Models
                 new ObjectParameter("userId", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("InsertTheatreUser", theatreIdParameter, userIdParameter);
+        }
+    
+        public virtual int deleteMovie2(Nullable<int> theatreaid, Nullable<int> movieId, Nullable<int> slotId)
+        {
+            var theatreaidParameter = theatreaid.HasValue ?
+                new ObjectParameter("theatreaid", theatreaid) :
+                new ObjectParameter("theatreaid", typeof(int));
+    
+            var movieIdParameter = movieId.HasValue ?
+                new ObjectParameter("MovieId", movieId) :
+                new ObjectParameter("MovieId", typeof(int));
+    
+            var slotIdParameter = slotId.HasValue ?
+                new ObjectParameter("slotId", slotId) :
+                new ObjectParameter("slotId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("deleteMovie2", theatreaidParameter, movieIdParameter, slotIdParameter);
+        }
+    
+        public virtual ObjectResult<GetMoviesList_Result1> GetMoviesList(Nullable<int> theatreId)
+        {
+            var theatreIdParameter = theatreId.HasValue ?
+                new ObjectParameter("theatreId", theatreId) :
+                new ObjectParameter("theatreId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetMoviesList_Result1>("GetMoviesList", theatreIdParameter);
         }
     }
 }

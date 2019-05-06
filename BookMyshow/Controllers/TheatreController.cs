@@ -132,10 +132,11 @@ namespace BookMyshow.Controllers
         }
         public PartialViewResult RemoveMovie()
         {
-          //  var mlist = ;
-           // List<string> movies = mlist.ToList();
-
-           ViewBag.movielist = new SelectList(entities.GetMoviesList(1), "MovieId", "MovieName");
+            //  var mlist = ;
+            // List<string> movies = mlist.ToList();
+            int uid = Convert.ToInt32(Session["userId"]);
+            int tid =Convert.ToInt32(entities.checkTheatre(uid).Single());
+           ViewBag.movielist = new SelectList(entities.GetMoviesList(tid), "MovieId", "MovieName");
             ViewBag.SlotList = new SelectList(entities.Slots, "SlotId", "StartTime");
             return PartialView("_RemoveMovie");
         }

@@ -33,12 +33,12 @@
                 var code = $("#offer").val();
                 alert("in post");
                 $.post('/UserHome/ApplyOffer',
-                    { key: "xyz", value: code, }, function (data) {
+                    { key: @ViewBag.amt2, value: code, }, function (data) {
                         alert("Success " + data.success);
                         if (data.success) {
                           
                             document.getElementById("offermsg").innerHTML = "Applied";
-                     
+                            document.getElementById("amtid").innerHTML=@ViewBag.newamt
                         } else {
                             alert("not applied");
                         }
@@ -130,7 +130,7 @@
                 </div>
                 <ul class="nav nav-pills nav-stacked">
                     <li class="active">
-                        <a href="#"><span class="badge pull-right"><span class="glyphicon glyphicon-usd"></span>@{(ViewBag.amt2-ViewBag.newamt)}</span> Final Payment</a>
+                        <a href="#"><span class="badge pull-right"><span class="glyphicon glyphicon-usd" id="amtid"></span></span> Final Payment</a>
                     </li>
                 </ul>
                 <br />
