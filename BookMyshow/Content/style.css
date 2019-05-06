@@ -251,7 +251,7 @@ t-family: 'Source Sans Pro', sans-serif;
     color: #f00;
 }
 
-/*.sel-reg {
+.sel-reg {
     width: 700px;
     margin: 0 5vw;
     background: rgba(128, 128, 128, 0.34);
@@ -261,7 +261,7 @@ t-family: 'Source Sans Pro', sans-serif;
     display: -webkit-flex;
     flex-wrap: wrap;
     opacity:1;
-}*/
+}
 
 .container {
     display: -webkit-flex;

@@ -3,6 +3,8 @@
 <html>
 
 <head>
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
     <link rel="stylesheet" href="~/Content/bootstrap/css/fontawesome-all.css">
     <link rel="stylesheet" href="~/Content/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="~/Content/bootstrap/css/mdb.css">
@@ -12,7 +14,7 @@
     <meta name="viewport" content="width=device-width" />
     <title>BookMovie</title>
     <script>
-                                     
+
     </script>
 </head>
 <body>
@@ -26,7 +28,7 @@
                         <span style="color:red" class="font-weight-bold text-uppercase mt-3 mb-4"> Movies </span><span class="font-weight-bold text-uppercase mt-3 mb-4">Ticket</span>
                     </a>
 
-                  
+
                     <button class="navbar-toggler">
                         <span class="navbar-toggler-icon"></span>
                     </button>
@@ -58,17 +60,21 @@
                             <i class="fa fa-home"></i> Home
                         </a>
                     </li>
-                    <li class="nav-item px-2">
-                        <a href="services.html" class="nav-link" data-toggle="modal" data-target="#login-modal">
-                            <i class="fa fa-user"></i> Register
-                        </a>
-                    </li>
+                    @if (Session["userId"] != null)
+                    {
+                        <li class="nav-item px-2">
+                            <a href="services.html" class="nav-link" data-toggle="modal" data-target="#login-modal">
+                                <i class="fa fa-user"></i> Register
+                            </a>
+                        </li>
 
-                    <li class="nav-item px-2">
-                        <a href="services.html" class="nav-link" data-toggle="modal" data-target="#login-modal">
-                            <i class="fa fa-user"></i> Login
-                        </a>
-                    </li>
+                        <li class="nav-item px-2">
+                            <a href="services.html" class="nav-link" data-toggle="modal" data-target="#login-modal">
+                                <i class="fa fa-user"></i> Login
+                            </a>
+                        </li>
+                    }
+
                     <li class="nav-item px-2">
                         <a href="contact.html" class="nav-link">
                             <i class="fa fa-film"></i> Movies
@@ -86,41 +92,75 @@
 
     </nav>
 
-    <div>
-        
-            <h3 style="background-color:lightgray;border-radius:20px;;padding:10px;font-weight:bold;margin-top:10px">Available Theatres and Timings</h3>
-            @foreach (var item in Model)
+    <div id="result">
+
+        <h3 style="background-color:lightgray;border-radius:20px;;padding:10px;font-weight:bold;margin-top:10px">Available Theatres and Timings</h3>
+        @foreach (var item in Model)
+        {
+            //using(Html.BeginForm("TimingsByTheatre", "UserHome",FormMethod.Get,new { name= "demoform" }))
+            //{
+
+            <p style="font-weight:bold;margin-left:15px">@item.Theatrename</p>
+
+            int a = item.TheatreId;
+
+
+
+            foreach (var item1 in item.Slots)
             {
-                //using(Html.BeginForm("TimingsByTheatre", "UserHome",FormMethod.Get,new { name= "demoform" }))
-                //{
-            
-                <p style="font-weight:bold;margin-left:15px">@item.Theatrename</p>
-
-                int a = item.TheatreId;
-
-
-
-                foreach (var item1 in item.Slots)
-                {
                 <form action="~/UserHome/TimingsByTheatre" method="post" style="width:200px;display:inline">
+
                     <input type="text" value="@item.TheatreId" hidden name="theatreId" />
                     <input type="text" value="@item1" name="slotId" hidden />
                     <input type="text" value="@ViewBag.movieId" hidden name="movieId" />
                     <input type="submit" value="@item1" id="submitId" name="ip" class="btn btn-outline-success" style="display:inline-block;font-size:15px;margin-left:15px" />
-                  
-
                 </form>
 
 
-                }
-         
-           
+
 
 
             }
-   
 
+
+
+
+        }
+
+
+    </div>
+    <div class="modal" id="login-modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-grey text-white">
+                    <h3>Log In</h3>
+                    <button class="close" data-dismiss="modal">
+                        <i class="fa fa-window-close text-white"></i>
+                    </button>
+                </div>
+                <form action="~/UserHome/Login" method="post">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <input type="text" placeholder="User Name" class="form-control" name="username" id="username">
+                            <span id="username_error">enter correct username</span>
+                        </div>
+                        <div class="form-group">
+                            <input type="password" placeholder="Password" class="form-control" name="password" id="password">
+                            <span id="password_error">bad credentials</span>
+                        </div>
+                        <!--<div class="form-group">-->
+                        <!--<textarea class="form-control my-textarea" rows="5" cols="30" placeholder="Leave a Message"></textarea>-->
+                        <!--</div>-->
+                    </div>
+                    <div class="modal-footer">
+                        <a href="#" class="btn btn-secondary" data-dismiss="modal">Close</a>
+                        <input type="submit" class="btn btn-teal" value="Submit" id="loginbtn">
+                        <a href="#" data-toggle="modal" data-target="#forgot-modal">ForgotPassword</a>
+                    </div>
+                </form>
+            </div>
         </div>
+    </div>
 
     <!--footer-->
     <footer class="page-footer font-small stylish-color-dark pt-4 pb-4">
