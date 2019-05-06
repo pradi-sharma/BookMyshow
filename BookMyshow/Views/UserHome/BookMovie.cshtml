@@ -87,31 +87,40 @@
     </nav>
 
     <div>
-        <h3>Available Theatres</h3>
-        @foreach (var item in Model)
-        {
-            //using(Html.BeginForm("TimingsByTheatre", "UserHome",FormMethod.Get,new { name= "demoform" }))
-            //{
-
-            <p>@item.Theatrename</p>
-
-            int a = item.TheatreId;
-
-            foreach (var item1 in item.Slots)
+        
+            <h3 style="background-color:lightgray;border-radius:20px;;padding:10px;font-weight:bold;margin-top:10px">Available Theatres and Timings</h3>
+            @foreach (var item in Model)
             {
-                <form action="~/UserHome/TimingsByTheatre" method="post">
+                //using(Html.BeginForm("TimingsByTheatre", "UserHome",FormMethod.Get,new { name= "demoform" }))
+                //{
+            
+                <p style="font-weight:bold;margin-left:15px">@item.Theatrename</p>
+
+                int a = item.TheatreId;
+
+
+
+                foreach (var item1 in item.Slots)
+                {
+                <form action="~/UserHome/TimingsByTheatre" method="post" style="width:200px;display:inline">
                     <input type="text" value="@item.TheatreId" hidden name="theatreId" />
                     <input type="text" value="@item1" name="slotId" hidden />
                     <input type="text" value="@ViewBag.movieId" hidden name="movieId" />
-                    <input type="submit" value="@item1" id="submitId" name="ip" class="btn btn-outline-success" style="display:inline-grid" />
+                    <input type="submit" value="@item1" id="submitId" name="ip" class="btn btn-outline-success" style="display:inline-block;font-size:15px;margin-left:15px" />
+                  
+
                 </form>
 
 
+                }
+         
+           
+
+
             }
+   
 
-        }
-
-    </div>
+        </div>
 
     <!--footer-->
     <footer class="page-footer font-small stylish-color-dark pt-4 pb-4">
