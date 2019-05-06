@@ -7,6 +7,7 @@
 
 <div id="msg">
 
+    <h2 class="font-weight-bold">Add Movie</h2>
 
     @using (Ajax.BeginForm("AddMovie", "AdminHome", new AjaxOptions { HttpMethod = "POST", InsertionMode = InsertionMode.Replace, UpdateTargetId = "msg" }, new { enctype = "multipart/form-data" }))
     {

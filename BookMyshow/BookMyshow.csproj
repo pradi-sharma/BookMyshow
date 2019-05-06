@@ -149,6 +149,11 @@
     <Content Include="Content\Images\download.jpg" />
     <Content Include="Content\Images\e1033a3d9b662e112e99e62ba2f1cd6f.jpg" />
     <Content Include="Content\Images\Oops-pop-art-retro-style-600x600.jpeg" />
+    <Content Include="Content\Offers\Copy of Family Movie Night Flyer - Made with PosterMyWall.jpg" />
+    <Content Include="Content\Offers\Copy of movie night - Made with PosterMyWall.jpg" />
+    <Content Include="Content\Offers\Copy of Movie Night Flyer - Made with PosterMyWall.jpg" />
+    <Content Include="Content\Offers\Copy of Retail - Made with PosterMyWall.jpg" />
+    <Content Include="Content\Offers\Oops-pop-art-retro-style-600x600.jpeg" />
     <Content Include="Content\PaymentStyle.css" />
     <Content Include="Content\style.css" />
     <Content Include="Content\Site.css" />

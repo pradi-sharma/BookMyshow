@@ -14,13 +14,21 @@ namespace BookMyshow.Controllers
        
         public ActionResult Index()
         {
-            var a =Session["userId"];
+            try
+            {
+                var a =Session["userId"];
             var result = entities.checkTheatre(Convert.ToInt32(Session["userId"])).Count();
             if (result != 0)
             {
                 return View("RegisteredTheatreAdminHome");
             }
             return View("TheatreAdminHome");
+            }
+            catch (Exception ex)
+            {
+
+                return View("Error", new HandleErrorInfo(ex, "UserHome", "Search"));
+            }
         }
         public ActionResult TheatreRegister()
         {
@@ -36,7 +44,8 @@ namespace BookMyshow.Controllers
         }
         [HttpPost]
         public PartialViewResult TheatreRegister(FormCollection theatre)
-        {   
+        {
+            try { 
             Theatre newtheatre = new Theatre();
             newtheatre.TheatreName = theatre["TheatreName"];
             newtheatre.Capacity = Convert.ToInt32(theatre["Capacity"]);
@@ -47,6 +56,8 @@ namespace BookMyshow.Controllers
             int uid = Convert.ToInt32(Session["userId"]);
             entities.InsertTheatreUser(idd,uid);
             return PartialView("_theatreSuccess");
+            }
+            catch (Exception ex) { throw ex; }
         }
         public PartialViewResult SelectLayout()
         {
@@ -60,6 +71,7 @@ namespace BookMyshow.Controllers
 
                 ViewBag.name = Session["userName"];
                 return PartialView("_RegisterFirstMessage");
+               
             }
                 
                 return PartialView("_SeatLayoutSelection");
@@ -68,6 +80,7 @@ namespace BookMyshow.Controllers
         [HttpPost]
         public ActionResult SelectLayout(string key, string[] value)
         {
+            try {
             int userid =Convert.ToInt32(Session["userId"]);
             int theatreId =Convert.ToInt32(entities.checkTheatre(userid).Single());
             Session[key] = value;
@@ -99,16 +112,25 @@ namespace BookMyshow.Controllers
             //}
             ViewBag.Message = Session[key];
             return this.Json(new { success = true });
+            }
+            catch (Exception ex) { throw ex; }
         }
         public PartialViewResult AddMovie()
         {
+            try {
             ViewBag.movielist = new SelectList(entities.Movies, "MovieId", "MovieName");
             ViewBag.SlotList = new SelectList(entities.Slots, "SlotId", "StartTime");
             return PartialView("_AddMovie");
+            }
+            catch (Exception ex) { throw ex; }
         }
         [HttpPost]
         public PartialViewResult AddMovie(FormCollection form)
         {
+            try
+            {
+
+            
             int movId = Convert.ToInt32(form["movielist"]);
             int SlotId = Convert.ToInt32(form["SlotList"]);
             decimal price = Convert.ToDecimal(form["Price"]);
@@ -129,23 +151,48 @@ namespace BookMyshow.Controllers
             entities.TimeSlots.Add(timeSlot);
             entities.SaveChanges();
             return PartialView("RegisteredTheatreAdminHome");
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
         }
         public PartialViewResult RemoveMovie()
         {
-          //  var mlist = ;
-           // List<string> movies = mlist.ToList();
-
+            //  var mlist = ;
+            // List<string> movies = mlist.ToList();
+            try { 
            ViewBag.movielist = new SelectList(entities.GetMoviesList(1), "MovieId", "MovieName");
             ViewBag.SlotList = new SelectList(entities.Slots, "SlotId", "StartTime");
             return PartialView("_RemoveMovie");
+            }
+            catch (Exception ex) { throw ex; }
         }
         [HttpPost]
         public ActionResult RemoveMovie(FormCollection form)
         {
+            try {
             int mvId = Convert.ToInt32(form["movielist"]);
             int slotid = Convert.ToInt32(form["SlotList"]);
             entities.deleteMovie(1, mvId, slotid);
             return View("RegisteredTheatreAdminHome");
+            }
+            catch (Exception ex) { throw ex; }
+        }
+        protected override void OnException(ExceptionContext filterContext)
+        {
+            Exception exception = filterContext.Exception;
+            //Logging the Exception
+            filterContext.ExceptionHandled = true;
+
+
+            var Result = this.View("Error", new HandleErrorInfo(exception,
+                filterContext.RouteData.Values["controller"].ToString(),
+                filterContext.RouteData.Values["action"].ToString()));
+
+            filterContext.Result = Result;
+
         }
     }
 }
