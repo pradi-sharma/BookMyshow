@@ -497,5 +497,14 @@ namespace BookMyshow.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetMoviesList_Result1>("GetMoviesList", theatreIdParameter);
         }
+    
+        public virtual ObjectResult<Nullable<decimal>> TotalCollection(Nullable<int> theatreId)
+        {
+            var theatreIdParameter = theatreId.HasValue ?
+                new ObjectParameter("theatreId", theatreId) :
+                new ObjectParameter("theatreId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<decimal>>("TotalCollection", theatreIdParameter);
+        }
     }
 }

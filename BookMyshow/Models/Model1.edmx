@@ -605,6 +605,9 @@
           <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="TotalCollection" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="theatreId" Type="int" Mode="In" />
+        </Function>
         <EntityContainer Name="ShowBookingModelStoreContainer">
           <EntitySet Name="BookedSeats" EntityType="Self.BookedSeats" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Casts" EntityType="Self.Casts" Schema="dbo" store:Type="Tables" />
@@ -975,6 +978,9 @@
             <Parameter Name="slotId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="GetMoviesList" ReturnType="Collection(ShowBookingModel.GetMoviesList_Result1)">
+          <Parameter Name="theatreId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="TotalCollection" ReturnType="Collection(Decimal)">
             <Parameter Name="theatreId" Mode="In" Type="Int32" />
           </FunctionImport>
           </EntityContainer>
@@ -1744,6 +1750,7 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="TotalCollection" FunctionName="ShowBookingModel.Store.TotalCollection" />
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -14,10 +14,13 @@ namespace BookMyshow.Controllers
        
         public ActionResult Index()
         {
+           
             var a =Session["userId"];
+            var result1 = entities.checkTheatre(Convert.ToInt32(Session["userId"])).Single();
             var result = entities.checkTheatre(Convert.ToInt32(Session["userId"])).Count();
             if (result != 0)
             {
+                ViewBag.collection =Convert.ToDecimal(entities.TotalCollection(result1).Single());
                 return View("RegisteredTheatreAdminHome");
             }
             return View("TheatreAdminHome");
