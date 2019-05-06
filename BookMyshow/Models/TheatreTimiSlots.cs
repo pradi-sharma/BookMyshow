@@ -9,11 +9,14 @@ namespace BookMyshow.Models
     public class TheatreTimiSlots
     {
         public int TheatreId { get; set; }
-        public List<TimeSpan> Slots { get; set; }
-        public TheatreTimiSlots(int id,List<TimeSpan> slots)
+
+        public string Theatrename { get; set; }
+        public List<string> Slots { get; set; }
+        public TheatreTimiSlots(int id,List<string> slots,string name)
         {
             this.TheatreId = id;
             this.Slots = slots;
+            this.Theatrename = name;
         }
     }
 }

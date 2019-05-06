@@ -84,21 +84,12 @@
                     }
                     @*</form>*@
                     <li class="nav-item px-2">
-                        <a href="/MoviesTicket/Movie" class="nav-link">
+                        <a href="/UserHome/Index" class="nav-link">
                             <i class="fa fa-home"></i> Home
                         </a>
                     </li>
-                    <li class="nav-item px-2">
-                        <a href="#" class="nav-link" data-toggle="modal" data-target="#login-modal">
-                            <i class="fa fa-user"></i> Register
-                        </a>
-                    </li>
 
-                    <li class="nav-item px-2">
-                        <a href="#" class="nav-link" data-toggle="modal" data-target="#login-modal">
-                            <i class="fa fa-user"></i> Login
-                        </a>
-                    </li>
+
                     <li class="nav-item px-2">
                         <a href="#" class="nav-link">
                             <i class="fa fa-film"></i> Movies
@@ -109,6 +100,25 @@
                             <i class="fa fa-play"></i> Plays
                         </a>
                     </li>
+                    @if (Session["userId"] != null)
+                    {
+
+
+                    }
+                    else
+                    {
+                        <li class="nav-item px-2">
+                            <a href="#" class="nav-link" data-toggle="modal" data-target="#login-modal">
+                                <i class="fa fa-user"></i> Register
+                            </a>
+                        </li>
+
+                        <li class="nav-item px-2">
+                            <a href="#" class="nav-link" data-toggle="modal" data-target="#login-modal">
+                                <i class="fa fa-user"></i> Login
+                            </a>
+                        </li>
+                    }
                     <li class="nav-item px-2">
                         <a href="/City/SearchByCity" class="nav-link">
                             <i class="fa fa-search"></i> City
@@ -126,7 +136,7 @@
 
     <!--Ends Here-->
     <!--Main Function-->
-    <h2>MoviesByCity</h2>
+    <h2>Available Movies In @ViewBag.cname</h2>
     <table style="margin-left:7%">
         @foreach (var item in Model)
         {
