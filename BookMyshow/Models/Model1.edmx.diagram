@@ -8,18 +8,18 @@
         <EntityTypeShape EntityType="ShowBookingModel.BookedSeat" Width="1.5" PointX="7.5" PointY="13.625" />
         <EntityTypeShape EntityType="ShowBookingModel.Cast" Width="1.5" PointX="1.5" PointY="1" />
         <EntityTypeShape EntityType="ShowBookingModel.City" Width="1.5" PointX="0.75" PointY="9" />
-        <EntityTypeShape EntityType="ShowBookingModel.MovieOfferDetail" Width="1.5" PointX="12" PointY="6.875" />
+        <EntityTypeShape EntityType="ShowBookingModel.MovieOfferDetail" Width="1.5" PointX="10" PointY="6.875" />
         <EntityTypeShape EntityType="ShowBookingModel.Movy" Width="1.5" PointX="0.75" PointY="4.25" />
-        <EntityTypeShape EntityType="ShowBookingModel.Offer" Width="1.5" PointX="9.75" PointY="3.875" />
+        <EntityTypeShape EntityType="ShowBookingModel.Offer" Width="1.5" PointX="7.75" PointY="3.875" />
         <EntityTypeShape EntityType="ShowBookingModel.Payment" Width="1.5" PointX="7.5" PointY="19.125" />
-        <EntityTypeShape EntityType="ShowBookingModel.PlayOffer" Width="1.5" PointX="12" PointY="3.875" />
-        <EntityTypeShape EntityType="ShowBookingModel.Play" Width="1.5" PointX="9.75" PointY="0.75" />
-        <EntityTypeShape EntityType="ShowBookingModel.Slot" Width="1.5" PointX="6" PointY="3" />
+        <EntityTypeShape EntityType="ShowBookingModel.PlayOffer" Width="1.5" PointX="10" PointY="3.875" />
+        <EntityTypeShape EntityType="ShowBookingModel.Play" Width="1.5" PointX="7.75" PointY="0.75" />
+        <EntityTypeShape EntityType="ShowBookingModel.Slot" Width="1.5" PointX="3" PointY="5" />
         <EntityTypeShape EntityType="ShowBookingModel.Theatre" Width="1.5" PointX="3" PointY="8.5" />
-        <EntityTypeShape EntityType="ShowBookingModel.TheatreSeat" Width="1.5" PointX="5.25" PointY="7.5" />
-        <EntityTypeShape EntityType="ShowBookingModel.TicketDetail" Width="1.5" PointX="5.25" PointY="9.875" />
-        <EntityTypeShape EntityType="ShowBookingModel.TicketSeat" Width="1.5" PointX="7.5" PointY="6.25" />
-        <EntityTypeShape EntityType="ShowBookingModel.TimeSlot" Width="1.5" PointX="8.25" PointY="8.875" />
+        <EntityTypeShape EntityType="ShowBookingModel.TheatreSeat" Width="1.5" PointX="5.25" PointY="16.375" />
+        <EntityTypeShape EntityType="ShowBookingModel.TicketDetail" Width="1.5" PointX="5.25" PointY="8.875" />
+        <EntityTypeShape EntityType="ShowBookingModel.TicketSeat" Width="1.5" PointX="7.5" PointY="9.25" />
+        <EntityTypeShape EntityType="ShowBookingModel.TimeSlot" Width="1.5" PointX="5.25" PointY="5.875" />
         <EntityTypeShape EntityType="ShowBookingModel.UserDetail" Width="1.5" PointX="5.25" PointY="18.75" />
         <AssociationConnector Association="ShowBookingModel.FK_BookedSeats_Movies" />
         <AssociationConnector Association="ShowBookingModel.FK_BookedSeats_Slots" />

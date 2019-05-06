@@ -278,6 +278,25 @@ namespace BookMyshow.Controllers
             return View("MoviesByCity", display);
   
         }
+        public ActionResult Register(FormCollection fc)
+        {
+            string Username = fc["username"];
+            string Password = fc["password"];
+            string role = "user";
+            long Contact = Convert.ToInt32(fc["contact"]);
+
+            string email = fc["email"];
+
+
+            UserDetail user = new UserDetail { UserName = Username, Password = Password, Role = role, Contact = Contact, Email = email };
+            entities.UserDetails.Add(user);
+            entities.SaveChanges();
+
+
+            return RedirectToAction("Login");
+
+
+        }
 
     }
 }

@@ -1,6 +1,5 @@
 ﻿@model BookMyshow.Models.Movy
 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -256,7 +255,7 @@
                                 <a type="button" class="btn-floating btn-sm btn-ins"><i class="fab fa-linkedin-in"></i></a>
 
                                 <button type="button" class="btn btn-outline-primary btn-rounded btn-md ml-4" data-dismiss="modal">Close</button>
-                                
+
                             </div>
 
                         </div>
@@ -290,25 +289,26 @@
                 <br />
                 @*<span id="Like">Intrested</span>*@
                 <button id="Like">Interested @Model.IntrestedUsers</button>
-                <button id="book">
-                 
-                    @Html.ActionLink("BookNow", "BookMovie", new { id = Model.MovieId })
+                <button id="book" class="text-dark">
+
+                    @Html.ActionLink("BookNow", "BookMovie", new { id = Model.MovieId }, new { @style = "color:black;" })
                 </button>
 
             </div>
             <div class="col-md-4 " style="align-items:center">
-                <h4>Movie Title:@Model.MovieName</h4>
-                <h3>Synopsis</h3>
-                <h4>@Model.Synopsis</h4>
-                <h3>Release Date</h3>
-                <h4>@Model.ReleaseDate</h4>
+                <h4 class="text-light font-weight-bold">Movie Title:</h4>
+                <p>@Model.MovieName</p>
+                <h4 class="text-light font-weight-bold">Synopsis:</h4>
+                <p>@Model.Synopsis</p>
+                <h4 class="text-light font-weight-bold">Release Date:</h4>
+                <p>@Model.ReleaseDate</p>
             </div>
             <div class="col-md-4" style="display:inline">
 
                 <table id="table">
                     <tr>
                         <td>
-                            <p>Cast</p>
+                            <h4 class="text-light font-weight-bold">Cast</h4>
                             @foreach (var item in ViewBag.Castphotos)
                             {
                                 <img src="@item" width="140" height="190" id="castimage" />
@@ -319,15 +319,15 @@
 
                         </td>
                         @*<td>
-                                <img src="~/Content/Imagescarosal/aquaman-movie-poster-2018-l0.jpg" width="140" height="190" />
-                                <p>IMage1</p>
-                            </td>*@
+                            <img src="~/Content/Imagescarosal/aquaman-movie-poster-2018-l0.jpg" width="140" height="190" />
+                            <p>IMage1</p>
+                        </td>*@
                     </tr>
                     @*<tr>
-                            <td><img src="~/Content/Imagescarosal/Hollywood-Animation-Movie-Kung-Fu-Panda-3-Poster.jpg" width="140" height="190" /> <p>IMage1</p></td>
+                        <td><img src="~/Content/Imagescarosal/Hollywood-Animation-Movie-Kung-Fu-Panda-3-Poster.jpg" width="140" height="190" /> <p>IMage1</p></td>
 
-                            <td> <img src="~/Content/Imagescarosal/rango.jpg" width="140" height="190"  /> <p>IMage1</p></td>
-                        </tr>*@
+                        <td> <img src="~/Content/Imagescarosal/rango.jpg" width="140" height="190"  /> <p>IMage1</p></td>
+                    </tr>*@
                 </table>
 
 
@@ -343,8 +343,7 @@
 
 
         </div>
-
-
+    </div>
 
 
         <!-- Footer -->
