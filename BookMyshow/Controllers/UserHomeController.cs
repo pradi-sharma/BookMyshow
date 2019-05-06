@@ -18,7 +18,7 @@ namespace BookMyshow.Controllers
         // GET: MoviesTicket
         public ActionResult Index()
         {
-
+            try { 
             List<MoviePosters> moviesDescription = new List<MoviePosters>();
 
             List<Movy> movies = Getmovies();
@@ -42,10 +42,13 @@ namespace BookMyshow.Controllers
             }
     
             return View(moviesDescription.ToList());
+            }
+            catch (Exception ex) { throw ex; }
         }
 
         public ActionResult MovieDescription(int id)
         {
+            try { 
             //List<Movy> movies = Getmovies();
             Movy movy = entities.Movies.Where(id1 => id1.MovieId == id).FirstOrDefault();
             ViewBag.FirstMovie = "data:image/png;base64," + Convert.ToBase64String(movy.Poster, 0, movy.Poster.Length);
@@ -66,10 +69,16 @@ namespace BookMyshow.Controllers
             ViewBag.Castphotos = actorphotolist;
            
             return View(movy);
+            }
+            catch (Exception ex) { throw ex; }
         }
 
         public ActionResult Search(FormCollection form)
         {
+            try
+            {
+
+            
             string value = form["searchInput"];
             int result = entities.Movies.Where(a => a.MovieName == value).FirstOrDefault().MovieId;
             //int id1 = result.MovieId;
@@ -77,17 +86,33 @@ namespace BookMyshow.Controllers
             //return RedirectToAction("MovieDescription", new {id = result });
             //  return this.Json(new { success = result });
             return RedirectToAction("MovieDescription", new { id = result });
+            }
+            catch (Exception ex)
+            {
+
+                return View("Error", new HandleErrorInfo(ex, "UserHome", "Search"));
+            }
         }
 
         public List<Movy> Getmovies()
         {
+            
             List<Movy> mylist = new List<Movy>();
             var m = entities.Movies;
+            try { 
             foreach (var item in m)
             {
                 mylist.Add(item);
             }
             return mylist;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+
+
         } 
 
         public ActionResult Login(FormCollection form)
@@ -137,6 +162,7 @@ namespace BookMyshow.Controllers
 
         public ActionResult BookMovie(int id)
         {
+            try { 
             //var result = entities.Movies.Where(movieId => movieId.MovieId == id).FirstOrDefault();
             var theatre = entities.GetTheatres(id);
             List<TheatreTimiSlots> theatreTimeSlotList = new List<TheatreTimiSlots>();
@@ -164,11 +190,14 @@ namespace BookMyshow.Controllers
             }
           //  ViewBag.theatrelist = theatre.ToList();
             return View(theatreTimeSlotList.ToList());
+            }
+            catch (Exception ex) { throw ex; }
         }
      
         [HttpPost]
         public ActionResult TimingsByTheatre(FormCollection form)
         {
+            try { 
             int theatreId = Convert.ToInt32(form["theatreId"]);
             TimeSpan slot = Convert.ToDateTime(form["slotId"]).TimeOfDay;
             int movieId = Convert.ToInt32(form["theatreId"]);
@@ -187,6 +216,8 @@ namespace BookMyshow.Controllers
             ViewBag.arr = notSelectedSeats;
           
             return View("UserSeatSelection");
+            }
+            catch (Exception ex) { throw ex; }
         }
         //public ActionResult BookTicket(int[]key,string[] value)
         //{
@@ -198,43 +229,54 @@ namespace BookMyshow.Controllers
 
         public ActionResult SelectedSeats(decimal key,string[] value)
         {
-          
-            
+
+            try { 
             TempData["amount2"] = key;
             TempData["ss"] = value.ToList();
             TempData.Keep();
 
 
             return this.Json(new { success = "true" });
+            }
+            catch (Exception ex) { throw ex; }
         }
         public ActionResult MakePayment()
         {
+         
             if (Session["userId"] != null)
             {
                 ViewBag.amt2 = TempData["amount2"];
                 TempData.Keep();
-                return PartialView("Payment");
+                return View("Payment");
             }
             else
             {
                 return RedirectToAction("Index", "UserHome");
             }
            
+
         }
         [HttpPost]
         public ActionResult ApplyOffer(string key,string value)
         {
+            try { 
             string ofrcode = value;
-
+            int result = entities.MovieOfferDetails.Where(o => o.CouponCode == ofrcode).FirstOrDefault().OfferId;
+            int discount = entities.Offers.Where(i => i.OfferId == result).FirstOrDefault().Discount;
+           int amt =Convert.ToInt32(TempData["amount2"]);
+            ViewBag.newamt = (amt * discount) / 100;
             return this.Json(new { success = true });
+            }
+            catch (Exception ex) { throw ex; }
         }
 
 
         public ActionResult GenerateTicket()
         {
+            try { 
             ViewBag.amt2 = TempData["amount2"];
             List<string> seatslist = (List<string>)TempData["ss"];
-            ViewBag.seats = seatslist;
+
             TicketDetail ticket = new TicketDetail();
             ticket.MovieId = mvId;
             ticket.TheatreId = thId;
@@ -245,36 +287,37 @@ namespace BookMyshow.Controllers
             int newIdentity = identity + 1;
             foreach (var item in seatslist)
             {
-                entities.InsertTicketSeats(identity, item);
+                entities.InsertTicketSeats(newIdentity, item);
             }
             foreach (var item in seatslist)
             {
-                int uid = Convert.ToInt32(Session["userId"]);
                 BookedSeat bookedSeat = new BookedSeat();
                 bookedSeat.MovieId = mvId;
                 bookedSeat.SlotId = sId;
                 bookedSeat.TheatreId = thId;
-                bookedSeat.UserId = uid;
+                bookedSeat.UserId = 1;
                 bookedSeat.SeatNumber = item;
                 entities.BookedSeats.Add(bookedSeat);
                 entities.SaveChanges();
             }
-            string mv = entities.Movies.Where(m => m.MovieId == mvId).FirstOrDefault().MovieName;
-            ViewBag.name = mv;
-            byte[] poster = entities.Movies.Where(m => m.MovieId == mvId).FirstOrDefault().Poster;
-            ViewBag.poster = poster;
-            ViewBag.thname = entities.Theatres.Where(t => t.TheatreId == thId).FirstOrDefault().TheatreName;
+
             return View("Ticket");
+            }
+            catch (Exception ex) { throw ex; }
         }
 
         public ActionResult SearchByCity()
         {
+            try { 
             ViewBag.City = new SelectList(entities.Cities.ToList(), "CityId", "CityName");
             return View();
+            }
+            catch (Exception ex) { throw ex; }
         }
         [HttpPost]
         public PartialViewResult SearchByCity(FormCollection fc)
         {
+            try { 
             //Inserting into Dropdown
             ViewBag.City = new SelectList(entities.Cities, "CityId", "CityName");
             int value = Convert.ToInt32(fc["CityId"]);
@@ -286,6 +329,8 @@ namespace BookMyshow.Controllers
 
 
             return PartialView("_MoviesByCityList", display.ToList());
+            }
+            catch (Exception ex) { throw ex; }
         }
 
 
@@ -295,17 +340,20 @@ namespace BookMyshow.Controllers
             //Inserting into Dropdown
             //ViewBag.City = new SelectList(entities.Cities, "CityId", "CityName");
             //int value = Convert.ToInt32(fc["CityId"]);
-
+            try { 
             var c = entities.Cities.Where(c1 => c1.CityId == id).FirstOrDefault();
 
             ViewBag.cname = c.CityName;
             var display = entities.MovyByCity(id);
 
             return View("MoviesByCity", display);
-  
+            }
+            catch (Exception ex) { throw ex; }
+
         }
         public ActionResult Register(FormCollection fc)
         {
+            try { 
             string Username = fc["username"];
             string Password = fc["password"];
             string role = "user";
@@ -320,7 +368,24 @@ namespace BookMyshow.Controllers
 
 
             return RedirectToAction("Login");
+            }
+            catch (Exception ex) {
+                throw ex;
+                    }
 
+        }
+        protected override void OnException(ExceptionContext filterContext)
+        {
+            Exception exception = filterContext.Exception;
+            //Logging the Exception
+            filterContext.ExceptionHandled = true;
+
+
+            var Result = this.View("Error", new HandleErrorInfo(exception,
+                filterContext.RouteData.Values["controller"].ToString(),
+                filterContext.RouteData.Values["action"].ToString()));
+
+            filterContext.Result = Result;
 
         }
 

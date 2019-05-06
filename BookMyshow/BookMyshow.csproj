@@ -144,12 +144,11 @@
     <Content Include="Content\Images\1Race Gurram Malayalam version %27Lucky The Racer%27 First Look Poster.jpg" />
     <Content Include="Content\Images\82ec2bbdc6893100ceaa08bc3.png" />
     <Content Include="Content\Images\aquaman-movie-poster-2018-l0.jpg" />
-    <Content Include="Content\Images\architecture-auditorium-chairs-109669.jpg" />
-    <Content Include="Content\Images\auditorium-chairs-comfortable-269140.jpg" />
     <Content Include="Content\Images\bb82ec2bbdc6893100ceaa08bc3fb61f.png" />
     <Content Include="Content\Images\blue-close-up-concrete-304664.jpg" />
     <Content Include="Content\Images\download.jpg" />
     <Content Include="Content\Images\e1033a3d9b662e112e99e62ba2f1cd6f.jpg" />
+    <Content Include="Content\Images\Oops-pop-art-retro-style-600x600.jpeg" />
     <Content Include="Content\PaymentStyle.css" />
     <Content Include="Content\style.css" />
     <Content Include="Content\Site.css" />
@@ -363,7 +362,7 @@
     <Content Include="Views\UserHome\Ticket.cshtml" />
     <Content Include="Views\UserHome\_OfferValidationSuccess.cshtml" />
     <Content Include="Views\UserHome\_UserSeatsSelection.cshtml" />
-    <Content Include="Views\AdminHome\_AddMovieSuccess.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

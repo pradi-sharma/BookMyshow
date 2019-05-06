@@ -512,11 +512,6 @@
         <Function Name="checkTheatre" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="userId" Type="int" Mode="In" />
         </Function>
-        <Function Name="deleteMovie" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="theatreaid" Type="int" Mode="In" />
-          <Parameter Name="MovieId" Type="int" Mode="In" />
-          <Parameter Name="slotId" Type="int" Mode="In" />
-        </Function>
         <Function Name="FillSeats" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="seatNumber" Type="int" Mode="In" />
         </Function>
@@ -530,9 +525,6 @@
           <Parameter Name="moviId" Type="int" Mode="In" />
         </Function>
         <Function Name="GetMoviesDescription" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
-        <Function Name="GetMoviesList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="theatreId" Type="int" Mode="In" />
-        </Function>
         <Function Name="GetPrice" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="TheatreId" Type="int" Mode="In" />
           <Parameter Name="MovieId" Type="int" Mode="In" />
@@ -1700,15 +1692,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="deleteMovie1" FunctionName="ShowBookingModel.Store.deleteMovie" />
-          <FunctionImportMapping FunctionImportName="GetMoviesList1" FunctionName="ShowBookingModel.Store.GetMoviesList">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="ShowBookingModel.GetMoviesList1_Result">
-                <ScalarProperty Name="MovieName" ColumnName="MovieName" />
-                <ScalarProperty Name="MovieId" ColumnName="MovieId" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="sp_alterdiagram1" FunctionName="ShowBookingModel.Store.sp_alterdiagram" />
           <FunctionImportMapping FunctionImportName="sp_creatediagram1" FunctionName="ShowBookingModel.Store.sp_creatediagram" />
           <FunctionImportMapping FunctionImportName="sp_dropdiagram1" FunctionName="ShowBookingModel.Store.sp_dropdiagram" />
