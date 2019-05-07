@@ -10,51 +10,92 @@
             width: 700px;
             height: 900px;
         }
-        #Drop{
-            font-size:10px;
-            padding:10px;
-            height:30px;
+
+        #Drop {
+            font-size: 10px;
+            padding: 0px;
+            height: 40px;
+            border: 1px solid black;
+            border-radius: 5px;
         }
-        body{
-            font-size:20px;
+
+        body {
+            font-size: 20px;
+            background-color: #ecdddd;
+        }
+
+        input[type=text] {
+            border: 1px solid black;
+            border-radius: 5px;
+            font-size: 20px;
+        }
+
+        label {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        option {
+            font-size: 10%;
+            min-height: 2em;
+        }
+
+        #table {
+            background-image: url(../../Content/Images/download.jpg);
+            background-repeat: no-repeat;
+            background-size: cover;
+            color: white;
+            padding: 10px;
+            border-radius: 20px;
+        }
+
+        td {
+            padding: 30px;
+        }
+
+        #coupon {
+            background-color: white;
+            color: black;
         }
     </style>
 </head>
 <body>
 
-    <div id="form">
-        <table>
+    <div id="form" style="width:450px;margin-left:20%">
+        <h3 style="font-weight:bold">Add Movie Offer</h3>
+        <table style="color:white" id="table">
 
-       
-        @using (Ajax.BeginForm("AddMovieOffers", "AdminHome", new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "form", InsertionMode = InsertionMode.Replace }, new { @class = "form", id = "form" }))
-        {<tr>
-             <td> @Html.Label("movielist", "Movie Name : ")</td>   
-             <td>
-                 @Html.DropDownList("movielist", (IEnumerable<SelectListItem>)ViewBag.movielist, new { @class = "forminputs", @id = "Drop" })<br /><br />
-             </td>
-         </tr>
-         <tr>
-             <td> @Html.Label("offerlist", "Offers     : ")</td>
-             <td>
-                 @Html.DropDownList("offerlist", (IEnumerable<SelectListItem>)ViewBag.offerlist, new { @class = "forminputs", @id = "Drop" })<br /><br />
-             </td>
-         </tr>
-         <tr>
-             <td> @Html.Label("Coupon", "Coupon Code : ")</td>
-             <td> @Html.TextBox("Coupon", null, new { style = "width: 400px;" })</td>
-         </tr>
-         <tr>
-             <td>
-                 <input type="submit" class="btn btn-success" value="Add Offer" />
-             </td>
-         </tr>
-           
-           
-           
-           
-            
-        }
-       </table>
+
+            @using (Ajax.BeginForm("AddMovieOffers", "AdminHome", new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "form", InsertionMode = InsertionMode.Replace }, new { @class = "form", id = "form" }))
+            {
+                <tr>
+                    <td> @Html.Label("movielist", "Movie Name : ")</td>
+                    <td>
+                        @Html.DropDownList("movielist", (IEnumerable<SelectListItem>)ViewBag.movielist, new { @class = "forminputs", @id = "Drop" })<br /><br />
+                    </td>
+                </tr>
+                <tr>
+                    <td> @Html.Label("offerlist", "Offers     : ")</td>
+                    <td>
+                        @Html.DropDownList("offerlist", (IEnumerable<SelectListItem>)ViewBag.offerlist, new { @class = "forminputs", @id = "Drop" })<br /><br />
+                    </td>
+                </tr>
+                <tr>
+                    <td> @Html.Label("Coupon", "Coupon Code : ")</td>
+                    <td> @Html.TextBox("Coupon", null, new { style = "width: 400px;" })</td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="submit" class="btn btn-success" style="width:200px" value="Add Offer" />
+                    </td>
+                </tr>
+
+
+
+
+
+            }
+        </table>
     </div>
 </body>
 </html>
