@@ -696,7 +696,7 @@
 
                 var pp =@ViewBag.Price;
                 amount1 = (($("#Numseats").val()) * pp);
-                alert(amount1);
+              //  alert(amount1);
                 //Storing in Array
                 //allNameVals.push($("#Username").val());
                 allNameVals.push(($("#Numseats").val())*pp);
@@ -707,7 +707,7 @@
                 $(function () {
                     $.post('/UserHome/SelectedSeats',
                         { key: amount1, value: allSeatsVals, }, function (data) {
-                            alert("Success " + data.success);
+                         //   alert("Success " + data.success);
                         });
                 });
 

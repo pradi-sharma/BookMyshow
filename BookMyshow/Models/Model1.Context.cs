@@ -197,13 +197,17 @@ namespace BookMyshow.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetMoviesDescription_Result>("GetMoviesDescription");
         }
     
-        public virtual ObjectResult<Nullable<int>> GetTheatres(Nullable<int> id)
+        public virtual ObjectResult<Nullable<int>> GetTheatres(Nullable<int> id, Nullable<int> cityId)
         {
             var idParameter = id.HasValue ?
                 new ObjectParameter("id", id) :
                 new ObjectParameter("id", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("GetTheatres", idParameter);
+            var cityIdParameter = cityId.HasValue ?
+                new ObjectParameter("cityId", cityId) :
+                new ObjectParameter("cityId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("GetTheatres", idParameter, cityIdParameter);
         }
     
         public virtual ObjectResult<Nullable<System.TimeSpan>> GetSlots(Nullable<int> tId, Nullable<int> mId)

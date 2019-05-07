@@ -1,4 +1,4 @@
-﻿@model BookMyshow.Models.Movy
+﻿@model IEnumerable<BookMyshow.Models.Movy>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -143,7 +143,7 @@
 
                         <div class="form-group">
 
-                            <input type="text" placeholder="SearchByMovie..." class="form-control" id="searchinput" name="searchInput" style="width: 200px;color:white;margin-top:-10px;">
+                            <input type="text" placeholder="SearchByMovie..." class="form-control" id="searchinput" autocomplete="off" name="searchInput" style="width: 200px;color:white;margin-top:-10px;">
 
                         </div>
                         <div class="search">
@@ -163,7 +163,7 @@
 
 
                     <li class="nav-item px-2">
-                        <a href="#" class="nav-link">
+                        <a href="#car" class="nav-link">
                             <i class="fa fa-film"></i> Movies
                         </a>
                     </li>
@@ -262,31 +262,31 @@
 
     <!--Login Modal-->
     <!-- CAROSAL Bottom  -->
-    <div class="wrapper" style="margin-bottom:5px;padding:10px;overflow:hidden">
+    <div class="wrapper" style="margin-bottom:5px;padding:10px;overflow:hidden" id="car">
 
         <div class="owl-carousel owl-theme" style="margin-bottom:5px;padding:10px;overflow:hidden">
 
 
-            @{ int id = 1;}
+
 
             @*<div class="item" style=""><a href="#"><img width="250px" height="250px" src="~/Content/Imagescarosal/rango.jpg"></a><caption>BoxOffice</caption></div>*@
-            @foreach (string item in ViewBag.list)
+            @foreach (string item in Model)
             {
-                <div class="item"><a href="@Url.Action("MovieDescription", "UserHome", new {id })"><img width="250px" height="250px" src="@item"></a><caption></caption></div>
-                id = id + 1;
+                <div class="item"><a href="@Url.Action("MovieDescription", "UserHome", new { id=item.MovieId,citid=7 })"><img width="250px" height="250px" src="data:image;base64,@System.Convert.ToBase64String(item.Poster)"></a><caption>@item.MovieName</caption></div>
+            
             }
 
             @*<div class="item"><a href="#"><img width="250px" height="250px" src="~/Content/Imagescarosal/ww.jpg"></a><caption>BoxOffice</caption> </div>
-            <div class="item"><a href="#"><img width="250px" height="250px" src="~/Content/Imagescarosal/alpha.jpg"></a><caption>BoxOffice</caption></div>*@
+        <div class="item"><a href="#"><img width="250px" height="250px" src="~/Content/Imagescarosal/alpha.jpg"></a><caption>BoxOffice</caption></div>*@
             @*<div class="item"><a href="#"><img width="250px" height="250px" src="~/Content/Imagescarosal/cherranjeevi.jpg"></a><caption>BoxOffice</caption></div>
-            <div class="item"><a href="#"><img width="250px" height="250px" src="~/Content/Imagescarosal/aquaman-movie-poster-2018-l0.jpg"></a><caption>BoxOffice</caption></div>
-            <div class="item"><a href="#"><img width="250px" height="250px" src="~/Content/Imagescarosal/Hollywood-Animation-Movie-Kung-Fu-Panda-3-Poster.jpg"></a><caption>BoxOffice</caption></div>*@
+        <div class="item"><a href="#"><img width="250px" height="250px" src="~/Content/Imagescarosal/aquaman-movie-poster-2018-l0.jpg"></a><caption>BoxOffice</caption></div>
+        <div class="item"><a href="#"><img width="250px" height="250px" src="~/Content/Imagescarosal/Hollywood-Animation-Movie-Kung-Fu-Panda-3-Poster.jpg"></a><caption>BoxOffice</caption></div>*@
             @*<div class="item"><a href="#"><img width="250px" height="250px" src="~/Content/Imagescarosal/1Race Gurram Malayalam version 'Lucky The Racer' First Look Poster.jpg"></a><caption>BoxOffice</caption></div>
-            <div class="item"><a href="#"><img width="250px" height="250px" src="~/Content/Imagescarosal/e1033a3d9b662e112e99e62ba2f1cd6f.jpg"></a><caption>BoxOffice</caption></div>
-            <div class="item"><a href="#"><img width="250px" height="250px" src="~/Content/Imagescarosal/venom.jpg"></a><caption>BoxOffice</caption></div>
-            <div class="item"><a href="#"><img width="250px" height="250px" src="~/Content/Imagescarosal/82ec2bbdc6893100ceaa08bc3.png"></a><caption>BoxOffice</caption></div>
-            <div class="item"><a href="#"><img width="250px" height="250px" src="~/Content/Imagescarosal/82ec2bbdc6893100ceaa08bc3.png"></a><caption>BoxOffice</caption></div>
-            </div>*@
+        <div class="item"><a href="#"><img width="250px" height="250px" src="~/Content/Imagescarosal/e1033a3d9b662e112e99e62ba2f1cd6f.jpg"></a><caption>BoxOffice</caption></div>
+        <div class="item"><a href="#"><img width="250px" height="250px" src="~/Content/Imagescarosal/venom.jpg"></a><caption>BoxOffice</caption></div>
+        <div class="item"><a href="#"><img width="250px" height="250px" src="~/Content/Imagescarosal/82ec2bbdc6893100ceaa08bc3.png"></a><caption>BoxOffice</caption></div>
+        <div class="item"><a href="#"><img width="250px" height="250px" src="~/Content/Imagescarosal/82ec2bbdc6893100ceaa08bc3.png"></a><caption>BoxOffice</caption></div>
+        </div>*@
 
 
         </div>
@@ -296,7 +296,7 @@
 
         <div>
             <h1>
-               Exclusive Offers
+                Exclusive Offers
             </h1>
             <!-- Card deck -->
             <div class="card-deck">
@@ -306,7 +306,7 @@
 
                     <!--Card image-->
                     <div class="view overlay">
-                        <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/images/16.jpg" alt="Card image cap">
+                        <img class="card-img-top" src="~/Content/Offers/Copy of Family Movie Night Flyer - Made with PosterMyWall.jpg" alt="Card image cap">
                         <a href="#!">
                             <div class="mask rgba-white-slight"></div>
                         </a>
@@ -316,11 +316,11 @@
                     <div class="card-body">
 
                         <!--Title-->
-                        <h4 class="card-title">Card title</h4>
+                        <h4 class="card-title">Family Offer</h4>
                         <!--Text-->
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <p class="card-text">Book Ticket for four people and availthis offer..</p>
                         <!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
-                        <button type="button" class="btn btn-light-blue btn-md">Read more</button>
+
 
                     </div>
 
@@ -331,7 +331,7 @@
 
                     <!--Card image-->
                     <div class="view overlay">
-                        <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/images/14.jpg" alt="Card image cap">
+                        <img class="card-img-top" src="~/Content/Offers/Copy of movie night - Made with PosterMyWall.jpg" alt="Card image cap">
                         <a href="#!">
                             <div class="mask rgba-white-slight"></div>
                         </a>
@@ -341,11 +341,11 @@
                     <div class="card-body">
 
                         <!--Title-->
-                        <h4 class="card-title">Card title</h4>
+                        <h4 class="card-title">Movie Night Offer</h4>
                         <!--Text-->
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <p class="card-text">Apply promo code avail offer(All users are applied)</p>
                         <!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
-                        <button type="button" class="btn btn-light-blue btn-md">Read more</button>
+
 
                     </div>
 
@@ -356,7 +356,7 @@
 
                     <!--Card image-->
                     <div class="view overlay">
-                        <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/images/15.jpg" alt="Card image cap">
+                        <img class="card-img-top" src="~/Content/Offers/Copy of Movie Night Flyer - Made with PosterMyWall.jpg" alt="Card image cap">
                         <a href="#!">
                             <div class="mask rgba-white-slight"></div>
                         </a>
@@ -366,11 +366,11 @@
                     <div class="card-body">
 
                         <!--Title-->
-                        <h4 class="card-title">Card title</h4>
+                        <h4 class="card-title">First 5% Offer</h4>
                         <!--Text-->
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <p class="card-text">You can avail 5% off on all movie tickets.User code FIRST</p>
                         <!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
-                        <button type="button" class="btn btn-light-blue btn-md">Read more</button>
+
 
                     </div>
 
@@ -381,7 +381,7 @@
 
                     <!--Card image-->
                     <div class="view overlay">
-                        <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/images/14.jpg" alt="Card image cap">
+                        <img class="card-img-top" src="~/Content/Offers/Copy of Retail - Made with PosterMyWall.jpg" alt="Card image cap">
                         <a href="#!">
                             <div class="mask rgba-white-slight"></div>
                         </a>
@@ -391,11 +391,11 @@
                     <div class="card-body">
 
                         <!--Title-->
-                        <h4 class="card-title">Card title</h4>
+                        <h4 class="card-title">Special Offer</h4>
                         <!--Text-->
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <p class="card-text">It is special offer apply the code of the card and avail this offer.</p>
                         <!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
-                        <button type="button" class="btn btn-light-blue btn-md">Read more</button>
+
 
                     </div>
 

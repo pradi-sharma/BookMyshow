@@ -1,4 +1,4 @@
-﻿@model IEnumerable<BookMyshow.Models.MoviePosters>
+﻿@model IEnumerable<BookMyshow.Models.Movy>
 
 
 <!DOCTYPE html>
@@ -284,7 +284,7 @@
 
                         <div class="form-group">
 
-                            <input type="text" placeholder="SearchByMovie..." class="form-control" id="searchinput" name="searchInput" style="width: 200px;color:white;margin-top:-10px;">
+                            <input type="text" autocomplete="off" placeholder="SearchByMovie..." class="form-control" id="searchinput" name="searchInput" style="width: 200px;color:white;margin-top:-10px;">
 
                         </div>
                         <div class="search">
@@ -305,15 +305,15 @@
                     </li>
 
                     <li class="nav-item px-2">
-                        <a href="#" class="nav-link">
+                        <a href="#car" class="nav-link">
                             <i class="fa fa-film"></i> Movies
                         </a>
                     </li>
-                    <li class="nav-item px-2">
+                    @*<li class="nav-item px-2">
                         <a href="#" class="nav-link">
                             <i class="fa fa-play"></i> Plays
                         </a>
-                    </li>
+                    </li>*@
                     <li class="nav-item px-2">
                         <a href="#" class="nav-link" data-toggle="modal" data-target="#register-modal">
                             <i class="fa fa-user"></i> Register
@@ -530,19 +530,17 @@
     </div>
     <!--Register Modal-->
     <!-- CAROSAL Bottom  -->
-    <div class="wrapper" style="margin-bottom:5px;padding:10px;overflow:hidden">
+    <div class="wrapper" style="margin-bottom:5px;padding:10px;overflow:hidden" id="car">
 
         <div class="owl-carousel owl-theme" style="margin-bottom:5px;padding:10px;overflow:hidden">
 
-
-            @{ int id = 1;}
 
             @*<div class="item" style=""><a href="#"><img width="250px" height="250px" src="~/Content/Imagescarosal/rango.jpg"></a><caption>BoxOffice</caption></div>*@
 
             @foreach (var item in Model)
             {
-                <div class="item"><a href="@Url.Action("MovieDescription", "UserHome", new { id=item.MovieId })"><img width="250px" height="250px" src="@item.MoviePhoto"></a><caption>@item.Moviename</caption></div>
-                id = id + 1;
+                <div class="item"><a href="@Url.Action("MovieDescription", "UserHome", new { id=item.MovieId,citid=7 })"><img width="250px" height="250px" src="data:image;base64,@System.Convert.ToBase64String(item.Poster)"></a><caption>@item.MovieName</caption></div>
+              
             }
 
             @*<div class="item"><a href="#"><img width="250px" height="250px" src="~/Content/Imagescarosal/ww.jpg"></a><caption>BoxOffice</caption> </div>

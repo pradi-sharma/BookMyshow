@@ -28,6 +28,10 @@
     </style>
 </head>
 <body class="bg-dark mb-2">
+    <a href="/UserHome/Index" class="navbar-brand " style="margin-left: 0px;margin-top: -10px;margin-bottom: -10px;margin-right:70px;">
+        <img src="~/Content/Images/bb82ec2bbdc6893100ceaa08bc3fb61f.png" width="100" height="100">
+        <span style="color:red" class="font-weight-bold text-uppercase mt-3 mb-4"> Movies </span><span class="font-weight-bold text-uppercase mt-3 mb-4 text-white">Ticket</span>
+    </a>
     <h4 style="color: aliceblue;margin-left: 420px;">
         Ticket :</h1>
         <div class="container bg-light " style="width: 500px;">
@@ -35,7 +39,7 @@
                 <div class="row">
                     <div class="col-md-10">
                         <tr>
-                            <img src="data:image;base64,@System.Convert.ToBase64String(ViewBag.poster)" width="500px" height="" style="overflow: hidden;" id="image1">
+                            <img src="data:image;base64,@System.Convert.ToBase64String(ViewBag.poster)" width="400px" height="300px" style="overflow: hidden;" id="image1">
 
                         </tr>
                     </div>
@@ -62,26 +66,26 @@
                         <tr>
                             <td width="20px"><h3>@ViewBag.thname</h3></td>
 
-                            @foreach (var item in ViewBag.seats)
+                            @foreach(var item in @ViewBag.seats)
                             {
                                 <td width="20px">
-                                @item
+                                    @item
                                 </td>
                             }
 
                         </tr>
                     </div>
-             
+
                 </div>
             </table>
         </div>
-     
 
 
-                <script src="~/Content/bootstrap/js/fontawesome-all.js"></script>
-                <script src="~/Content/bootstrap/js/jquery-3.2.1.min.js"></script>
-                <script src="~/Content/bootstrap/js/popper.min.js"></script>
-                <script src="~/Content/bootstrap/js/bootstrap.min.js"></script>
-                <script src="~/Content/bootstrap/js/mdb.min.js"></script>
+
+        <script src="~/Content/bootstrap/js/fontawesome-all.js"></script>
+        <script src="~/Content/bootstrap/js/jquery-3.2.1.min.js"></script>
+        <script src="~/Content/bootstrap/js/popper.min.js"></script>
+        <script src="~/Content/bootstrap/js/bootstrap.min.js"></script>
+        <script src="~/Content/bootstrap/js/mdb.min.js"></script>
 </body>
 </html>

@@ -374,6 +374,10 @@
     <Content Include="Views\UserHome\_OfferValidationSuccess.cshtml" />
     <Content Include="Views\UserHome\_UserSeatsSelection.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Theatre\_LoggedOut.cshtml" />
+    <Content Include="Views\AdminHome\_AddMovieSuccess.cshtml" />
+    <Content Include="Views\AdminHome\_DisplayMovies.cshtml" />
+    <Content Include="Views\UserHome\GeneratedTicket.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -547,6 +547,7 @@
         </Function>
         <Function Name="GetTheatres" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="id" Type="int" Mode="In" />
+          <Parameter Name="cityId" Type="int" Mode="In" />
         </Function>
         <Function Name="InsertBookedSeat" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="theatreId" Type="int" Mode="In" />
@@ -787,6 +788,7 @@
           <FunctionImport Name="GetMoviesDescription" ReturnType="Collection(ShowBookingModel.GetMoviesDescription_Result)" />
           <FunctionImport Name="GetTheatres" ReturnType="Collection(Int32)">
           <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="cityId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="GetSlots" ReturnType="Collection(Time)">
             <Parameter Name="tId" Mode="In" Type="Int32" />
@@ -981,7 +983,7 @@
           <Parameter Name="theatreId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="TotalCollection" ReturnType="Collection(Decimal)">
-            <Parameter Name="theatreId" Mode="In" Type="Int32" />
+          <Parameter Name="theatreId" Mode="In" Type="Int32" />
           </FunctionImport>
           </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
