@@ -89,17 +89,17 @@
     <script>
 
 
-
         function Demo() {
             document.getElementsByName("DemoForm").submit();
         }
 
     </script>
-    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
-    <script type="text/javascript">
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script type="text/javascript">
+
         $(function () {
 
-            $("#username_error").hide();
+                $("#username_error").hide();
             $("#password_error").hide();
 
             var name_error = false;
@@ -116,15 +116,15 @@
 
                 var name = $("#username").val();
                 if (name !== '') {
-                    $("#username_error").hide();
-                    $("#username").css("border-bottom", "2px solid #34F458");
+                $("#username_error").hide();
+            $("#username").css("border-bottom", "2px solid #34F458");
                 } else {
-                   // $("#username_error").html("Invalid Username");
-                    $("#username_error").show();
-                    $("#username").css("border-bottom", "2px solid #F90A0A");
-                    name_error = true;
-                }
-            }
+                // $("#username_error").html("Invalid Username");
+                $("#username_error").show();
+            $("#username").css("border-bottom", "2px solid #F90A0A");
+            name_error = true;
+        }
+    }
 
             function check_password_error() {
                 var Password = $("#password").val();
@@ -132,38 +132,38 @@
 
                 if (Password == "") {
                 //    $("#password_error").html("PassWord Not Match");
-                    $("#password_error").show();
-                    $("#password").css("border-bottom", "2px solid red");
-                    error_Password = true;
+                $("#password_error").show();
+            $("#password").css("border-bottom", "2px solid red");
+            error_Password = true;
                 } else {
-                    $("#password_error").hide();
-                    $("#password").css("border-bottom", "2px solid green");
+                $("#password_error").hide();
+            $("#password").css("border-bottom", "2px solid green");
 
-                }
+        }
 
-            }
+    }
             $("#loginbtn").click(function () {
 
                 name_error = false;
-                password_error = false;
+            password_error = false;
 
-                check_name_error();
-                check_password_error();
+            check_name_error();
+            check_password_error();
 
                 if (name_error === false && password_error === false) {
-                    alert("Login Sucessfull");
-                    return ("User.cshtml");
-                }
+                alert("Login Sucessfull");
+            return ("User.cshtml");
+        }
                 else {
-                    alert("Fill Your Details");
-                    return false;
-                }
-            })
-        })
-        //Forgot pass script
+                alert("Fill Your Details");
+            return false;
+        }
+    })
+})
+//Forgot pass script
         $(function () {
 
-            $("#username_error1").hide();
+                $("#username_error1").hide();
             $("#oldpassword_error").hide();
             $("#new_password_error").hide();
 
@@ -186,31 +186,31 @@
 
                 var name = $("#username1").val();
                 if (name != "") {
-                    $("#username_error1").hide();
-                    $("#username1").css("border-bottom", "2px solid #34F458");
+                $("#username_error1").hide();
+            $("#username1").css("border-bottom", "2px solid #34F458");
                 } else {
-                    $("#username_error1").html("Invalid Username");
-                    $("#username_error1").show();
-                    $("#username1").css("border-bottom", "2px solid #F90A0A");
-                    name_error = true;
-                }
-            }
+                $("#username_error1").html("Invalid Username");
+            $("#username_error1").show();
+            $("#username1").css("border-bottom", "2px solid #F90A0A");
+            name_error = true;
+        }
+    }
 
 
             function check_oldpass() {
 
                 var password = $("#oldpassword").val();
                 if (password !== '') {
-                    $("#oldpassword_error").hide();
-                    $("#oldpassword").css("border-bottom", "2px solid #34F458");
+                $("#oldpassword_error").hide();
+            $("#oldpassword").css("border-bottom", "2px solid #34F458");
 
                 } else {
-                    $("#oldpassword_error").html("Please Enter Password");
-                    $("#oldpassword_error").show();
-                    $("#oldpassword").css("border-bottom", "2px solid #F90A0A");
-                    old_error = true;
-                }
-            }
+                $("#oldpassword_error").html("Please Enter Password");
+            $("#oldpassword_error").show();
+            $("#oldpassword").css("border-bottom", "2px solid #F90A0A");
+            old_error = true;
+        }
+    }
 
             function check_newpass() {
 
@@ -218,44 +218,47 @@
 
 
                 if (Password == "") {
-                    $("#new_password_error").html("Retype-password");
-                    $("#new_password_error").show();
-                    $("#newpassword").css("border-bottom", "2px solid red");
-                    new_error = true;
+                $("#new_password_error").html("Retype-password");
+            $("#new_password_error").show();
+            $("#newpassword").css("border-bottom", "2px solid red");
+            new_error = true;
                 } else {
-                    $("#password_error").hide();
-                    $("#password").css("border-bottom", "2px solid green");
+                $("#password_error").hide();
+            $("#password").css("border-bottom", "2px solid green");
 
-                }
+        }
 
-            }
+    }
             $("#save").click(function () {
                 name_error = false;
-                old_error = false;
-                new_error = false;
+            old_error = false;
+            new_error = false;
 
-                check_name_error();
-                check_oldpass();
-                check_newpass();
+            check_name_error();
+            check_oldpass();
+            check_newpass();
 
 
                 if (name_error === false && old_error === false && new_error === false) {
-                    alert("Password Changed Suceesfully");
+                alert("Password Changed Suceesfully");
 
-                    return ("Login");
-                }
+            return ("Login");
+        }
                 else {
-                    alert("Fill Your All required fileds");
-                    return false;
-                }
-            })
-        })
-    </script>
+                alert("Fill Your All required fileds");
+            return false;
+        }
+    })
+})
+
+</script>
 </head>
 
 <body>
     <!-- ############################### START HERE ################################ -->
     <!-- Main Navigation -->
+    
+
     <nav class="navbar navbar-dark stylish-color-dark   navbar-expand-sm ">
         <div class="container">
 
@@ -476,7 +479,7 @@
                         <div class="form-group">
 
                             <label>User Name</label>
-                            <input type="text" class="form-control" id="username2" />
+                            <input type="text" class="form-control" id="username2" required pattern="^[A-Za-z]{3,20}" name="username" />
                             <span id="name_errors" class="error_form"></span>
 
                         </div>
@@ -484,7 +487,7 @@
                         <div class="form-group">
 
                             <label>Password</label>
-                            <input type="password" id="password2" class="form-control" />
+                            <input type="password" id="password2" class="form-control" required pattern="^.{6,10}" name="password" />
                             <span id="password_errors" class="error_form"></span>
 
                         </div>
@@ -501,14 +504,14 @@
                         <div class="form-group">
 
                             <label>Contact</label>
-                            <input type="text" id="contacts" class="form-control" />
+                            <input type="text" id="contacts" name="contact" class="form-control" required pattern="^[7-9]{1}[0-9]{9}" />
                             <span id="contacts_errors" class="error_form"></span>
 
                         </div>
                         <div class="form-group">
 
                             <label>Email</label>
-                            <input type="email" id="email2" class="form-control" />
+                            <input type="email" id="email2" name="email" class="form-control" required />
                             <span id="emails_errors" class="error_form"></span>
 
                         </div>
@@ -565,7 +568,7 @@
 
         <div>
             <h1>
-              Exclusive Offers
+                Exclusive Offers
             </h1>
             <!-- Card deck -->
             <div class="card-deck">
@@ -589,7 +592,7 @@
                         <!--Text-->
                         <p class="card-text">Book Ticket for four people and availthis offer..</p>
                         <!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
-                       
+
 
                     </div>
 
@@ -614,7 +617,7 @@
                         <!--Text-->
                         <p class="card-text">Apply promo code avail offer(All users are applied)</p>
                         <!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
-                        
+
 
                     </div>
 
@@ -639,7 +642,7 @@
                         <!--Text-->
                         <p class="card-text">You can avail 5% off on all movie tickets.User code FIRST</p>
                         <!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
-                       
+
 
                     </div>
 
@@ -664,7 +667,7 @@
                         <!--Text-->
                         <p class="card-text">It is special offer apply the code of the card and avail this offer.</p>
                         <!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
-                        
+
 
                     </div>
 
