@@ -270,7 +270,7 @@
 
 
             @*<div class="item" style=""><a href="#"><img width="250px" height="250px" src="~/Content/Imagescarosal/rango.jpg"></a><caption>BoxOffice</caption></div>*@
-            @foreach (string item in Model)
+            @foreach (var item in Model)
             {
                 <div class="item"><a href="@Url.Action("MovieDescription", "UserHome", new { id=item.MovieId,citid=7 })"><img width="250px" height="250px" src="data:image;base64,@System.Convert.ToBase64String(item.Poster)"></a><caption>@item.MovieName</caption></div>
             

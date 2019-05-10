@@ -378,6 +378,7 @@
     <Content Include="Views\AdminHome\_AddMovieSuccess.cshtml" />
     <Content Include="Views\AdminHome\_DisplayMovies.cshtml" />
     <Content Include="Views\UserHome\GeneratedTicket.cshtml" />
+    <Content Include="Views\Theatre\_MovieSuccess.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -158,7 +158,7 @@ namespace BookMyshow.Controllers
             timeSlot.Price = price;
             entities.TimeSlots.Add(timeSlot);
             entities.SaveChanges();
-            return PartialView("RegisteredTheatreAdminHome");
+            return PartialView("_MovieSuccess");
             //}
             //catch (Exception ex) { throw ex; }
         }
@@ -168,9 +168,10 @@ namespace BookMyshow.Controllers
             // List<string> movies = mlist.ToList();
             try { 
             int uid = Convert.ToInt32(Session["userId"]);
-            int tid =Convert.ToInt32(entities.checkTheatre(uid).Single());
+            int tid =Convert.ToInt32(entities.checkTheatre(uid).FirstOrDefault());
            ViewBag.movielist = new SelectList(entities.GetMoviesList(tid), "MovieId", "MovieName");
             ViewBag.SlotList = new SelectList(entities.Slots, "SlotId", "StartTime");
+           //     ViewBag.SlotList=new SelectList(entities.GetSlotsList(tid,))
             return PartialView("_RemoveMovie");
             }
             catch (Exception ex) { throw ex; }
@@ -178,10 +179,11 @@ namespace BookMyshow.Controllers
         [HttpPost]
         public ActionResult RemoveMovie(FormCollection form)
         {
-            try { 
+            try {
+                int tid = Convert.ToInt32(Session["userId"]);
             int mvId = Convert.ToInt32(form["movielist"]);
             int slotid = Convert.ToInt32(form["SlotList"]);
-            entities.deleteMovie(1, mvId, slotid);
+            entities.deleteMovie(tid, mvId, slotid);
             return View("RegisteredTheatreAdminHome");
             }
             catch (Exception ex) { throw ex; }

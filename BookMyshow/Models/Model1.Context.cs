@@ -510,5 +510,18 @@ namespace BookMyshow.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<decimal>>("TotalCollection", theatreIdParameter);
         }
+    
+        public virtual ObjectResult<Nullable<int>> GetSlotsList(Nullable<int> tid, Nullable<int> mvId)
+        {
+            var tidParameter = tid.HasValue ?
+                new ObjectParameter("tid", tid) :
+                new ObjectParameter("tid", typeof(int));
+    
+            var mvIdParameter = mvId.HasValue ?
+                new ObjectParameter("mvId", mvId) :
+                new ObjectParameter("mvId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("GetSlotsList", tidParameter, mvIdParameter);
+        }
     }
 }

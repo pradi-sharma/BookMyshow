@@ -545,6 +545,10 @@
           <Parameter Name="tId" Type="int" Mode="In" />
           <Parameter Name="mId" Type="int" Mode="In" />
         </Function>
+        <Function Name="GetSlotsList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="tid" Type="int" Mode="In" />
+          <Parameter Name="mvId" Type="int" Mode="In" />
+        </Function>
         <Function Name="GetTheatres" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="id" Type="int" Mode="In" />
           <Parameter Name="cityId" Type="int" Mode="In" />
@@ -787,7 +791,7 @@
           </FunctionImport>
           <FunctionImport Name="GetMoviesDescription" ReturnType="Collection(ShowBookingModel.GetMoviesDescription_Result)" />
           <FunctionImport Name="GetTheatres" ReturnType="Collection(Int32)">
-          <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="id" Mode="In" Type="Int32" />
             <Parameter Name="cityId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="GetSlots" ReturnType="Collection(Time)">
@@ -984,6 +988,10 @@
           </FunctionImport>
           <FunctionImport Name="TotalCollection" ReturnType="Collection(Decimal)">
           <Parameter Name="theatreId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetSlotsList" ReturnType="Collection(Int32)">
+            <Parameter Name="tid" Mode="In" Type="Int32" />
+            <Parameter Name="mvId" Mode="In" Type="Int32" />
           </FunctionImport>
           </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
@@ -1753,6 +1761,7 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="TotalCollection" FunctionName="ShowBookingModel.Store.TotalCollection" />
+          <FunctionImportMapping FunctionImportName="GetSlotsList" FunctionName="ShowBookingModel.Store.GetSlotsList" />
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
