@@ -17,7 +17,8 @@ namespace BookMyshow.Models
         public int TheatreId { get; set; }
         public int Movieid { get; set; }
         public int SlotId { get; set; }
-        public Nullable<decimal> Price { get; set; }
+        public decimal Price { get; set; }
+        public System.DateTime Date { get; set; }
     
         public virtual Movy Movy { get; set; }
         public virtual Slot Slot { get; set; }

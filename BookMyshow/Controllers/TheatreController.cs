@@ -142,6 +142,7 @@ namespace BookMyshow.Controllers
             int movId = Convert.ToInt32(form["movielist"]);
             int SlotId = Convert.ToInt32(form["SlotList"]);
             decimal price = Convert.ToDecimal(form["Price"]);
+            DateTime date = Convert.ToDateTime(form["date"]);
             int uId =Convert.ToInt32(Session["userId"]);
            int tid=Convert.ToInt32(entities.checkTheatre(uId).FirstOrDefault());
          //   int tid = ;
@@ -156,6 +157,7 @@ namespace BookMyshow.Controllers
             timeSlot.Movieid = movId;
             timeSlot.SlotId = SlotId;
             timeSlot.Price = price;
+            timeSlot.Date = date;
             entities.TimeSlots.Add(timeSlot);
             entities.SaveChanges();
             return PartialView("_MovieSuccess");

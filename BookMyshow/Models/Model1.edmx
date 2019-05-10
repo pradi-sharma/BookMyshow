@@ -17,6 +17,7 @@
           <Property Name="MovieId" Type="int" Nullable="false" />
           <Property Name="SeatNumber" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="date" Type="date" Nullable="false" />
         </EntityType>
         <EntityType Name="Casts">
           <Key>
@@ -180,11 +181,13 @@
           <Key>
             <PropertyRef Name="TheatreId" />
             <PropertyRef Name="SlotId" />
+            <PropertyRef Name="Date" />
           </Key>
           <Property Name="TheatreId" Type="int" Nullable="false" />
           <Property Name="Movieid" Type="int" Nullable="false" />
           <Property Name="SlotId" Type="int" Nullable="false" />
-          <Property Name="Price" Type="money" />
+          <Property Name="Price" Type="money" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
         </EntityType>
         <EntityType Name="UserDetails">
           <Key>
@@ -1039,6 +1042,7 @@
           <NavigationProperty Name="Slot" Relationship="ShowBookingModel.FK_BookedSeats_Slots" FromRole="BookedSeat" ToRole="Slot" />
           <NavigationProperty Name="Theatre" Relationship="ShowBookingModel.FK_BookedSeats_Theatres" FromRole="BookedSeat" ToRole="Theatre" />
           <NavigationProperty Name="UserDetail" Relationship="ShowBookingModel.FK_BookedSeats_UserDetails" FromRole="BookedSeat" ToRole="UserDetail" />
+          <Property Name="date" Type="DateTime" Nullable="false" Precision="0" />
         </EntityType>
         <EntityType Name="Cast">
           <Key>
@@ -1194,14 +1198,16 @@
           <Key>
             <PropertyRef Name="TheatreId" />
             <PropertyRef Name="SlotId" />
+            <PropertyRef Name="Date" />
           </Key>
           <Property Name="TheatreId" Type="Int32" Nullable="false" />
           <Property Name="Movieid" Type="Int32" Nullable="false" />
           <Property Name="SlotId" Type="Int32" Nullable="false" />
-          <Property Name="Price" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Price" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
           <NavigationProperty Name="Movy" Relationship="ShowBookingModel.FK_TimeSlots_Movies" FromRole="TimeSlot" ToRole="Movy" />
           <NavigationProperty Name="Slot" Relationship="ShowBookingModel.FK_TimeSlots_Slots" FromRole="TimeSlot" ToRole="Slot" />
           <NavigationProperty Name="Theatre" Relationship="ShowBookingModel.FK_TimeSlots_Theatres" FromRole="TimeSlot" ToRole="Theatre" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
         </EntityType>
         <EntityType Name="UserDetail">
           <Key>
@@ -1528,6 +1534,7 @@
           <EntitySetMapping Name="BookedSeats">
             <EntityTypeMapping TypeName="ShowBookingModel.BookedSeat">
               <MappingFragment StoreEntitySet="BookedSeats">
+                <ScalarProperty Name="date" ColumnName="date" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="SeatNumber" ColumnName="SeatNumber" />
                 <ScalarProperty Name="MovieId" ColumnName="MovieId" />
@@ -1664,6 +1671,7 @@
           <EntitySetMapping Name="TimeSlots">
             <EntityTypeMapping TypeName="ShowBookingModel.TimeSlot">
               <MappingFragment StoreEntitySet="TimeSlots">
+                <ScalarProperty Name="Date" ColumnName="Date" />
                 <ScalarProperty Name="Price" ColumnName="Price" />
                 <ScalarProperty Name="SlotId" ColumnName="SlotId" />
                 <ScalarProperty Name="Movieid" ColumnName="Movieid" />

@@ -19,6 +19,7 @@ namespace BookMyshow.Models
         public int MovieId { get; set; }
         public string SeatNumber { get; set; }
         public int UserId { get; set; }
+        public System.DateTime date { get; set; }
     
         public virtual Movy Movy { get; set; }
         public virtual Slot Slot { get; set; }
