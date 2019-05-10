@@ -14,21 +14,27 @@ namespace BookMyshow.Controllers
        
         public ActionResult Index()
         {
-            try
+           
+            var a =Session["userId"];
+            if (Session["userId"] != null)
             {
-                var a =Session["userId"];
-            var result = entities.checkTheatre(Convert.ToInt32(Session["userId"])).Count();
-            if (result != 0)
-            {
+               
+                //var result = entities.checkTheatre(Convert.ToInt32(Session["userId"])).Count();
+                //if (result != 0)
+                //{
+                //    var result1 = entities.checkTheatre(Convert.ToInt32(Session["userId"])).Single();
+                //    ViewBag.collection = Convert.ToDecimal(entities.TotalCollection(result1).Single());
+                    
+                //    return View("RegisteredTheatreAdminHome");
+                //}
                 return View("RegisteredTheatreAdminHome");
-            }
-            return View("TheatreAdminHome");
-            }
-            catch (Exception ex)
-            {
 
-                return View("Error", new HandleErrorInfo(ex, "UserHome", "Search"));
             }
+            else
+            {
+                return RedirectToAction("Index", "UserHome");
+            }
+          
         }
         public ActionResult TheatreRegister()
         {
@@ -45,44 +51,46 @@ namespace BookMyshow.Controllers
         [HttpPost]
         public PartialViewResult TheatreRegister(FormCollection theatre)
         {
-            try { 
-            Theatre newtheatre = new Theatre();
-            newtheatre.TheatreName = theatre["TheatreName"];
-            newtheatre.Capacity = Convert.ToInt32(theatre["Capacity"]);
-            newtheatre.CityId = Convert.ToInt32(theatre["cities"]);
-            entities.Theatres.Add(newtheatre);
-            entities.SaveChanges();
-            int idd = entities.Theatres.Max(t => t.TheatreId);
-            int uid = Convert.ToInt32(Session["userId"]);
-            entities.InsertTheatreUser(idd,uid);
-            return PartialView("_theatreSuccess");
-            }
-            catch (Exception ex) { throw ex; }
-        }
-        public PartialViewResult SelectLayout()
-        {
-            int userid = Convert.ToInt32(Session["userId"]);
-            try
-            {
-                var theatreId = Convert.ToInt32(entities.checkTheatre(userid).Single());
-            }
-            catch (Exception)
+            if (Session["userId"] != null)
             {
 
-                ViewBag.name = Session["userName"];
-                return PartialView("_RegisterFirstMessage");
-               
+                Theatre newtheatre = new Theatre();
+                newtheatre.TheatreName = theatre["TheatreName"];
+                newtheatre.Capacity = Convert.ToInt32(theatre["Capacity"]);
+                newtheatre.CityId = Convert.ToInt32(theatre["cities"]);
+                entities.Theatres.Add(newtheatre);
+                entities.SaveChanges();
+                int idd = entities.Theatres.Max(t => t.TheatreId);
+                int uid = Convert.ToInt32(Session["userId"]);
+                entities.InsertTheatreUser(idd, uid);
+                return PartialView("_theatreSuccess");
             }
+            return PartialView("_LoggedOut");
+        }
+        public ActionResult SelectLayout()
+        {
+            //int userid = Convert.ToInt32(Session["userId"]);
+            //try
+            //{
+            //    var theatreId = Convert.ToInt32(entities.checkTheatre(userid).Single());
+            //}
+            //catch (Exception)
+            //{
+
+                ViewBag.name = Session["userName"];
+            //    return PartialView("_RegisterFirstMessage");
+            //}
                 
-                return PartialView("_SeatLayoutSelection");
+                return View("SelectLayout");
 
         }
         [HttpPost]
         public ActionResult SelectLayout(string key, string[] value)
         {
-            try {
-            int userid =Convert.ToInt32(Session["userId"]);
-            int theatreId =Convert.ToInt32(entities.checkTheatre(userid).Single());
+            //try
+            //{
+                int userid =Convert.ToInt32(Session["userId"]);
+            int theatreId =Convert.ToInt32(entities.checkTheatre(userid).FirstOrDefault());
             Session[key] = value;
 
             SqlConnection connection = new SqlConnection("database=ShowBooking;server=VDI-NET-0006\\LOCAL;trusted_connection=true");
@@ -112,31 +120,31 @@ namespace BookMyshow.Controllers
             //}
             ViewBag.Message = Session[key];
             return this.Json(new { success = true });
-            }
-            catch (Exception ex) { throw ex; }
+            //}
+            //catch (Exception ex)
+            //{
+
+            //    return View("Error", new HandleErrorInfo(ex, "UserHome", "Search"));
+            //}
         }
         public PartialViewResult AddMovie()
         {
-            try {
+            
             ViewBag.movielist = new SelectList(entities.Movies, "MovieId", "MovieName");
             ViewBag.SlotList = new SelectList(entities.Slots, "SlotId", "StartTime");
             return PartialView("_AddMovie");
-            }
-            catch (Exception ex) { throw ex; }
+        
         }
         [HttpPost]
         public PartialViewResult AddMovie(FormCollection form)
         {
-            try
-            {
-
-            
+            //try { 
             int movId = Convert.ToInt32(form["movielist"]);
             int SlotId = Convert.ToInt32(form["SlotList"]);
             decimal price = Convert.ToDecimal(form["Price"]);
             int uId =Convert.ToInt32(Session["userId"]);
-         //  int tid=Convert.ToInt32(entities.checkTheatre(uId));
-            int tid = 2;
+           int tid=Convert.ToInt32(entities.checkTheatre(uId).FirstOrDefault());
+         //   int tid = ;
          //   entities.InsertTheatreMovy(tid, movId);
             //theatreMovie.TheatreId = 1;
             //theatreMovie.MovieId = movId;
@@ -150,21 +158,20 @@ namespace BookMyshow.Controllers
             timeSlot.Price = price;
             entities.TimeSlots.Add(timeSlot);
             entities.SaveChanges();
-            return PartialView("RegisteredTheatreAdminHome");
-            }
-            catch (Exception ex)
-            {
-
-                throw ex;
-            }
+            return PartialView("_MovieSuccess");
+            //}
+            //catch (Exception ex) { throw ex; }
         }
         public PartialViewResult RemoveMovie()
         {
             //  var mlist = ;
             // List<string> movies = mlist.ToList();
             try { 
-           ViewBag.movielist = new SelectList(entities.GetMoviesList(1), "MovieId", "MovieName");
+            int uid = Convert.ToInt32(Session["userId"]);
+            int tid =Convert.ToInt32(entities.checkTheatre(uid).FirstOrDefault());
+           ViewBag.movielist = new SelectList(entities.GetMoviesList(tid), "MovieId", "MovieName");
             ViewBag.SlotList = new SelectList(entities.Slots, "SlotId", "StartTime");
+           //     ViewBag.SlotList=new SelectList(entities.GetSlotsList(tid,))
             return PartialView("_RemoveMovie");
             }
             catch (Exception ex) { throw ex; }
@@ -173,9 +180,10 @@ namespace BookMyshow.Controllers
         public ActionResult RemoveMovie(FormCollection form)
         {
             try {
+                int tid = Convert.ToInt32(Session["userId"]);
             int mvId = Convert.ToInt32(form["movielist"]);
             int slotid = Convert.ToInt32(form["SlotList"]);
-            entities.deleteMovie(1, mvId, slotid);
+            entities.deleteMovie(tid, mvId, slotid);
             return View("RegisteredTheatreAdminHome");
             }
             catch (Exception ex) { throw ex; }

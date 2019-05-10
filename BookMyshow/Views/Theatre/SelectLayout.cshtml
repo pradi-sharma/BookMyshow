@@ -35,16 +35,16 @@
                 <h2>fill the required details below and select your seats</h2>
                 <div class="mr_movmain">
 
-                    <div class="movits-left">
+                    @*<div class="movits-left">
                         <label>
                             Name
                             <span>*</span>
                         </label>
                         <input type="text" id="Username" required>
-                    </div>
+                    </div>*@
                     <div class="movits-right">
                         <label>
-                           Capacity
+                           Provide Number of Blocked seats
                             <span>*</span>
                         </label>
                         <input type="number" id="Numseats" required min="1">
@@ -542,7 +542,7 @@
         }
 
         function takeData() {
-            if (($("#Username").val().length == 0) || ($("#Numseats").val().length == 0)) {
+            if ($("#Numseats").val().length == 0) {
                 alert("Please Enter your Name and Number of Seats");
             } else {
                 $(".inputForm *").prop("disabled", true);

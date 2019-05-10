@@ -1,6 +1,6 @@
 ﻿@model BookMyshow.Models.UserDetail
 <style>
-    input[type=text],#RoleDropdown,input[type=number] {
+    input[type=text], #RoleDropdown, input[type=number] {
         border: 1px solid white;
         border-radius: 5px;
         font-size: 20px;
@@ -20,7 +20,7 @@
         padding: 10px;
         border-radius: 20px;
         width: 600px;
-        margin-left:25%;
+        margin-left: 25%;
     }
 
     td, th {
@@ -42,60 +42,60 @@
     }
 </style>
 
-@using (Html.BeginForm("AddTheatreAdmin","AdminHome",FormMethod.Post)) 
+@using (Html.BeginForm("AddTheatreAdmin", "AdminHome", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
-    
-<div class="form-horizontal">
-    <h4>Add Admins here</h4>
-    <hr />
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <div class="form-horizontal">
+        <h4>Add Admins here</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.UserName, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control",@required="required"} })
-            @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.UserName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control", @required = "required" } })
+                @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+            </div>
         </div>
-    </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } ,@required="required",min="8",max="15", pattern = "/^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/" })
-            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" }, @required = "required", min = "8", max = "15", pattern = "/^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/" })
+                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+            </div>
         </div>
-    </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.Role, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.DropDownList("RoleDropdown", new List<SelectListItem> { new SelectListItem { Value ="1", Text = "Theatre Admin" }, new SelectListItem { Value = "2", Text = "Application Admin" } })
-            @Html.ValidationMessageFor(model => model.Role, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Role, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("RoleDropdown", new List<SelectListItem> { new SelectListItem { Value = "1", Text = "Theatre Admin" }, new SelectListItem { Value = "2", Text = "Application Admin" } })
+                @Html.ValidationMessageFor(model => model.Role, "", new { @class = "text-danger" })
+            </div>
         </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" ,@required="required"} })
-            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @required = "required" } })
+                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+            </div>
         </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(model => model.Contact, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Contact, new { htmlAttributes = new { @class = "form-control",@required="required",pattern="[1-9]{1}[0-9]{9}" } })
-            @Html.ValidationMessageFor(model => model.Contact, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Contact, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Contact, new { htmlAttributes = new { @class = "form-control", @required = "required", pattern = "[1-9]{1}[0-9]{9}" } })
+                @Html.ValidationMessageFor(model => model.Contact, "", new { @class = "text-danger" })
+            </div>
         </div>
-    </div>
 
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Save" class="btn btn-default" />
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
         </div>
     </div>
-</div>
 }
 
 

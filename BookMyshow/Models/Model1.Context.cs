@@ -197,13 +197,17 @@ namespace BookMyshow.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetMoviesDescription_Result>("GetMoviesDescription");
         }
     
-        public virtual ObjectResult<Nullable<int>> GetTheatres(Nullable<int> id)
+        public virtual ObjectResult<Nullable<int>> GetTheatres(Nullable<int> id, Nullable<int> cityId)
         {
             var idParameter = id.HasValue ?
                 new ObjectParameter("id", id) :
                 new ObjectParameter("id", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("GetTheatres", idParameter);
+            var cityIdParameter = cityId.HasValue ?
+                new ObjectParameter("cityId", cityId) :
+                new ObjectParameter("cityId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("GetTheatres", idParameter, cityIdParameter);
         }
     
         public virtual ObjectResult<Nullable<System.TimeSpan>> GetSlots(Nullable<int> tId, Nullable<int> mId)
@@ -322,15 +326,6 @@ namespace BookMyshow.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("InsertTheatreMovy", theatreIdParameter, movieIdParameter);
         }
     
-        public virtual ObjectResult<GetMoviesList_Result> GetMoviesList(Nullable<int> theatreId)
-        {
-            var theatreIdParameter = theatreId.HasValue ?
-                new ObjectParameter("theatreId", theatreId) :
-                new ObjectParameter("theatreId", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetMoviesList_Result>("GetMoviesList", theatreIdParameter);
-        }
-    
         public virtual int deleteMovie(Nullable<int> theatreaid, Nullable<int> movieId, Nullable<int> slotId)
         {
             var theatreaidParameter = theatreaid.HasValue ?
@@ -363,15 +358,6 @@ namespace BookMyshow.Models
                 new ObjectParameter("slotId", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("deleteMovie1", theatreaidParameter, movieIdParameter, slotIdParameter);
-        }
-    
-        public virtual ObjectResult<GetMoviesList1_Result> GetMoviesList1(Nullable<int> theatreId)
-        {
-            var theatreIdParameter = theatreId.HasValue ?
-                new ObjectParameter("theatreId", theatreId) :
-                new ObjectParameter("theatreId", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetMoviesList1_Result>("GetMoviesList1", theatreIdParameter);
         }
     
         public virtual int sp_alterdiagram1(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
@@ -488,6 +474,54 @@ namespace BookMyshow.Models
                 new ObjectParameter("userId", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("InsertTheatreUser", theatreIdParameter, userIdParameter);
+        }
+    
+        public virtual int deleteMovie2(Nullable<int> theatreaid, Nullable<int> movieId, Nullable<int> slotId)
+        {
+            var theatreaidParameter = theatreaid.HasValue ?
+                new ObjectParameter("theatreaid", theatreaid) :
+                new ObjectParameter("theatreaid", typeof(int));
+    
+            var movieIdParameter = movieId.HasValue ?
+                new ObjectParameter("MovieId", movieId) :
+                new ObjectParameter("MovieId", typeof(int));
+    
+            var slotIdParameter = slotId.HasValue ?
+                new ObjectParameter("slotId", slotId) :
+                new ObjectParameter("slotId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("deleteMovie2", theatreaidParameter, movieIdParameter, slotIdParameter);
+        }
+    
+        public virtual ObjectResult<GetMoviesList_Result1> GetMoviesList(Nullable<int> theatreId)
+        {
+            var theatreIdParameter = theatreId.HasValue ?
+                new ObjectParameter("theatreId", theatreId) :
+                new ObjectParameter("theatreId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetMoviesList_Result1>("GetMoviesList", theatreIdParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<decimal>> TotalCollection(Nullable<int> theatreId)
+        {
+            var theatreIdParameter = theatreId.HasValue ?
+                new ObjectParameter("theatreId", theatreId) :
+                new ObjectParameter("theatreId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<decimal>>("TotalCollection", theatreIdParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> GetSlotsList(Nullable<int> tid, Nullable<int> mvId)
+        {
+            var tidParameter = tid.HasValue ?
+                new ObjectParameter("tid", tid) :
+                new ObjectParameter("tid", typeof(int));
+    
+            var mvIdParameter = mvId.HasValue ?
+                new ObjectParameter("mvId", mvId) :
+                new ObjectParameter("mvId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("GetSlotsList", tidParameter, mvIdParameter);
         }
     }
 }

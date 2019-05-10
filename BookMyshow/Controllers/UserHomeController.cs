@@ -35,20 +35,22 @@ namespace BookMyshow.Controllers
             }
 
 
-            ViewBag.list = movielist;
+            ViewBag.list = movies;
             if (Session["userId"] !=null)
             {
-                return View("UserIndex");
+                return View("UserIndex",movies);
             }
     
-            return View(moviesDescription.ToList());
+            return View(movies);
             }
             catch (Exception ex) { throw ex; }
         }
+    
 
-        public ActionResult MovieDescription(int id)
+        public ActionResult MovieDescription(int id,int citid)
         {
-            try { 
+            try {
+                ViewBag.citid = citid;
             //List<Movy> movies = Getmovies();
             Movy movy = entities.Movies.Where(id1 => id1.MovieId == id).FirstOrDefault();
             ViewBag.FirstMovie = "data:image/png;base64," + Convert.ToBase64String(movy.Poster, 0, movy.Poster.Length);
@@ -75,8 +77,8 @@ namespace BookMyshow.Controllers
 
         public ActionResult Search(FormCollection form)
         {
-            try
-            {
+            //try
+            //{
 
             
             string value = form["searchInput"];
@@ -85,22 +87,29 @@ namespace BookMyshow.Controllers
             //ViewBag.FirstMovie = "data:image/png;base64," + Convert.ToBase64String(result.Poster, 0, result.Poster.Length);
             //return RedirectToAction("MovieDescription", new {id = result });
             //  return this.Json(new { success = result });
-            return RedirectToAction("MovieDescription", new { id = result });
-            }
-            catch (Exception ex)
-            {
+            return RedirectToAction("MovieDescription", new { id = result,citid=7 });
+            //}
+            //catch (Exception ex)
+            //{
 
-                return View("Error", new HandleErrorInfo(ex, "UserHome", "Search"));
-            }
+            //    return View("Error", new HandleErrorInfo(ex, "UserHome", "Search"));
+            //}
         }
 
         public List<Movy> Getmovies()
         {
             
             List<Movy> mylist = new List<Movy>();
-            var m = entities.Movies;
+            var mv = entities.MovyByCity(7);
+            var mt = (from m in entities.Movies
+                     join ts in entities.TimeSlots
+                     on m.MovieId equals ts.Movieid
+                     join th in entities.Theatres
+                     on ts.TheatreId equals th.TheatreId
+                     where th.CityId == 7
+                     select m).ToList();
             try { 
-            foreach (var item in m)
+            foreach (var item in mt)
             {
                 mylist.Add(item);
             }
@@ -160,36 +169,39 @@ namespace BookMyshow.Controllers
             return RedirectToAction("Index", "UserHome");
         }
 
-        public ActionResult BookMovie(int id)
+        public ActionResult BookMovie(int id,int citid)
         {
-            try { 
+            try {
+                
+              
+                
             //var result = entities.Movies.Where(movieId => movieId.MovieId == id).FirstOrDefault();
-            var theatre = entities.GetTheatres(id);
+            var theatre = entities.GetTheatres(id,citid);
             List<TheatreTimiSlots> theatreTimeSlotList = new List<TheatreTimiSlots>();
-            foreach(int item in theatre.ToList())
-            {
-                List<string> spans = new List<string>();
-                //var times = from t in entities.TimeSlots
-                //            join s in entities.Slots
-                //            on t.SlotId equals s.SlotId
-                //            where t.TheatreId == item & t.Movieid == id
-                //            select new { startTime=s.StartTime};
-                var times = entities.GetSlots(item, id);
-
-
-                // TimeSpan xyz = times.StartTime;
-                foreach (TimeSpan item1 in times.ToList())
+                foreach (int item in theatre.ToList())
                 {
-                    string ntime = string.Format("{0:00}:{1:00}", item1.Hours, item1.Minutes); // it should display 00:00
-                    spans.Add(ntime);
+                    List<string> spans = new List<string>();
+                    //var times = from t in entities.TimeSlots
+                    //            join s in entities.Slots
+                    //            on t.SlotId equals s.SlotId
+                    //            where t.TheatreId == item & t.Movieid == id
+                    //            select new { startTime=s.StartTime};
+                    var times = entities.GetSlots(item, id);
+
+
+                    // TimeSpan xyz = times.StartTime;
+                    foreach (TimeSpan item1 in times.ToList())
+                    {
+                        string ntime = string.Format("{0:00}:{1:00}", item1.Hours, item1.Minutes); // it should display 00:00
+                        spans.Add(ntime);
+                    }
+                    string tname = entities.Theatres.Where(i => i.TheatreId == item).Select(t => t.TheatreName).Single();
+                    ViewBag.movieId = id;
+                    TheatreTimiSlots theatreTimeSlot = new TheatreTimiSlots(item, spans, tname);
+                    theatreTimeSlotList.Add(theatreTimeSlot);
                 }
-                string tname = entities.Theatres.Where(i => i.TheatreId == item).Select(t => t.TheatreName).Single();
-                ViewBag.movieId = id;
-                TheatreTimiSlots theatreTimeSlot = new TheatreTimiSlots(item,spans,tname);
-                theatreTimeSlotList.Add(theatreTimeSlot);
-            }
-          //  ViewBag.theatrelist = theatre.ToList();
-            return View(theatreTimeSlotList.ToList());
+                //  ViewBag.theatrelist = theatre.ToList();
+                return View(theatreTimeSlotList.ToList());
             }
             catch (Exception ex) { throw ex; }
         }
@@ -197,10 +209,10 @@ namespace BookMyshow.Controllers
         [HttpPost]
         public ActionResult TimingsByTheatre(FormCollection form)
         {
-            try { 
+            //try { 
             int theatreId = Convert.ToInt32(form["theatreId"]);
             TimeSpan slot = Convert.ToDateTime(form["slotId"]).TimeOfDay;
-            int movieId = Convert.ToInt32(form["theatreId"]);
+            int movieId = Convert.ToInt32(form["movieId"]);
             int slotid = entities.Slots.Where(s => s.StartTime == slot).FirstOrDefault().SlotId;
 
             //to set global variables
@@ -216,8 +228,8 @@ namespace BookMyshow.Controllers
             ViewBag.arr = notSelectedSeats;
           
             return View("UserSeatSelection");
-            }
-            catch (Exception ex) { throw ex; }
+            //}
+            //catch (Exception ex) { throw ex; }
         }
         //public ActionResult BookTicket(int[]key,string[] value)
         //{
@@ -259,12 +271,13 @@ namespace BookMyshow.Controllers
         [HttpPost]
         public ActionResult ApplyOffer(string key,string value)
         {
-            try { 
+            try {
+                decimal nkey = Convert.ToDecimal(key);
             string ofrcode = value;
             int result = entities.MovieOfferDetails.Where(o => o.CouponCode == ofrcode).FirstOrDefault().OfferId;
             int discount = entities.Offers.Where(i => i.OfferId == result).FirstOrDefault().Discount;
            int amt =Convert.ToInt32(TempData["amount2"]);
-            ViewBag.newamt = (amt * discount) / 100;
+            ViewBag.newamt =(nkey - ((amt * discount) / 100));
             return this.Json(new { success = true });
             }
             catch (Exception ex) { throw ex; }
@@ -273,7 +286,7 @@ namespace BookMyshow.Controllers
 
         public ActionResult GenerateTicket()
         {
-            try { 
+           
             ViewBag.amt2 = TempData["amount2"];
             List<string> seatslist = (List<string>)TempData["ss"];
 
@@ -287,7 +300,7 @@ namespace BookMyshow.Controllers
             int newIdentity = identity + 1;
             foreach (var item in seatslist)
             {
-                entities.InsertTicketSeats(newIdentity, item);
+                entities.InsertTicketSeats(identity, item);
             }
             foreach (var item in seatslist)
             {
@@ -295,15 +308,16 @@ namespace BookMyshow.Controllers
                 bookedSeat.MovieId = mvId;
                 bookedSeat.SlotId = sId;
                 bookedSeat.TheatreId = thId;
-                bookedSeat.UserId = 1;
+                bookedSeat.UserId = Convert.ToInt32(Session["userId"]);
                 bookedSeat.SeatNumber = item;
                 entities.BookedSeats.Add(bookedSeat);
                 entities.SaveChanges();
             }
-
+            ViewBag.seats = seatslist;
+            ViewBag.poster = entities.Movies.Where(i => i.MovieId == mvId).FirstOrDefault().Poster;
             return View("Ticket");
-            }
-            catch (Exception ex) { throw ex; }
+            
+          
         }
 
         public ActionResult SearchByCity()
@@ -342,8 +356,9 @@ namespace BookMyshow.Controllers
             //int value = Convert.ToInt32(fc["CityId"]);
             try { 
             var c = entities.Cities.Where(c1 => c1.CityId == id).FirstOrDefault();
-
+                ViewBag.cid = id;
             ViewBag.cname = c.CityName;
+                TempData["ucname"] = c.CityName;
             var display = entities.MovyByCity(id);
 
             return View("MoviesByCity", display);

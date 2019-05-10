@@ -5,31 +5,29 @@
 
     <script src="~/Scripts/jquery-3.4.1.js"></script>
     <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
-    <script src="~/Scripts/jquery.validate.min.js"></script>
-    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
     <style>
 
         body {
-            
             background-color: #ecdddd;
         }
-        input[type=text], input[type=url], input[type=date]{
+
+        input[type=text], input[type=url], input[type=date] {
             border: 1px solid white;
             border-radius: 5px;
             font-size: 20px;
             width: 450px;
             background-color: white;
-           
         }
-            input[type=text]:focus{
-                color:white;
-               
+
+            input[type=text]:focus {
+                color: white;
             }
 
-            label {
-                font-size: 20px;
-                font-weight: bold;
-            }
+        label {
+            font-size: 20px;
+            font-weight: bold;
+        }
 
         option {
             font-size: 7%;
@@ -55,18 +53,19 @@
             background-color: white;
             color: black;
         }
-        span{
-            color:white;
-            font-size:20px;
+
+        span {
+            color: white;
+            font-size: 20px;
         }
-        .form-horizontal{
-            padding:10PX;
+
+        .form-horizontal {
+            padding: 10PX;
         }
     </style>
 </head>
 <body>
     <h2 class="font-weight-bold" style="margin-left:25%">Add Movie</h2>
-    <div id="msg">
 
 
 
@@ -82,7 +81,7 @@
                 <div class="form-group">
                     @Html.LabelFor(model => model.MovieName, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.MovieName, new { htmlAttributes = new { @class = "form-control", min = "3", max = "20", @required = "required" } })
+                        @Html.EditorFor(model => model.MovieName, new { htmlAttributes = new { @class = "form-control",  @required = "required" } })
                         @Html.ValidationMessageFor(model => model.MovieName, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -90,7 +89,7 @@
                 <div class="form-group">
                     @Html.LabelFor(model => model.Synopsis, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.Synopsis, new { htmlAttributes = new { @class = "form-control", min = "10", max = "150", @required = "required" } })
+                        @Html.EditorFor(model => model.Synopsis, new { htmlAttributes = new { @class = "form-control",  @required = "required" } })
                         @Html.ValidationMessageFor(model => model.Synopsis, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -121,7 +120,7 @@
                     <label>Video Trailer Link</label>
                     <div class="col-md-10">
                         <input type="url" name="trailerlink" placeholder="https://example.com"
-                               pattern="https://.*" required/>
+                               pattern="https://.*" required />
                     </div>
                 </div>
 
@@ -132,8 +131,7 @@
                 </div>
             </div>
         }
-    </div>
+    <div id="msg"></div>
 </body>
-<script src="~/Scripts/jquery-3.4.1.js"></script>
-<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+
 </html>

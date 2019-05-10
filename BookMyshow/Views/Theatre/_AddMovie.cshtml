@@ -1,4 +1,4 @@
-﻿@using (Html.BeginForm("AddMovie", "Theatre", FormMethod.Post, new { @id = "form" }))
+﻿@using (Ajax.BeginForm("AddMovie", "Theatre", new AjaxOptions { HttpMethod="POST",UpdateTargetId="result",InsertionMode=InsertionMode.Replace}, new { @id = "form" }))
 {
     <label>Select Movie</label>
     <br />
@@ -13,4 +13,5 @@
     <input type="submit" id="save" value="submit" class="btn btn-success" />
 
 }
+<div id="result"></div>
 

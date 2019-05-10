@@ -1,4 +1,4 @@
-﻿@model BookMyshow.Models.Movy
+﻿@model IEnumerable<BookMyshow.Models.Movy>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -143,7 +143,7 @@
 
                         <div class="form-group">
 
-                            <input type="text" placeholder="SearchByMovie..." class="form-control" id="searchinput" name="searchInput" style="width: 200px;color:white;margin-top:-10px;">
+                            <input type="text" placeholder="SearchByMovie..." class="form-control" id="searchinput" autocomplete="off" name="searchInput" style="width: 200px;color:white;margin-top:-10px;">
 
                         </div>
                         <div class="search">
@@ -163,7 +163,7 @@
 
 
                     <li class="nav-item px-2">
-                        <a href="#" class="nav-link">
+                        <a href="#car" class="nav-link">
                             <i class="fa fa-film"></i> Movies
                         </a>
                     </li>
@@ -262,31 +262,31 @@
 
     <!--Login Modal-->
     <!-- CAROSAL Bottom  -->
-    <div class="wrapper" style="margin-bottom:5px;padding:10px;overflow:hidden">
+    <div class="wrapper" style="margin-bottom:5px;padding:10px;overflow:hidden" id="car">
 
         <div class="owl-carousel owl-theme" style="margin-bottom:5px;padding:10px;overflow:hidden">
 
 
-            @{ int id = 1;}
+
 
             @*<div class="item" style=""><a href="#"><img width="250px" height="250px" src="~/Content/Imagescarosal/rango.jpg"></a><caption>BoxOffice</caption></div>*@
-            @foreach (string item in ViewBag.list)
+            @foreach (var item in Model)
             {
-                <div class="item"><a href="@Url.Action("MovieDescription", "UserHome", new {id })"><img width="250px" height="250px" src="@item"></a><caption></caption></div>
-                id = id + 1;
+                <div class="item"><a href="@Url.Action("MovieDescription", "UserHome", new { id=item.MovieId,citid=7 })"><img width="250px" height="250px" src="data:image;base64,@System.Convert.ToBase64String(item.Poster)"></a><caption>@item.MovieName</caption></div>
+            
             }
 
             @*<div class="item"><a href="#"><img width="250px" height="250px" src="~/Content/Imagescarosal/ww.jpg"></a><caption>BoxOffice</caption> </div>
-            <div class="item"><a href="#"><img width="250px" height="250px" src="~/Content/Imagescarosal/alpha.jpg"></a><caption>BoxOffice</caption></div>*@
+        <div class="item"><a href="#"><img width="250px" height="250px" src="~/Content/Imagescarosal/alpha.jpg"></a><caption>BoxOffice</caption></div>*@
             @*<div class="item"><a href="#"><img width="250px" height="250px" src="~/Content/Imagescarosal/cherranjeevi.jpg"></a><caption>BoxOffice</caption></div>
-            <div class="item"><a href="#"><img width="250px" height="250px" src="~/Content/Imagescarosal/aquaman-movie-poster-2018-l0.jpg"></a><caption>BoxOffice</caption></div>
-            <div class="item"><a href="#"><img width="250px" height="250px" src="~/Content/Imagescarosal/Hollywood-Animation-Movie-Kung-Fu-Panda-3-Poster.jpg"></a><caption>BoxOffice</caption></div>*@
+        <div class="item"><a href="#"><img width="250px" height="250px" src="~/Content/Imagescarosal/aquaman-movie-poster-2018-l0.jpg"></a><caption>BoxOffice</caption></div>
+        <div class="item"><a href="#"><img width="250px" height="250px" src="~/Content/Imagescarosal/Hollywood-Animation-Movie-Kung-Fu-Panda-3-Poster.jpg"></a><caption>BoxOffice</caption></div>*@
             @*<div class="item"><a href="#"><img width="250px" height="250px" src="~/Content/Imagescarosal/1Race Gurram Malayalam version 'Lucky The Racer' First Look Poster.jpg"></a><caption>BoxOffice</caption></div>
-            <div class="item"><a href="#"><img width="250px" height="250px" src="~/Content/Imagescarosal/e1033a3d9b662e112e99e62ba2f1cd6f.jpg"></a><caption>BoxOffice</caption></div>
-            <div class="item"><a href="#"><img width="250px" height="250px" src="~/Content/Imagescarosal/venom.jpg"></a><caption>BoxOffice</caption></div>
-            <div class="item"><a href="#"><img width="250px" height="250px" src="~/Content/Imagescarosal/82ec2bbdc6893100ceaa08bc3.png"></a><caption>BoxOffice</caption></div>
-            <div class="item"><a href="#"><img width="250px" height="250px" src="~/Content/Imagescarosal/82ec2bbdc6893100ceaa08bc3.png"></a><caption>BoxOffice</caption></div>
-            </div>*@
+        <div class="item"><a href="#"><img width="250px" height="250px" src="~/Content/Imagescarosal/e1033a3d9b662e112e99e62ba2f1cd6f.jpg"></a><caption>BoxOffice</caption></div>
+        <div class="item"><a href="#"><img width="250px" height="250px" src="~/Content/Imagescarosal/venom.jpg"></a><caption>BoxOffice</caption></div>
+        <div class="item"><a href="#"><img width="250px" height="250px" src="~/Content/Imagescarosal/82ec2bbdc6893100ceaa08bc3.png"></a><caption>BoxOffice</caption></div>
+        <div class="item"><a href="#"><img width="250px" height="250px" src="~/Content/Imagescarosal/82ec2bbdc6893100ceaa08bc3.png"></a><caption>BoxOffice</caption></div>
+        </div>*@
 
 
         </div>

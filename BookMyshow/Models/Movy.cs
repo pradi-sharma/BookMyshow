@@ -30,7 +30,7 @@ namespace BookMyshow.Models
         public string Synopsis { get; set; }
         public System.DateTime ReleaseDate { get; set; }
         public byte[] Poster { get; set; }
-        public int IntrestedUsers { get; set; }
+        public Nullable<int> IntrestedUsers { get; set; }
         public string VideoLink { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

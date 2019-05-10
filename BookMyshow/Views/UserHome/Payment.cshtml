@@ -33,12 +33,12 @@
                 var code = $("#offer").val();
                 alert("in post");
                 $.post('/UserHome/ApplyOffer',
-                    { key: "xyz", value: code, }, function (data) {
+                    { key: @ViewBag.amt2, value: code, }, function (data) {
                         alert("Success " + data.success);
                         if (data.success) {
                           
                             document.getElementById("offermsg").innerHTML = "Applied";
-                     
+                            document.getElementById("amtid").innerHTML=@ViewBag.newamt
                         } else {
                             alert("not applied");
                         }
@@ -54,7 +54,7 @@
 
 </head>
 <body id="payment-body" class="mt-2">
-
+  
     <div class="" style="transform:translate(50,50);">
         <div class="row mt-2">
             <div class="col-xs-12 col-md-4 " style="margin-left:33%;margin-top:5%;margin-bottom:5%">
@@ -73,7 +73,7 @@
                                 </label>
                                 <div class="input-group">
                                     @*@using (Ajax.BeginForm("ApplyOffer", "UserHome", new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "offermsg", InsertionMode = InsertionMode.Replace }))
-                            {*@
+                                        {*@
                                     <input type="text" name="offercode" class="form-control" id="offer" placeholder="Enter Valid Promo Code"
                                            required autofocus />
                                     <span class="input-group-addon"><span class="glyphicon glyphicon-barcode"></span></span>
@@ -130,14 +130,14 @@
                 </div>
                 <ul class="nav nav-pills nav-stacked">
                     <li class="active">
-                        <a href="#"><span class="badge pull-right"><span class="glyphicon glyphicon-usd"></span>@{(ViewBag.amt2-ViewBag.newamt)}</span> Final Payment</a>
+                        <a href="#"><span class="badge pull-right"><span class="glyphicon glyphicon-usd" ></span>@ViewBag.amt2</span> Final Payment</a>
                     </li>
                 </ul>
                 <br />
                 <a href="/UserHome/GenerateTicket" class="btn btn-success btn-lg btn-block" role="button">Pay</a>
                 @*<button class="btn btn-success btn-lg btn-block" type="submit" onclick="ValidatePayment()">Pay</button>*@
                 <br />
-                <a href="/UserHome/GenerateTicket" class="btn btn-danger btn-lg btn-block" role="button">Cancel Pay</a>
+                <a href="/UserHome/Index" class="btn btn-danger btn-lg btn-block" role="button">Cancel Pay</a>
             </div>
         </div>
     </div>

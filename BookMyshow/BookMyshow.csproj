@@ -237,7 +237,13 @@
     <Compile Include="Models\GetMoviesList1_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\GetMoviesList2_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\GetMoviesList_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GetMoviesList_Result1.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Model1.Context.cs">
@@ -368,6 +374,11 @@
     <Content Include="Views\UserHome\_OfferValidationSuccess.cshtml" />
     <Content Include="Views\UserHome\_UserSeatsSelection.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Theatre\_LoggedOut.cshtml" />
+    <Content Include="Views\AdminHome\_AddMovieSuccess.cshtml" />
+    <Content Include="Views\AdminHome\_DisplayMovies.cshtml" />
+    <Content Include="Views\UserHome\GeneratedTicket.cshtml" />
+    <Content Include="Views\Theatre\_MovieSuccess.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

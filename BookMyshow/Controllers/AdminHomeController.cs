@@ -29,12 +29,12 @@ namespace BookMyshow.Controllers
         {
             return PartialView("_AddOffers");
         }
-        [HttpPost]
-        public PartialViewResult AddOffers(Offer form)
+       [HttpPost]
+        public PartialViewResult AddOffers1(FormCollection form)
         {
             Offer offer = new Offer();
-            offer.OfferName = form.OfferName;
-            offer.Discount = form.Discount;
+            offer.OfferName = form["Offername"];
+            offer.Discount = Convert.ToInt32(form["discount"]);
             // offer.CouponCode = form.CouponCode;
             entities.Offers.Add(offer);
             entities.SaveChanges();
@@ -65,8 +65,8 @@ namespace BookMyshow.Controllers
 
             return PartialView("_Displayoffers", entities.Offers);
         }
-
-        public ActionResult DeleteOffer(int id)
+        [HttpPost]
+        public PartialViewResult DeleteOffer(int id)
         {
             var offer = entities.Offers.Find(id);
             var playoffer = entities.PlayOffers.Where(o => o.OfferId == id).FirstOrDefault();
@@ -83,7 +83,7 @@ namespace BookMyshow.Controllers
             }
             entities.Offers.Remove(offer);
             entities.SaveChanges();
-            return View("Admin");
+            return PartialView("_Displayoffers",entities.Offers);
         } 
         #endregion 
 
@@ -129,6 +129,10 @@ namespace BookMyshow.Controllers
             return PartialView("_AddMovie");
             }
             catch (Exception ex) { throw ex; }
+        }
+        public PartialViewResult DisplayAllMovies()
+        {
+            return PartialView("_DisplayMovies", entities.Movies);
         }
         [HttpPost]
         public PartialViewResult AddMovie(Movy form, HttpPostedFileBase poster1)
