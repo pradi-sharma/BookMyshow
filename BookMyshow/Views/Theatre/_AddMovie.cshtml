@@ -1,19 +1,61 @@
-﻿@using (Ajax.BeginForm("AddMovie", "Theatre", new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "result", InsertionMode = InsertionMode.Replace }, new { @id = "form" }))
-{
-    <label>Select Movie</label>
-    <br />
-    @Html.DropDownList("movielist", (IEnumerable<SelectListItem>)ViewBag.movielist, null, new { @class = "form-control" })<br />
-    <br />
-    <label>Select Time Slot</label>
-    @Html.DropDownList("SlotList", (IEnumerable<SelectListItem>)ViewBag.SlotList, null, new { @class = "form-control" })<br />
-    <br />
-    <input type="date" name="date" width="100%" />
-    <br />
-    <label>Give Price For the One Ticket </label>
-    <input type="number" name="Price" width="100%" />
-    <br />
-    <input type="submit" id="save" value="submit" class="btn btn-success" />
+﻿
 
-}
-<div id="result"></div>
+<html>
+<head>
+    <style>
+        .form-horizontal {
+            background-image: url(../../Content/Images/download.jpg);
+            background-repeat: no-repeat;
+            background-size: cover;
+            color: white;
+            width: 600px;
+            padding: 30px;
+            margin-left: 25%;
+            border-radius: 20px;
+        }
+        #movielist, #slotlist {
+            width: 400px;
+            background-color: white;
+            border-radius: 5px;
+        }
+        input[type=date],input[type=number], option {
+            width: 400px;
+            border: none;
+            background-color: white;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+
+
+    <div class="form-horizontal ">
+
+
+        @using (Ajax.BeginForm("AddMovie", "Theatre", new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "result", InsertionMode = InsertionMode.Replace }, new { @id = "form" }))
+        {
+            <label>Select Movie</label>
+            <br />
+            @Html.DropDownList("movielist", (IEnumerable<SelectListItem>)ViewBag.movielist, null, new { @class = "form-control" })<br />
+            <br />
+            <label>Select Time Slot</label>
+            @Html.DropDownList("SlotList", (IEnumerable<SelectListItem>)ViewBag.SlotList, null, new { @class = "form-control" })<br />
+            <br />
+            <label>Select Date</label>
+            <br />
+            <input type="date" name="date" width="100%" min="@System.DateTime.Now.AddDays(1)" />
+            <br />
+            <br />
+            <br />
+            <label>Give Price For the One Ticket </label>
+            <input type="number" name="Price" width="100%" required />
+            <br />
+            <br />
+            <input type="submit" id="save" value="submit" class="btn btn-success" />
+
+        }
+        <div id="result"></div>
+    </div>
+</body>
+</html>
 

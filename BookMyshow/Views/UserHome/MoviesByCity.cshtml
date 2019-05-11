@@ -110,11 +110,11 @@
                             </a>
                         </li>
                     }
-                    <li class="nav-item px-2">
+                    @*<li class="nav-item px-2">
                         <a href="/City/SearchByCity" class="nav-link">
                             <i class="fa fa-search"></i> City
                         </a>
-                    </li>
+                    </li>*@
 
 
                 </ul>
@@ -137,7 +137,7 @@
                 <td>
 
                     <a href="@Url.Action("MovieDescription", "UserHome", new { id = item.MovieId ,citid=ViewBag.cid})">
-                        <h2><img src="data:image;base64,@System.Convert.ToBase64String(item.Poster)" width="250" height="200" style="border-radius:5px" /></h2>
+                        <h2><img src="data:image;base64,@System.Convert.ToBase64String(item.Poster)" width="250px" height="200px" style="border-radius:5px" /></h2>
                     </a>
                     <h4 class="bg-light" style="border-radius:5px;padding:5px;text-align:center;">@item.MovieName</h4>
                 </td>

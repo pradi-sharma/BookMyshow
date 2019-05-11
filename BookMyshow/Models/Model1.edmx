@@ -555,6 +555,7 @@
         <Function Name="GetTheatres" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="id" Type="int" Mode="In" />
           <Parameter Name="cityId" Type="int" Mode="In" />
+          <Parameter Name="date" Type="date" Mode="In" />
         </Function>
         <Function Name="InsertBookedSeat" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="theatreId" Type="int" Mode="In" />
@@ -582,6 +583,10 @@
         </Function>
         <Function Name="MovyByCity" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SlotsWithToday" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="tid" Type="int" Mode="In" />
+          <Parameter Name="mid" Type="int" Mode="In" />
         </Function>
         <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
@@ -793,16 +798,9 @@
           <Parameter Name="userId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="GetMoviesDescription" ReturnType="Collection(ShowBookingModel.GetMoviesDescription_Result)" />
-          <FunctionImport Name="GetTheatres" ReturnType="Collection(Int32)">
-            <Parameter Name="id" Mode="In" Type="Int32" />
-            <Parameter Name="cityId" Mode="In" Type="Int32" />
-          </FunctionImport>
           <FunctionImport Name="GetSlots" ReturnType="Collection(Time)">
             <Parameter Name="tId" Mode="In" Type="Int32" />
             <Parameter Name="mId" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="MovyByCity" ReturnType="Collection(ShowBookingModel.MovyByCity_Result)">
-          <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="GetSelectSeats" ReturnType="Collection(String)">
           <Parameter Name="theatreId" Mode="In" Type="Int32" />
@@ -996,6 +994,18 @@
             <Parameter Name="tid" Mode="In" Type="Int32" />
             <Parameter Name="mvId" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="SlotsWithToday" ReturnType="Collection(Time)">
+            <Parameter Name="tid" Mode="In" Type="Int32" />
+            <Parameter Name="mid" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetTheatres" ReturnType="Collection(Int32)">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="cityId" Mode="In" Type="Int32" />
+            <Parameter Name="date" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="MovyByCity" ReturnType="Collection(ShowBookingModel.MovyByCity_Result)">
+          <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
           </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -1016,11 +1026,6 @@
           <Property Type="Int32" Name="MovieId" Nullable="false" />
           <Property Type="Binary" Name="Poster" Nullable="true" />
           <Property Type="String" Name="MovieName" Nullable="false" MaxLength="50" />
-        </ComplexType>
-        <ComplexType Name="MovyByCity_Result">
-          <Property Type="String" Name="MovieName" Nullable="false" MaxLength="50" />
-          <Property Type="Binary" Name="Poster" Nullable="true" />
-          <Property Type="Int32" Name="MovieId" Nullable="false" />
         </ComplexType>
         <ComplexType Name="GetMoviesList_Result">
           <Property Type="String" Name="MovieName" Nullable="false" MaxLength="50" />
@@ -1488,6 +1493,11 @@
           <Property Type="String" Name="MovieName" Nullable="false" MaxLength="50" />
           <Property Type="Int32" Name="MovieId" Nullable="false" />
         </ComplexType>
+        <ComplexType Name="MovyByCity_Result">
+          <Property Type="String" Name="MovieName" Nullable="false" MaxLength="50" />
+          <Property Type="Binary" Name="Poster" Nullable="true" />
+          <Property Type="Int32" Name="MovieId" Nullable="false" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1514,17 +1524,7 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="GetTheatres" FunctionName="ShowBookingModel.Store.GetTheatres" />
           <FunctionImportMapping FunctionImportName="GetSlots" FunctionName="ShowBookingModel.Store.GetSlots" />
-          <FunctionImportMapping FunctionImportName="MovyByCity" FunctionName="ShowBookingModel.Store.MovyByCity">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="ShowBookingModel.MovyByCity_Result">
-                <ScalarProperty Name="MovieName" ColumnName="MovieName" />
-                <ScalarProperty Name="Poster" ColumnName="Poster" />
-                <ScalarProperty Name="MovieId" ColumnName="MovieId" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="GetSelectSeats" FunctionName="ShowBookingModel.Store.GetSelectSeats" />
           <FunctionImportMapping FunctionImportName="GetBlockedSeats" FunctionName="ShowBookingModel.Store.GetBlockedSeats" />
           <FunctionImportMapping FunctionImportName="GetPrice" FunctionName="ShowBookingModel.Store.GetPrice" />
@@ -1770,6 +1770,17 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="TotalCollection" FunctionName="ShowBookingModel.Store.TotalCollection" />
           <FunctionImportMapping FunctionImportName="GetSlotsList" FunctionName="ShowBookingModel.Store.GetSlotsList" />
+          <FunctionImportMapping FunctionImportName="SlotsWithToday" FunctionName="ShowBookingModel.Store.SlotsWithToday" />
+          <FunctionImportMapping FunctionImportName="GetTheatres" FunctionName="ShowBookingModel.Store.GetTheatres" />
+          <FunctionImportMapping FunctionImportName="MovyByCity" FunctionName="ShowBookingModel.Store.MovyByCity">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ShowBookingModel.MovyByCity_Result">
+                <ScalarProperty Name="MovieName" ColumnName="MovieName" />
+                <ScalarProperty Name="Poster" ColumnName="Poster" />
+                <ScalarProperty Name="MovieId" ColumnName="MovieId" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

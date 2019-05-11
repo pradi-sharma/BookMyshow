@@ -1,16 +1,45 @@
 ﻿@model IEnumerable<BookMyshow.Models.GetMoviesList_Result>
 
+<html>
+<head>
+    <style>
+        .form-horizontal {
+            background-image: url(../../Content/Images/download.jpg);
+            background-repeat: no-repeat;
+            background-size: cover;
+            color: white;
+            width: 600px;
+            padding: 30px;
+            margin-left: 25%;
+            border-radius: 20px;
+        }
 
-@using (Html.BeginForm("RemoveMovie", "Theatre", FormMethod.Post, new { @id = "form" }))
-{
-    <label>Select Movie</label>
-    <br />
-    @Html.DropDownList("movielist",(IEnumerable<SelectListItem>)ViewBag.movielist, "movielist",new { @class = "form-control" })<br />
-    <br />
-    <label>Select Time Slot</label>
-    @Html.DropDownList("SlotList", (IEnumerable<SelectListItem>)ViewBag.SlotList, null, new { @class = "form-control" })<br />
+        #movielist,#slotlist {
+            width: 400px;
+            background-color: white;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
 
-    <br />
-    <input type="submit" id="save" value="submit" class="btn btn-success" />
 
-}
+    <div class="form-horizontal">
+        <h1>Remove Movie</h1>
+        @using (Html.BeginForm("RemoveMovie", "Theatre", FormMethod.Post, new { @id = "form" }))
+        {
+            <label>Select Movie</label>
+            <br />
+            @Html.DropDownList("movielist", (IEnumerable<SelectListItem>)ViewBag.movielist, "movielist", new { @class = "form-control" })<br />
+            <br />
+            <label>Select Time Slot</label>
+            @Html.DropDownList("SlotList", (IEnumerable<SelectListItem>)ViewBag.SlotList, null, new { @class = "form-control" })<br />
+
+            <br />
+            <input type="submit" id="save" value="submit" class="btn btn-success" />
+
+        }
+    </div>
+</body>
+</html>
+

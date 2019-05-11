@@ -1,0 +1,25 @@
+﻿@model IEnumerable<BookMyshow.Models.TheatreTimiSlots>
+@foreach (var item in Model)
+{
+    //using(Html.BeginForm("TimingsByTheatre", "UserHome",FormMethod.Get,new { name= "demoform" }))
+    //{
+
+    <p style="font-weight:bold;margin-left:15px">@item.Theatrename</p>
+
+    int a = item.TheatreId;
+
+
+
+    foreach (var item1 in item.Slots)
+    {
+        <form action="~/UserHome/TimingsByTheatre" method="post" style="width:200px;display:inline">
+
+            <input type="text" value="@item.TheatreId" hidden name="theatreId" />
+            <input type="text" value="@item1" name="slotId" hidden />
+            <input type="text" value="@ViewBag.movieId" hidden name="movieId" />
+            <input type="submit" value="@item1" id="submitId" name="ip" class="btn btn-outline-success" style="display:inline-block;font-size:15px;margin-left:15px" />
+        </form>
+
+    }
+
+}

@@ -197,19 +197,6 @@ namespace BookMyshow.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetMoviesDescription_Result>("GetMoviesDescription");
         }
     
-        public virtual ObjectResult<Nullable<int>> GetTheatres(Nullable<int> id, Nullable<int> cityId)
-        {
-            var idParameter = id.HasValue ?
-                new ObjectParameter("id", id) :
-                new ObjectParameter("id", typeof(int));
-    
-            var cityIdParameter = cityId.HasValue ?
-                new ObjectParameter("cityId", cityId) :
-                new ObjectParameter("cityId", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("GetTheatres", idParameter, cityIdParameter);
-        }
-    
         public virtual ObjectResult<Nullable<System.TimeSpan>> GetSlots(Nullable<int> tId, Nullable<int> mId)
         {
             var tIdParameter = tId.HasValue ?
@@ -221,15 +208,6 @@ namespace BookMyshow.Models
                 new ObjectParameter("mId", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<System.TimeSpan>>("GetSlots", tIdParameter, mIdParameter);
-        }
-    
-        public virtual ObjectResult<MovyByCity_Result> MovyByCity(Nullable<int> id)
-        {
-            var idParameter = id.HasValue ?
-                new ObjectParameter("id", id) :
-                new ObjectParameter("id", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<MovyByCity_Result>("MovyByCity", idParameter);
         }
     
         public virtual ObjectResult<string> GetSelectSeats(Nullable<int> theatreId)
@@ -522,6 +500,45 @@ namespace BookMyshow.Models
                 new ObjectParameter("mvId", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("GetSlotsList", tidParameter, mvIdParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<System.TimeSpan>> SlotsWithToday(Nullable<int> tid, Nullable<int> mid)
+        {
+            var tidParameter = tid.HasValue ?
+                new ObjectParameter("tid", tid) :
+                new ObjectParameter("tid", typeof(int));
+    
+            var midParameter = mid.HasValue ?
+                new ObjectParameter("mid", mid) :
+                new ObjectParameter("mid", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<System.TimeSpan>>("SlotsWithToday", tidParameter, midParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> GetTheatres(Nullable<int> id, Nullable<int> cityId, Nullable<System.DateTime> date)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            var cityIdParameter = cityId.HasValue ?
+                new ObjectParameter("cityId", cityId) :
+                new ObjectParameter("cityId", typeof(int));
+    
+            var dateParameter = date.HasValue ?
+                new ObjectParameter("date", date) :
+                new ObjectParameter("date", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("GetTheatres", idParameter, cityIdParameter, dateParameter);
+        }
+    
+        public virtual ObjectResult<MovyByCity_Result> MovyByCity(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<MovyByCity_Result>("MovyByCity", idParameter);
         }
     }
 }

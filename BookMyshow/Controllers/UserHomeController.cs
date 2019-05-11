@@ -171,39 +171,10 @@ namespace BookMyshow.Controllers
 
         public ActionResult BookMovie(int id,int citid)
         {
-            try {
-                
-              
-                
-            //var result = entities.Movies.Where(movieId => movieId.MovieId == id).FirstOrDefault();
-            var theatre = entities.GetTheatres(id,citid);
-            List<TheatreTimiSlots> theatreTimeSlotList = new List<TheatreTimiSlots>();
-                foreach (int item in theatre.ToList())
-                {
-                    List<string> spans = new List<string>();
-                    //var times = from t in entities.TimeSlots
-                    //            join s in entities.Slots
-                    //            on t.SlotId equals s.SlotId
-                    //            where t.TheatreId == item & t.Movieid == id
-                    //            select new { startTime=s.StartTime};
-                    var times = entities.GetSlots(item, id);
+            TempData["nmvid"] = id;
+            TempData["ncitid"] = citid;
+            return View();
 
-
-                    // TimeSpan xyz = times.StartTime;
-                    foreach (TimeSpan item1 in times.ToList())
-                    {
-                        string ntime = string.Format("{0:00}:{1:00}", item1.Hours, item1.Minutes); // it should display 00:00
-                        spans.Add(ntime);
-                    }
-                    string tname = entities.Theatres.Where(i => i.TheatreId == item).Select(t => t.TheatreName).Single();
-                    ViewBag.movieId = id;
-                    TheatreTimiSlots theatreTimeSlot = new TheatreTimiSlots(item, spans, tname);
-                    theatreTimeSlotList.Add(theatreTimeSlot);
-                }
-                //  ViewBag.theatrelist = theatre.ToList();
-                return View(theatreTimeSlotList.ToList());
-            }
-            catch (Exception ex) { throw ex; }
         }
      
         [HttpPost]
@@ -335,12 +306,9 @@ namespace BookMyshow.Controllers
             //Inserting into Dropdown
             ViewBag.City = new SelectList(entities.Cities, "CityId", "CityName");
             int value = Convert.ToInt32(fc["CityId"]);
-            //var result = entities.Movies.Where(a=>a.MovieName == value).FirstOrDefault().MovieId;
-
+                //var result = entities.Movies.Where(a=>a.MovieName == value).FirstOrDefault().MovieId;
+                ViewBag.cid1 = value;
             var display = entities.MovyByCity(value);
-
-
-
 
             return PartialView("_MoviesByCityList", display.ToList());
             }
@@ -402,6 +370,51 @@ namespace BookMyshow.Controllers
 
             filterContext.Result = Result;
 
+        }  
+
+        public PartialViewResult Pdemo(FormCollection form)
+        {
+            try
+            {
+                DateTime date = Convert.ToDateTime(form["selectedDate"]).Date;
+                int id = Convert.ToInt32(TempData["nmvid"]);
+                int citid = Convert.ToInt32(TempData["ncitid"]); 
+                //var result = entities.Movies.Where(movieId => movieId.MovieId == id).FirstOrDefault();
+                var theatre = entities.GetTheatres(id, citid,date);
+                List<TheatreTimiSlots> theatreTimeSlotList = new List<TheatreTimiSlots>();
+                foreach (int item in theatre.ToList())
+                {
+                    List<string> spans = new List<string>();
+                    //var times = from t in entities.TimeSlots
+                    //            join s in entities.Slots
+                    //            on t.SlotId equals s.SlotId
+                    //            where t.TheatreId == item & t.Movieid == id
+                    //            select new { startTime=s.StartTime};
+                    var times = entities.GetSlots(item, id);
+                    if (date != DateTime.Now.Date)
+                    {
+                        times = entities.SlotsWithToday(item, id);
+                        
+                    }
+
+
+                    // TimeSpan xyz = times.StartTime;
+                    foreach (TimeSpan item1 in times.ToList())
+                    {
+                        string ntime = string.Format("{0:00}:{1:00}", item1.Hours, item1.Minutes); // it should display 00:00
+                        spans.Add(ntime);
+                    }
+                    string tname = entities.Theatres.Where(i => i.TheatreId == item).Select(t => t.TheatreName).Single();
+                    ViewBag.movieId = id;
+                    TheatreTimiSlots theatreTimeSlot = new TheatreTimiSlots(item, spans, tname);
+                    theatreTimeSlotList.Add(theatreTimeSlot);
+                }
+                //  ViewBag.theatrelist = theatre.ToList();
+                return PartialView("_demoPartial", theatreTimeSlotList.ToList());
+                
+            }
+            catch (Exception ex) { throw ex; }
+         
         }
 
     }

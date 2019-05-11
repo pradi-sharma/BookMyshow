@@ -3,8 +3,8 @@
 <head>
 
 
-    <script src="~/Scripts/jquery-3.4.1.js"></script>
-    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    @*<script src="~/Scripts/jquery-3.4.1.js"></script>
+        <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>*@
 
     <style>
 
@@ -63,6 +63,13 @@
             padding: 10PX;
         }
     </style>
+    <script src="~/Scripts/jquery-3.4.1.js"></script>
+    <script>
+        $(document).ready(function () {
+            alert("in jq");
+            $("#rdate").datepicker({ minDate: 0 });
+        });
+    </script>
 </head>
 <body>
     <h2 class="font-weight-bold" style="margin-left:25%">Add Movie</h2>
@@ -97,7 +104,8 @@
                 <div class="form-group">
                     @Html.LabelFor(model => model.ReleaseDate, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.ReleaseDate, new { htmlAttributes = new { @class = "date", @Type = "Date", @min = @TempData["currentdate"] } })
+                        @*@Html.EditorFor(model => model.ReleaseDate, new { htmlAttributes = new { @class = "date", @Type = "Date",  @min =DateTime.Now.AddDays(1) } })*@
+                      <input type="date" name="Releasedate" width="400px" min="@DateTime.Now.AddDays(1)"/>
                         @Html.ValidationMessageFor(model => model.ReleaseDate, "", new { @class = "text-danger" })
                     </div>
                 </div>
