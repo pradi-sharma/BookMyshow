@@ -340,7 +340,7 @@ namespace BookMyshow.Controllers
             string Username = fc["username"];
             string Password = fc["password"];
             string role = "user";
-            long Contact = Convert.ToInt32(fc["contact"]);
+            long Contact = Convert.ToInt64(fc["contact"]);
 
             string email = fc["email"];
 
@@ -348,9 +348,9 @@ namespace BookMyshow.Controllers
             UserDetail user = new UserDetail { UserName = Username, Password = Password, Role = role, Contact = Contact, Email = email };
             entities.UserDetails.Add(user);
             entities.SaveChanges();
-
-
-            return RedirectToAction("Login");
+        
+            
+            return RedirectToAction("Index");
             }
             catch (Exception ex) {
                 throw ex;

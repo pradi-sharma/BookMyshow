@@ -1,6 +1,6 @@
 ﻿@model System.Web.Mvc.HandleErrorInfo
 
 <img src="~/Content/Images/Oops-pop-art-retro-style-600x600.jpeg"/>
-<h2 class="text-danger">You have provided wrong input and An error occurred while processing your request.</h2>
-<h1 class="text-danger">Error.@Model.Exception.Message</h1>
+<h1 class="text-danger">You have provided wrong input and An error occurred while processing your request.</h1>
+@*<h1 class="text-danger">Error.@Model.Exception.Message</h1>*@
 @Html.ActionLink("Back", "Index", "UserHome")
