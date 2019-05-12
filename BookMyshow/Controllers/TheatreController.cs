@@ -204,5 +204,36 @@ namespace BookMyshow.Controllers
             filterContext.Result = Result;
 
         }
+
+        public PartialViewResult UpdatePassword()
+        {
+            return PartialView("_UpdatePassword");
+        }
+        [HttpPost]
+        public PartialViewResult UpdatePassword(UserDetail form)
+        {
+            string username = Session["userName"].ToString();
+            string password = form.Password;
+            bool status = IsPasswordExist(username, password);
+            if (status)
+            {
+                ModelState.AddModelError("Password", "Password is not correct");
+                return PartialView("_UpdatePassword",form);
+            }
+            string newPassword = form.NewPassword;
+            var user = entities.UserDetails.Where(u => u.UserName == username).FirstOrDefault();
+            user.Password = newPassword;
+            entities.SaveChanges();
+
+            return PartialView("_UserPasswordSuccess");
+        }
+        [NonAction]
+        public bool IsPasswordExist(string username,string password)
+        {
+            var pwd = entities.UserDetails.Where(u => u.UserName == username && u.Password == password).FirstOrDefault();
+            if (pwd != null) { return false; }
+            else
+            { return true; }
+        }
     }
 }

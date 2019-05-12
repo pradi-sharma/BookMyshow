@@ -390,16 +390,16 @@ namespace BookMyshow.Controllers
                     //            on t.SlotId equals s.SlotId
                     //            where t.TheatreId == item & t.Movieid == id
                     //            select new { startTime=s.StartTime};
-                    var times = entities.GetSlots(item, id);
-                    if (date != DateTime.Now.Date)
+                    var times = entities.GetSlots(item, id).ToList();
+                    if (date == DateTime.Now.Date)
                     {
-                        times = entities.SlotsWithToday(item, id);
+                        times = entities.SlotsWithToday(item, id).ToList();
                         
                     }
 
 
                     // TimeSpan xyz = times.StartTime;
-                    foreach (TimeSpan item1 in times.ToList())
+                    foreach (TimeSpan item1 in times)
                     {
                         string ntime = string.Format("{0:00}:{1:00}", item1.Hours, item1.Minutes); // it should display 00:00
                         spans.Add(ntime);

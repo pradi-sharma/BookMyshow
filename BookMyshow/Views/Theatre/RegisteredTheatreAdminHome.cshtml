@@ -41,7 +41,7 @@
         <div class="container">
             <table>
                 <tr id="nav-tr">
-                    <a href="index.html" class="navbar-brand " style="margin-left: -20px;margin-top: -10px;margin-bottom: -10px">
+                    <a href="/UserHome/Index" class="navbar-brand " style="margin-left: -20px;margin-top: -10px;margin-bottom: -10px">
                         <img src="~/Content/Images/bb82ec2bbdc6893100ceaa08bc3fb61f.png" width="100" height="100">
                         Movies Ticket
                     </a>
@@ -63,7 +63,7 @@
             <div class="collapse navbar-collapse " id="uiNavBar">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item px-2">
-                        <a href="/Theatre/RegisteredTheatreAdminHome" class="nav-link">
+                        <a href="/Theatre/Index" class="nav-link">
                             <i class="fa fa-home"></i> Home
                         </a>
                     </li>
@@ -73,7 +73,8 @@
                             <i class="fa fa-user-circle"></i> Welcome @Session["userName"]
                         </a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#">Action</a>
+
+                            @Ajax.ActionLink("Update Password", "UpdatePassword", new AjaxOptions { HttpMethod = "GET", UpdateTargetId = "div", InsertionMode = InsertionMode.Replace })
                             <a class="dropdown-item" href="#">Another action</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="~/UserHome/Logout">Logout</a>

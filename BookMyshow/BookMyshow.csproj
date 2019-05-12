@@ -96,6 +96,20 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\actors\akshay.jpg" />
+    <Content Include="Content\actors\allu arjun.jpg" />
+    <Content Include="Content\actors\amir khan.jpg" />
+    <Content Include="Content\actors\anglo.jpg" />
+    <Content Include="Content\actors\Christian bale.jpg" />
+    <Content Include="Content\actors\hritik roshan.jpg" />
+    <Content Include="Content\actors\kingaman.jpg" />
+    <Content Include="Content\actors\Radhika Madan.jpg" />
+    <Content Include="Content\actors\ranveer singh.jpg" />
+    <Content Include="Content\actors\Robert Downey.jpg" />
+    <Content Include="Content\actors\Robert+Downey.jpg" />
+    <Content Include="Content\actors\Salman khan.jpg" />
+    <Content Include="Content\actors\shaharukh khan.jpg" />
+    <Content Include="Content\actors\sonu sood.jpg" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\bootstrap\css\bootstrap.css" />
@@ -380,6 +394,8 @@
     <Content Include="Views\UserHome\GeneratedTicket.cshtml" />
     <Content Include="Views\Theatre\_MovieSuccess.cshtml" />
     <Content Include="Views\UserHome\_demoPartial.cshtml" />
+    <Content Include="Views\Theatre\_UpdatePassword.cshtml" />
+    <Content Include="Views\Theatre\_UserPasswordSuccess.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
