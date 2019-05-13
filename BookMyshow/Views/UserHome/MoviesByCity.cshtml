@@ -112,18 +112,16 @@
         @foreach (var item in Model)
         {
 
-            <tr class="col-lg-4 col-md-4" style="display:inline-block;">
+            <tr class=" col-md-4" style="display:inline-block;margin-left:40px;padding:5px;">
 
-                <td>
+                <td >
 
                     <a href="@Url.Action("MovieDescription", "UserHome", new { id = item.MovieId ,citid=ViewBag.cid})">
-                        <h2><img src="data:image;base64,@System.Convert.ToBase64String(item.Poster)" width="250px" height="200px" style="border-radius:5px" /></h2>
+                        <h2><img src="data:image;base64,@System.Convert.ToBase64String(item.Poster)" width="220px" height="200px" style="border-radius:5px;margin-left:10px" /></h2>
                     </a>
                     <h4 class="bg-light" style="border-radius:5px;padding:5px;text-align:center;">@item.MovieName</h4>
                 </td>
-                <td>
-                    
-                </td>
+               
 
 
 

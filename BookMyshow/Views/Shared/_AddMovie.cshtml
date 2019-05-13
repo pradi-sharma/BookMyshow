@@ -74,7 +74,7 @@
 <body>
     <h2 class="font-weight-bold" style="margin-left:25%">Add Movie</h2>
 
-
+    <div id="msg">
 
         @using (Ajax.BeginForm("AddMovie", "AdminHome", new AjaxOptions { HttpMethod = "POST", InsertionMode = InsertionMode.Replace, UpdateTargetId = "msg" }, new { enctype = "multipart/form-data" }))
         {
@@ -88,7 +88,7 @@
                 <div class="form-group">
                     @Html.LabelFor(model => model.MovieName, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.MovieName, new { htmlAttributes = new { @class = "form-control",  @required = "required" } })
+                        @Html.EditorFor(model => model.MovieName, new { htmlAttributes = new { @class = "form-control", @required = "required" } })
                         @Html.ValidationMessageFor(model => model.MovieName, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -96,7 +96,7 @@
                 <div class="form-group">
                     @Html.LabelFor(model => model.Synopsis, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.Synopsis, new { htmlAttributes = new { @class = "form-control",  @required = "required" } })
+                        @Html.EditorFor(model => model.Synopsis, new { htmlAttributes = new { @class = "form-control", @required = "required" } })
                         @Html.ValidationMessageFor(model => model.Synopsis, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -105,7 +105,7 @@
                     @Html.LabelFor(model => model.ReleaseDate, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
                         @*@Html.EditorFor(model => model.ReleaseDate, new { htmlAttributes = new { @class = "date", @Type = "Date",  @min =DateTime.Now.AddDays(1) } })*@
-                      <input type="date" name="Releasedate" width="400px" min="@DateTime.Now.AddDays(1)"/>
+                        <input type="date" name="Releasedate" width="400px" min="@DateTime.Now.AddDays(1)" />
                         @Html.ValidationMessageFor(model => model.ReleaseDate, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -139,7 +139,7 @@
                 </div>
             </div>
         }
-    <div id="msg"></div>
+    </div>
 </body>
 
 </html>

@@ -54,94 +54,114 @@
 
 </head>
 <body id="payment-body" class="mt-2">
-  
-    <div class="" style="transform:translate(50,50);">
-        <div class="row mt-2">
-            <div class="col-xs-12 col-md-4 " style="margin-left:33%;margin-top:5%;margin-bottom:5%">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">
-                            Payment Details
-                        </h3>
+    <nav class="navbar navbar-dark stylish-color-dark   navbar-expand-sm ">
+        <div class="container">
 
-                    </div>
-                    <div class="panel-body">
-                        <form role="form">
-                            <div class="form-group">
-                                <label for="cardNumber">
-                                    Apply Offer
-                                </label>
-                                <div class="input-group">
-                                    @*@using (Ajax.BeginForm("ApplyOffer", "UserHome", new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "offermsg", InsertionMode = InsertionMode.Replace }))
-                                        {*@
-                                    <input type="text" name="offercode" class="form-control" id="offer" placeholder="Enter Valid Promo Code"
-                                           required autofocus />
-                                    <span class="input-group-addon"><span class="glyphicon glyphicon-barcode"></span></span>
-
-                                    <br />
+            <table>
+                <tr id="nav-tr">
+                    <a href="/UserHome/Index" class="navbar-brand " style="margin-left: 30px;margin-top: -10px;margin-bottom: -10px;margin-right:70px;">
+                        <img src="~/Content/Images/bb82ec2bbdc6893100ceaa08bc3fb61f.png" width="100" height="100">
+                        <span style="color:red" class="font-weight-bold text-uppercase mt-3 mb-4"> Movies </span><span class="font-weight-bold text-uppercase mt-3 mb-4">Ticket</span>
+                    </a>
 
 
 
-                                </div>
-                                <p id="offermsg"></p>
-                                <button type="button" id="sbbtn" style="margin-top:2px">
-                                    Apply Offer
-                                </button>
-                            </div>
-                            <span id="offerError"></span>
-                            <div class="form-group">
-                                <label for="cardNumber">
-                                    CARD NUMBER
-                                </label>
-                                <div class="input-group">
-                                    <input type="text" class="form-control" id="cardNumber" placeholder="Valid Card Number"
-                                           required autofocus />
-                                    <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
-                                </div>
-                            </div>
-                            <span id="cardError"></span>
-                            <div class="row">
-                                <div class="col-xs-7 col-md-7">
-                                    <div class="form-group">
-                                        <label for="expityMonth">
-                                            EXPIRY DATE OF CARD
-                                        </label>
-                                        <div class="col-xs-6 col-lg-6 pl-ziro">
-                                            <input type="text" class="form-control" id="expityMonth" placeholder="MM" required />
-                                        </div>
-                                        <div class="col-xs-6 col-lg-6 pl-ziro">
-                                            <input type="text" class="form-control" id="expityYear" placeholder="YY" required />
-                                        </div>
+                    
+                </tr>
+        </div>
+        
+        </table>
+
+    </nav>
+    <div id="new">
+
+        <div class="" style="transform:translate(50,50);">
+            <div class="row mt-2">
+                <div class="col-xs-12 col-md-4 " style="margin-left:33%;margin-top:5%;margin-bottom:5%">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">
+                                Payment Details
+                            </h3>
+
+                        </div>
+                        <div class="panel-body">
+                            <form role="form">
+                                <div class="form-group">
+                                    <label for="cardNumber">
+                                        Apply Offer
+                                    </label>
+                                    <div class="input-group">
+                                        @*@using (Ajax.BeginForm("ApplyOffer", "UserHome", new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "offermsg", InsertionMode = InsertionMode.Replace }))
+                                            {*@
+                                        <input type="text" name="offercode" class="form-control" id="offer" placeholder="Enter Valid Promo Code"
+                                               required autofocus />
+                                        <span class="input-group-addon"><span class="glyphicon glyphicon-barcode"></span></span>
+
+                                        <br />
+
+
+
                                     </div>
-                                    <span id="dateError"></span>
+                                    <p id="offermsg"></p>
+                                    <button type="button" id="sbbtn" style="margin-top:2px">
+                                        Apply Offer
+                                    </button>
                                 </div>
-                                <div class="col-xs-5 col-md-5 pull-right">
-                                    <div class="form-group">
-                                        <label for="cvCode">
-                                            CV CODE
-                                        </label>
-                                        <input type="password" class="form-control" id="cvCode" placeholder="CV" required />
+                                <span id="offerError"></span>
+                                <div class="form-group">
+                                    <label for="cardNumber">
+                                        CARD NUMBER
+                                    </label>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" id="cardNumber" placeholder="Valid Card Number"
+                                               required autofocus />
+                                        <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
                                     </div>
-                                    <span id="cvvError"></span>
                                 </div>
-                            </div>
-                        </form>
+                                <span id="cardError"></span>
+                                <div class="row">
+                                    <div class="col-xs-7 col-md-7">
+                                        <div class="form-group">
+                                            <label for="expityMonth">
+                                                EXPIRY DATE OF CARD
+                                            </label>
+                                            <div class="col-xs-6 col-lg-6 pl-ziro">
+                                                <input type="text" class="form-control" id="expityMonth" placeholder="MM" required />
+                                            </div>
+                                            <div class="col-xs-6 col-lg-6 pl-ziro">
+                                                <input type="text" class="form-control" id="expityYear" placeholder="YY" required />
+                                            </div>
+                                        </div>
+                                        <span id="dateError"></span>
+                                    </div>
+                                    <div class="col-xs-5 col-md-5 pull-right">
+                                        <div class="form-group">
+                                            <label for="cvCode">
+                                                CV CODE
+                                            </label>
+                                            <input type="password" class="form-control" id="cvCode" placeholder="CV" required />
+                                        </div>
+                                        <span id="cvvError"></span>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
                     </div>
+                    <ul class="nav nav-pills nav-stacked">
+                        <li class="active">
+                            <a href="#"><span class="badge pull-right"><span class="glyphicon glyphicon-usd"></span>@ViewBag.amt2</span> Final Payment</a>
+                        </li>
+                    </ul>
+                    <br />
+                    <a href="/UserHome/GenerateTicket" class="btn btn-success btn-lg btn-block" role="button">Pay</a>
+                    @*<button class="btn btn-success btn-lg btn-block" type="submit" onclick="ValidatePayment()">Pay</button>*@
+                    <br />
+                    <a href="/UserHome/Index" class="btn btn-danger btn-lg btn-block" role="button">Cancel Pay</a>
                 </div>
-                <ul class="nav nav-pills nav-stacked">
-                    <li class="active">
-                        <a href="#"><span class="badge pull-right"><span class="glyphicon glyphicon-usd" ></span>@ViewBag.amt2</span> Final Payment</a>
-                    </li>
-                </ul>
-                <br />
-                <a href="/UserHome/GenerateTicket" class="btn btn-success btn-lg btn-block" role="button">Pay</a>
-                @*<button class="btn btn-success btn-lg btn-block" type="submit" onclick="ValidatePayment()">Pay</button>*@
-                <br />
-                <a href="/UserHome/Index" class="btn btn-danger btn-lg btn-block" role="button">Cancel Pay</a>
             </div>
         </div>
     </div>
-
 
     <script src="~/Scripts/jquery-3.4.1.min.js"></script>
     <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
