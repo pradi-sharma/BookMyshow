@@ -286,6 +286,8 @@ namespace BookMyshow.Controllers
             }
             ViewBag.seats = seatslist;
             ViewBag.poster = entities.Movies.Where(i => i.MovieId == mvId).FirstOrDefault().Poster;
+            var slot = entities.Slots.Where(s => s.SlotId == sId).Select(s => s.StartTime).Single();
+            TempData["nslot"] = slot;
             return View("Ticket");
             
           
@@ -377,6 +379,7 @@ namespace BookMyshow.Controllers
             try
             {
                 DateTime date = Convert.ToDateTime(form["selectedDate"]).Date;
+                TempData["date"] = date.ToShortDateString();
                 int id = Convert.ToInt32(TempData["nmvid"]);
                 int citid = Convert.ToInt32(TempData["ncitid"]); 
                 //var result = entities.Movies.Where(movieId => movieId.MovieId == id).FirstOrDefault();
@@ -409,7 +412,7 @@ namespace BookMyshow.Controllers
                     TheatreTimiSlots theatreTimeSlot = new TheatreTimiSlots(item, spans, tname);
                     theatreTimeSlotList.Add(theatreTimeSlot);
                 }
-                ViewBag.xyz = "xyz";
+     
                 //  ViewBag.theatrelist = theatre.ToList();
                 return PartialView("_demoPartial", theatreTimeSlotList.ToList());
                 

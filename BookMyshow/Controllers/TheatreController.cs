@@ -23,6 +23,8 @@ namespace BookMyshow.Controllers
                 {
                     var result = entities.checkTheatre(Convert.ToInt32(Session["userId"])).Count();
                     ViewBag.count = result;
+                    var result1 = entities.checkTheatre(Convert.ToInt32(Session["userId"])).FirstOrDefault();
+                    ViewBag.collection = Convert.ToDecimal(entities.TotalCollection(result1).Single());
                 }
                 catch (Exception)
                 {
