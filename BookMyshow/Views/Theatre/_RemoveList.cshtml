@@ -1,0 +1,37 @@
+﻿@model IEnumerable<BookMyshow.Models.RemoveMoviesList_Result>
+
+<div id="div1">
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.MovieName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StartTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Date)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MovieName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StartTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Date)
+                </td>
+                <td>
+                    @Ajax.ActionLink("Delete", "RemoveMovie", new { id = item.MovieId, tid = item.TheatreId, sid = item.SlotId, d = item.Date }, new AjaxOptions { HttpMethod = "POST", InsertionMode = InsertionMode.Replace, UpdateTargetId = "div1" })
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>

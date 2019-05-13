@@ -91,40 +91,50 @@
 
     </nav>
 
-    <div id="result">
+
         <div class="btn-toolbar mb-4" role="toolbar" aria-label="Toolbar with button groups">
             <div class="btn-group mr-2" role="group" aria-label="First group">
+                @using (Ajax.BeginForm("Pdemo", "UserHome", new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "displaydemo", InsertionMode = InsertionMode.ReplaceWith }, new { @id = "form" }))
+                {
+                <input type="text" value="@DateTime.Now.ToShortDateString()" hidden name="selectedDate" />
+                <button type="submit" class="btn mdb-color lighten-2">@DateTime.Now.ToShortDateString() </button>
+                }
+                @using (Ajax.BeginForm("Pdemo", "UserHome", new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "displaydemo", InsertionMode = InsertionMode.ReplaceWith }, new { @id = "form" }))
+                {
+                    <input type="text" value="@DateTime.Now.AddDays(1).ToShortDateString()" hidden name="selectedDate" />
+                    <button type="submit" class="btn indigo lighten-2">@DateTime.Now.AddDays(1).ToShortDateString()</button>
+                }
                 @using (Ajax.BeginForm("Pdemo", "UserHome", new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "displaydemo", InsertionMode = InsertionMode.Replace }, new { @id = "form" }))
                 {
-                    <input type="text" value="@DateTime.Now.ToShortDateString()" hidden name="selectedDate"/>
-                    <button type="submit" class="btn mdb-color lighten-2"> @DateTime.Now.ToShortDateString()</button>
+                    <input type="text" value="@DateTime.Now.AddDays(2).ToShortDateString()" hidden name="selectedDate" />
+                    <button type="submit" class="btn blue lighten-2">@DateTime.Now.AddDays(2).ToShortDateString()</button>
                 }
-                @using (Ajax.BeginForm("", "", new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "result", InsertionMode = InsertionMode.Replace }, new { @id = "form" }))
+                @using (Ajax.BeginForm("Pdemo", "UserHome", new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "displaydemo", InsertionMode = InsertionMode.Replace }, new { @id = "form" }))
                 {
-                    <button type="button" class="btn indigo lighten-2">@DateTime.Now.AddDays(1).ToShortDateString()</button>
+                    <input type="text" value="@DateTime.Now.AddDays(3).ToShortDateString()" hidden name="selectedDate" />
+                    <button type="submit" class="btn light-blue lighten-2">@DateTime.Now.AddDays(3).ToShortDateString()</button>
                 }
-                @using (Ajax.BeginForm("", "", new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "result", InsertionMode = InsertionMode.Replace }, new { @id = "form" }))
+                @using (Ajax.BeginForm("Pdemo", "UserHome", new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "displaydemo", InsertionMode = InsertionMode.Replace }, new { @id = "form" }))
                 {
-                    <button type="button" class="btn blue lighten-2">@DateTime.Now.AddDays(2).ToShortDateString()</button>
+
+                    <input type="text" value="@DateTime.Now.AddDays(4).ToShortDateString()" hidden name="selectedDate" />
+                    <button type="submit" class="btn cyan lighten-2">@DateTime.Now.AddDays(4).ToShortDateString()</button>
                 }
-                @using (Ajax.BeginForm("", "", new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "result", InsertionMode = InsertionMode.Replace }, new { @id = "form" }))
+                @using (Ajax.BeginForm("Pdemo", "UserHome", new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "displaydemo", InsertionMode = InsertionMode.Replace }, new { @id = "form" }))
                 {
-                    <button type="button" class="btn light-blue lighten-2">@DateTime.Now.AddDays(3).ToShortDateString()</button>
+
+                    <input type="text" value="@DateTime.Now.AddDays(5).ToShortDateString()" hidden name="selectedDate" />
+                    <button type="submit" class="btn light-blue lighten-2">@DateTime.Now.AddDays(5).ToShortDateString()</button>
                 }
-                @using (Ajax.BeginForm("", "", new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "result", InsertionMode = InsertionMode.Replace }, new { @id = "form" }))
+                @using (Ajax.BeginForm("Pdemo", "UserHome", new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "displaydemo", InsertionMode = InsertionMode.Replace }, new { @id = "form" }))
                 {
-                    <button type="button" class="btn cyan lighten-2">@DateTime.Now.AddDays(4).ToShortDateString()</button>
-                }
-                @using (Ajax.BeginForm("", "", new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "result", InsertionMode = InsertionMode.Replace }, new { @id = "form" }))
-                {
-                    <button type="button" class="btn light-blue lighten-2">@DateTime.Now.AddDays(5).ToShortDateString()</button>
-                }
-                @using (Ajax.BeginForm("", "", new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "result", InsertionMode = InsertionMode.Replace }, new { @id = "form" }))
-                {
-                    <button type="button" class="btn cyan lighten-2">@DateTime.Now.AddDays(6).ToShortDateString()</button>
+
+                    <input type="text" value="@DateTime.Now.AddDays(6).ToShortDateString()" hidden name="selectedDate" />
+                    <button type="submit" class="btn cyan lighten-2">@DateTime.Now.AddDays(6).ToShortDateString()</button>
                 }
             </div>
         </div>
+
         <h3 style="background-color:lightgray;border-radius:20px;;padding:10px;font-weight:bold;margin-top:10px">Available Theatres and Timings</h3>
         <div id="displaydemo">
             @*@foreach (var item in Model)

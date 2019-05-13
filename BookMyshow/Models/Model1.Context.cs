@@ -540,5 +540,14 @@ namespace BookMyshow.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<MovyByCity_Result>("MovyByCity", idParameter);
         }
+    
+        public virtual ObjectResult<RemoveMoviesList_Result> RemoveMoviesList(Nullable<int> theatreId)
+        {
+            var theatreIdParameter = theatreId.HasValue ?
+                new ObjectParameter("theatreId", theatreId) :
+                new ObjectParameter("theatreId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<RemoveMoviesList_Result>("RemoveMoviesList", theatreIdParameter);
+        }
     }
 }

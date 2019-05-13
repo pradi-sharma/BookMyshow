@@ -589,7 +589,8 @@
                 $(function () {
                     $.post('/Theatre/SelectLayout',
                         { key: "TestKey", value: allSeatsVals}, function (data) {
-                            alert("Success " + data.success);
+                            alert("Theatre Registered Successfully");
+                            var d = data;
                         });
                 });
 

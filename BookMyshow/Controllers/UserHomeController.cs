@@ -371,7 +371,7 @@ namespace BookMyshow.Controllers
             filterContext.Result = Result;
 
         }  
-
+        
         public PartialViewResult Pdemo(FormCollection form)
         {
             try
@@ -409,6 +409,7 @@ namespace BookMyshow.Controllers
                     TheatreTimiSlots theatreTimeSlot = new TheatreTimiSlots(item, spans, tname);
                     theatreTimeSlotList.Add(theatreTimeSlot);
                 }
+                ViewBag.xyz = "xyz";
                 //  ViewBag.theatrelist = theatre.ToList();
                 return PartialView("_demoPartial", theatreTimeSlotList.ToList());
                 
@@ -416,6 +417,8 @@ namespace BookMyshow.Controllers
             catch (Exception ex) { throw ex; }
          
         }
+
+   
 
     }
 }

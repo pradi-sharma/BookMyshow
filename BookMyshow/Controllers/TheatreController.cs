@@ -18,13 +18,22 @@ namespace BookMyshow.Controllers
             var a =Session["userId"];
             if (Session["userId"] != null)
             {
-               
-                //var result = entities.checkTheatre(Convert.ToInt32(Session["userId"])).Count();
+
+                try
+                {
+                    var result = entities.checkTheatre(Convert.ToInt32(Session["userId"])).Count();
+                    ViewBag.count = result;
+                }
+                catch (Exception)
+                {
+                    ViewBag.count = 0;
+                   
+                }
                 //if (result != 0)
                 //{
                 //    var result1 = entities.checkTheatre(Convert.ToInt32(Session["userId"])).Single();
                 //    ViewBag.collection = Convert.ToDecimal(entities.TotalCollection(result1).Single());
-                    
+
                 //    return View("RegisteredTheatreAdminHome");
                 //}
                 return View("RegisteredTheatreAdminHome");
@@ -171,24 +180,35 @@ namespace BookMyshow.Controllers
             try { 
             int uid = Convert.ToInt32(Session["userId"]);
             int tid =Convert.ToInt32(entities.checkTheatre(uid).FirstOrDefault());
+
+                var result = entities.RemoveMoviesList(tid).ToList();
            ViewBag.movielist = new SelectList(entities.GetMoviesList(tid), "MovieId", "MovieName");
             ViewBag.SlotList = new SelectList(entities.Slots, "SlotId", "StartTime");
            //     ViewBag.SlotList=new SelectList(entities.GetSlotsList(tid,))
-            return PartialView("_RemoveMovie");
+            return PartialView("_RemoveList",result);
             }
             catch (Exception ex) { throw ex; }
         }
+        //[HttpPost]
+        //public ActionResult RemoveMovie(FormCollection form)
+        //{
+        //    try {
+        //        int tid = Convert.ToInt32(Session["userId"]);
+        //    int mvId = Convert.ToInt32(form["movielist"]);
+        //    int slotid = Convert.ToInt32(form["SlotList"]);
+        //    entities.deleteMovie(tid, mvId, slotid);
+        //    return View("RegisteredTheatreAdminHome");
+        //    }
+        //    catch (Exception ex) { throw ex; }
+        //}
         [HttpPost]
-        public ActionResult RemoveMovie(FormCollection form)
+        public PartialViewResult RemoveMovie(int id,int tid,int sid,DateTime d)
         {
-            try {
-                int tid = Convert.ToInt32(Session["userId"]);
-            int mvId = Convert.ToInt32(form["movielist"]);
-            int slotid = Convert.ToInt32(form["SlotList"]);
-            entities.deleteMovie(tid, mvId, slotid);
-            return View("RegisteredTheatreAdminHome");
-            }
-            catch (Exception ex) { throw ex; }
+            var result = entities.TimeSlots.Where(ts => ts.Movieid == id && ts.SlotId == sid && ts.Date == d.Date).FirstOrDefault();
+            entities.TimeSlots.Remove(result);
+            entities.SaveChanges();
+      
+            return PartialView("_RemoveMovieSuccess");
         }
         protected override void OnException(ExceptionContext filterContext)
         {

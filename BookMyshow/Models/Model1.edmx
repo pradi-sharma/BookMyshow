@@ -248,18 +248,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Casts_Movies">
-          <End Role="Movies" Type="Self.Movies" Multiplicity="1" />
-          <End Role="Casts" Type="Self.Casts" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="Movies">
-              <PropertyRef Name="MovieId" />
-            </Principal>
-            <Dependent Role="Casts">
-              <PropertyRef Name="CastId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_MovieCastDetails_Casts">
           <End Role="Casts" Type="Self.Casts" Multiplicity="1" />
           <End Role="MovieCastDetails" Type="Self.MovieCastDetails" Multiplicity="*" />
@@ -584,6 +572,9 @@
         <Function Name="MovyByCity" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="id" Type="int" Mode="In" />
         </Function>
+        <Function Name="RemoveMoviesList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="theatreId" Type="int" Mode="In" />
+        </Function>
         <Function Name="SlotsWithToday" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="tid" Type="int" Mode="In" />
           <Parameter Name="mid" Type="int" Mode="In" />
@@ -658,10 +649,6 @@
           <AssociationSet Name="FK_BookedSeats_UserDetails" Association="Self.FK_BookedSeats_UserDetails">
             <End Role="UserDetails" EntitySet="UserDetails" />
             <End Role="BookedSeats" EntitySet="BookedSeats" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Casts_Movies" Association="Self.FK_Casts_Movies">
-            <End Role="Movies" EntitySet="Movies" />
-            <End Role="Casts" EntitySet="Casts" />
           </AssociationSet>
           <AssociationSet Name="FK_MovieCastDetails_Casts" Association="Self.FK_MovieCastDetails_Casts">
             <End Role="Casts" EntitySet="Casts" />
@@ -1005,6 +992,9 @@
           </FunctionImport>
           <FunctionImport Name="MovyByCity" ReturnType="Collection(ShowBookingModel.MovyByCity_Result)">
           <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="RemoveMoviesList" ReturnType="Collection(ShowBookingModel.RemoveMoviesList_Result)">
+            <Parameter Name="theatreId" Mode="In" Type="Int32" />
           </FunctionImport>
           </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
@@ -1498,6 +1488,14 @@
           <Property Type="Binary" Name="Poster" Nullable="true" />
           <Property Type="Int32" Name="MovieId" Nullable="false" />
         </ComplexType>
+        <ComplexType Name="RemoveMoviesList_Result">
+          <Property Type="Int32" Name="MovieId" Nullable="false" />
+          <Property Type="Int32" Name="TheatreId" Nullable="false" />
+          <Property Type="Int32" Name="SlotId" Nullable="false" />
+          <Property Type="String" Name="MovieName" Nullable="false" MaxLength="50" />
+          <Property Type="Time" Name="StartTime" Nullable="false" />
+          <Property Type="DateTime" Name="Date" Nullable="false" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1778,6 +1776,18 @@
                 <ScalarProperty Name="MovieName" ColumnName="MovieName" />
                 <ScalarProperty Name="Poster" ColumnName="Poster" />
                 <ScalarProperty Name="MovieId" ColumnName="MovieId" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="RemoveMoviesList" FunctionName="ShowBookingModel.Store.RemoveMoviesList">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ShowBookingModel.RemoveMoviesList_Result">
+                <ScalarProperty Name="MovieId" ColumnName="MovieId" />
+                <ScalarProperty Name="TheatreId" ColumnName="TheatreId" />
+                <ScalarProperty Name="SlotId" ColumnName="SlotId" />
+                <ScalarProperty Name="MovieName" ColumnName="MovieName" />
+                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
