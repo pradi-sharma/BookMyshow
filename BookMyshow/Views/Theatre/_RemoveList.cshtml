@@ -52,7 +52,8 @@
                         @Html.DisplayFor(modelItem => item.StartTime)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Date)
+                        @item.Date.ToShortDateString()
+                        @*@Html.DisplayFor(modelItem => item.Date)*@
                     </td>
                     <td style="color:white">
                         @Ajax.ActionLink("Delete", "RemoveMovie", new { id = item.MovieId, tid = item.TheatreId, sid = item.SlotId, d = item.Date }, new AjaxOptions { HttpMethod = "POST", InsertionMode = InsertionMode.Replace, UpdateTargetId = "div1" })

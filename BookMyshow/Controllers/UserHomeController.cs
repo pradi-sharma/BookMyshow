@@ -288,6 +288,8 @@ namespace BookMyshow.Controllers
             ViewBag.poster = entities.Movies.Where(i => i.MovieId == mvId).FirstOrDefault().Poster;
             var slot = entities.Slots.Where(s => s.SlotId == sId).Select(s => s.StartTime).Single();
             TempData["nslot"] = slot;
+            var tname = entities.Theatres.Where(t => t.TheatreId == thId).FirstOrDefault().TheatreName;
+            ViewBag.thname = tname;
             return View("Ticket");
             
           
@@ -338,7 +340,7 @@ namespace BookMyshow.Controllers
         }
         public ActionResult Register(FormCollection fc)
         {
-            try { 
+            //try { 
             string Username = fc["username"];
             string Password = fc["password"];
             string role = "user";
@@ -353,10 +355,10 @@ namespace BookMyshow.Controllers
         
             
             return RedirectToAction("Index");
-            }
-            catch (Exception ex) {
-                throw ex;
-                    }
+            //}
+            //catch (Exception ex) {
+            //    throw ex;
+            //        }
 
         }
         protected override void OnException(ExceptionContext filterContext)

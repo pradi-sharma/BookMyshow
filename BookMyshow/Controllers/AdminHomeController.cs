@@ -93,10 +93,9 @@ namespace BookMyshow.Controllers
             return PartialView("_TheatreAdmin");
         }
         [HttpPost]
-        public ActionResult AddTheatreAdmin(FormCollection form)
+        public PartialViewResult AddTheatreAdmin(FormCollection form)
         {
-            try
-            {
+        
                 UserDetail newadmin = new UserDetail();
             newadmin.UserName = form["Username"];
             newadmin.Password = form["Password"];
@@ -113,13 +112,13 @@ namespace BookMyshow.Controllers
             newadmin.Contact = Convert.ToInt64(form["Contact"]);
             entities.UserDetails.Add(newadmin);
             entities.SaveChanges();
-            return View("Admin");
-            }
-            catch (Exception ex)
-            {
+            return PartialView("AddTheatreAdmin");
+            
+            //catch (Exception ex)
+            //{
 
-                return View("Error", new HandleErrorInfo(ex, "UserHome", "Search"));
-            }
+            //    return View("Error", new HandleErrorInfo(ex, "UserHome", "Search"));
+            //}
         }
         public PartialViewResult AddMovie()
         {
